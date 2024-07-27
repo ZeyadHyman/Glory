@@ -12,19 +12,6 @@ new class extends Component {
 };
 ?>
 
-@php
-    use App\Models\Wishlist;
-    use App\Models\Cart;
-
-    $wishlist_count = 0;
-    $cart_count = 0;
-
-    if (Auth::check()) {
-        $userId = Auth::id();
-        $wishlist_count = App\Models\Wishlist::where('user_id', $userId)->count();
-        $cart_count = App\Models\Cart::where('user_id', $userId)->count();
-    }
-@endphp
 
 <nav class="sticky w-full top-0 pb-[1px] flex justify-center z-50">
     <div class="w-4/6 py-3 px-8 bg-white/80 rounded-full transition-all flex items-center justify-between shadow-lg"
@@ -37,44 +24,38 @@ new class extends Component {
                 </a>
             </div>
 
-            {{-- Center item: Shorter Search Form --}}
-            <div class="place-self-center items-center">
-                <label for="default-search" class="mb-2 text-sm font-medium sr-only text-white">Search</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                        </svg>
+            @if (strpos(Request::url(), 'profile') !== false ||
+                    strpos(Request::url(), 'dashboard') !== false ||
+                    strpos(Request::url(), 'login') !== false ||
+                    strpos(Request::url(), 'register') !== false ||
+                    strpos(Request::url(), 'forgot-password') !== false ||
+                    strpos(Request::url(), 'reset-password') !== false )
+                <div class=""></div>
+            @else
+                {{-- Center item: Shorter Search Form --}}
+                <div class="place-self-center items-center">
+                    <label for="default-search" class="mb-2 text-sm font-medium sr-only text-white">Search</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
+                        </div>
+                        <input type="search" id="default-search"
+                            class="block w-full p-2 ps-10 text-sm rounded-lg bg-stone-100 border focus:outline-stone-100 outline-none placeholder-gray-400 text-cyan-900"
+                            placeholder="Search..." />
                     </div>
-                    <input type="search" id="default-search"
-                        class="block w-full p-2 ps-10 text-sm rounded-lg bg-stone-100 border focus:outline-stone-100 outline-none placeholder-gray-400 text-cyan-900"
-                        placeholder="Search..." />
                 </div>
-            </div>
+            @endif
+
 
             {{-- Right item: Icons and Profile Dropdown  --}}
             <div class="flex items-center place-content-end ">
                 @auth
-                    <div class="flex items-center {{ $wishlist_count ? 'space-x-3 ' : 'space-x-2' }}">
-                        @if ($wishlist_count)
-                            <i class="fa-solid fa-heart text-2xl text-red-600 relative">
-                                <span
-                                    class="absolute -top-2 -right-2 w-5 h-5 flex items-center justify-center bg-cyan-900 text-xs rounded-full text-zinc-50">
-                                    {{ $wishlist_count }}
-                                </span>
-                            </i>
-                        @else
-                            <i class="fa-regular fa-heart text-2xl text-cyan-900"></i>
-                        @endif
-                        <i class="fa fa-cart-shopping text-2xl text-cyan-900 relative" aria-hidden="true">
-                            <span
-                                class="absolute -top-2 -right-2 w-5 h-5 flex items-center justify-center bg-cyan-900 text-zinc-50 text-xs rounded-full">
-                                {{ $cart_count }}
-                            </span>
-                        </i>
-                    </div>
+                    @livewire('components.cart-wishlist-count')
+
 
                     <div class="ml-3 relative group" id="profile">
                         <button>
@@ -82,7 +63,7 @@ new class extends Component {
                         </button>
                         {{-- Profile DropDown --}}
                         <div
-                            class="dropdown absolute hidden right-1 top-full mt-2 bg-white/80 rounded-b-lg opacity-0 translate-y-2 transition-all duration-300 ease-in-out group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:block">
+                            class="dropdown absolute hidden right-1 top-full mt-2  bg-white/80 rounded-b-lg opacity-0 translate-y-2 transition-all duration-300 ease-in-out group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:block">
                             <div class="px-4 pb-2 pt-3">
                                 <button class="w-full text-start">
                                     <a href={{ route('dashboard') }} wire:navigate
