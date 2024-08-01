@@ -6,11 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="shortcut icon"
-        href="https://images.pexels.com/photos/698899/pexels-photo-698899.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        type="image/x-icon">
+    {{-- App Title --}}
     <title>{{ config('app.name') }} - @yield('pageTitle')</title>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    {{-- App Icon --}}
+    <link rel="shortcut icon" href={{ asset('images/star_white.png') }} type="image/x-icon">
+
+
+    {{-- Splidejs --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -20,10 +24,28 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-screen bg-gray-900 pt-5">
+<body class="min-h-screen bg-[#13212E]" id="body">
+    <img src="{{ asset('images/cover_slogan.jpg') }}" class="h-[30vh] w-full object-cover hidden" alt=""
+        id="cover">
+
     <main>
+        <livewire:layout.navigation />
         {{ $slot }}
     </main>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cover = document.getElementById('cover');
+            const body = document.getElementById('body');
+            if (window.location.pathname === '/') {
+                cover.classList.add('xl:block');
+            }
+            if (window.location.pathname === '/login' || window.location.pathname === '/register') {
+                body.classList.add('cover');
+            }
+        });
+    </script>
 </body>
 
 </html>

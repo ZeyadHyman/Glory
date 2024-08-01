@@ -37,20 +37,17 @@ new #[Layout('layouts.guest')] class extends Component {
 
 <div>
     @section('pageTitle', 'Registration')
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto w-full lg:h-[80vh] lg:py-0">
-        <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-white">
-            <i class="fa fa-user mr-2" aria-hidden="true"></i>
-            Glory
-        </a>
+    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto w-full xl:h-[90vh]">
         <div class="w-full md:w-1/2 lg:w-1/3 bg-gray-800 rounded-lg shadow dark:border dark:border-gray-700">
-            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 class="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl">
-                    Create account
+            <div class="p-6 sm:p-8">
+                <h1 class="text-xl mb-2 text-center font-bold leading-tight tracking-tight text-white md:text-2xl">
+                    <i class="fa fa-user-plus mr-2" aria-hidden="true"></i>
+                    Create Account
                 </h1>
-                <form class="space-y-4 md:space-y-6" wire:submit.prevent="register">
+                <form wire:submit.prevent="register">
                     {{-- Name --}}
                     <div>
-                        <label for="name" class="block mb-2 text-sm font-medium text-white">
+                        <label for="name" class="block mb-2 mt-5  text-sm font-medium text-white">
                             <i class="fa fa-user mr-1" aria-hidden="true"></i>
                             Name
                         </label>
@@ -63,7 +60,7 @@ new #[Layout('layouts.guest')] class extends Component {
 
                     {{-- Email --}}
                     <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-white">
+                        <label for="email" class="block mb-2 mt-5  text-sm font-medium text-white">
                             <i class="fa fa-envelope mr-1" aria-hidden="true"></i>
                             Email
                         </label>
@@ -76,7 +73,7 @@ new #[Layout('layouts.guest')] class extends Component {
 
                     {{-- Password --}}
                     <div>
-                        <label for="password" class="block mb-2 text-sm font-medium text-white">
+                        <label for="password" class="block mb-2 mt-5  text-sm font-medium text-white">
                             <i class="fa fa-lock mr-1" aria-hidden="true"></i>
                             Password
                         </label>
@@ -90,7 +87,7 @@ new #[Layout('layouts.guest')] class extends Component {
 
                     {{-- Password Confirmation --}}
                     <div>
-                        <label for="password" class="block mb-2 text-sm font-medium text-white">
+                        <label for="password" class="block mb-2 mt-5  text-sm font-medium text-white">
                             <i class="fa fa-lock mr-1" aria-hidden="true"></i>
                             Confirm Password
                         </label>
@@ -102,17 +99,9 @@ new #[Layout('layouts.guest')] class extends Component {
 
                     </div>
 
-
-                    <div class="">
-                        <a class="
-                        underline text-sm mt-2 text-blue-600 hover:text-blue-700  rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-gray-800"
-                            href="{{ route('login') }}" wire:navigate>
-                            {{ __('Already registered?') }}
-                        </a>
-                    </div>
-
+                    {{-- Register Button --}}
                     <button type="submit"
-                        class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        class="mt-5 w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                         <span wire:loading.remove wire:target="register">Register</span>
                         <span wire:loading wire:target="register">
                             <svg aria-hidden="true"
@@ -128,7 +117,37 @@ new #[Layout('layouts.guest')] class extends Component {
                             <span class="sr-only">Loading...</span>
                         </span>
                     </button>
+
+                    <div class="my-5">
+                        <a class="
+                        underline text-sm text-blue-600 hover:text-blue-700  rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-gray-800"
+                            href="{{ route('login') }}" >
+                            {{ __('Already registered?') }}
+                        </a>
+                    </div>
                 </form>
+
+                {{-- Sign Up with Gooogle or Facebook --}}
+                <div class="flex items-center text-gray-400">
+                    <div class="w-full h-[1px] bg-gray-400"></div>
+                    <h1 class="text-md mx-5">or</h1>
+                    <div class="w-full h-[1px] bg-gray-400"></div>
+                </div>
+                <h1 class="text-sm font-light text-gray-400 my-2">Sign Up with </h1>
+                <div class="flex">
+                    {{-- Google --}}
+                    <a href="/socialite/google"
+                        class="py-2 px-4md:mr-5 flex justify-center items-center bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-sm md:text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
+                        <i class="mr-2 fa-brands fa-google"></i>
+                        Google
+                    </a>
+
+                    {{-- <a  href="/socialite/facebook"
+                    class="py-2 px-4 ml-1 md:ml-5 flex justify-center items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-sm md:text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
+                    <i class="mr-2 fa-brands fa-facebook-f"></i>
+                    Facebook
+                </a> --}}
+                </div>
             </div>
         </div>
     </div>

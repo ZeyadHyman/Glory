@@ -46,7 +46,7 @@
     </div>
 
     <div x-show="show"
-        class="mb-6 bg-gradient-to-tr to-zinc-200/90 from-zinc-300/90 rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full {{ $maxWidth }} sm:mx-auto"
+        class="mb-6  bg-gradient-to-tr to-[#1d364a50] from-cyan-950 rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full {{ $maxWidth }} sm:mx-auto"
         x-transition:enter="ease-out duration-300"
         x-transition:enter-start="opacity-0 translate-y-10 sm:translate-y-0 sm:scale-95"
         x-transition:enter-end="opacity-100 translate-y-30 sm:scale-100" x-transition:leave="ease-in duration-200"

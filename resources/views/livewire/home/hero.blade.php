@@ -1,3 +1,3 @@
-<div>
-    <img src={{ asset('images/صورة.png') }} alt="test" class="h-[30vh] w-full rounded-lg">
+<div class="xl:hidden block">
+    <img src={{ asset('images/cover_slogan.jpg') }} alt="test" class="object-cover md:h-[40vh] w-full md:`rounded-lg">
 </div>

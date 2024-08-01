@@ -29,14 +29,9 @@ new #[Layout('layouts.guest')] class extends Component {
     }
 }; ?>
 
-<div>
-
+<div >
     @section('pageTitle', 'Login')
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto w-full lg:h-[80vh] lg:py-0">
-        <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-white">
-            <i class="fa fa-user mr-2" aria-hidden="true"></i>
-            Glory
-        </a>
+    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto w-full h-[90vh]">
         @if (session()->has('success') || session()->has('error'))
             <div
                 class="{{ session()->has('error') ? 'bg-red-500' : 'bg-green-500' }} text-white p-2 rounded-t-full w-full md:w-1/2 lg:w-1/3 text-center">
@@ -47,14 +42,15 @@ new #[Layout('layouts.guest')] class extends Component {
                 <div class="w-full md:w-1/2 lg:w-1/3 bg-gray-800 rounded-lg shadow dark:border dark:border-gray-700">
         @endif
 
-        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 class="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl">
-                Log in to your account
+        <div class="p-6 sm:p-8">
+            <h1 class="text-xl mb-2 text-center font-bold leading-tight tracking-tight text-white xl:text-2xl">
+                <i class="fa fa-user mr-2" aria-hidden="true"></i>
+                Login to your Account
             </h1>
-            <form class="space-y-4 md:space-y-6" wire:submit="login">
+            <form wire:submit="login">
                 {{-- Email --}}
                 <div>
-                    <label for="email" class="block mb-2 text-sm font-medium text-white">
+                    <label for="email" class="block mb-2 mt-5 text-sm font-medium text-white">
                         <i class="fa fa-envelope mr-1" aria-hidden="true"></i>
                         Your email
                     </label>
@@ -66,7 +62,7 @@ new #[Layout('layouts.guest')] class extends Component {
 
                 {{-- Password --}}
                 <div>
-                    <label for="password" class="block mb-2 text-sm font-medium text-white">
+                    <label for="password" class="block mb-2 mt-5 text-sm font-medium text-white">
                         <i class="fa fa-lock mr-1" aria-hidden="true"></i>
                         Password
                     </label>
@@ -79,7 +75,7 @@ new #[Layout('layouts.guest')] class extends Component {
                 </div>
 
                 <!-- Remember Me -->
-                <div class="flex items-center justify-between">
+                <div class="flex items-center justify-between my-3">
                     <div>
                         <label for="remember" class="inline-flex items-center">
                             <input wire:model="form.remember" id="remember" type="checkbox"
@@ -89,18 +85,11 @@ new #[Layout('layouts.guest')] class extends Component {
                         </label>
                     </div>
 
-                    @if (Route::has('password.request'))
-                        <a class="underline text-sm text-blue-600 hover:text-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800"
-                            href="{{ route('password.request') }}" wire:navigate>
-                            {{ __('Forgot your password?') }}
-                        </a>
-                    @endif
                 </div>
-
 
                 {{-- Login --}}
                 <button type="submit"
-                    class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                    class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-base px-5 py-2.5 text-center">
                     <span wire:loading.remove wire:target="login">Log in</span>
                     <span wire:loading wire:target="login">
                         <svg aria-hidden="true"
@@ -117,12 +106,43 @@ new #[Layout('layouts.guest')] class extends Component {
                     </span>
                 </button>
 
+                {{-- Forget Password --}}
+                <div class="mt-2">
+                    @if (Route::has('password.request'))
+                        <a class="underline text-sm text-blue-600 hover:text-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800"
+                            href="{{ route('password.request') }}">
+                            {{ __('Forgot your password?') }}
+                        </a>
+                    @endif
+                </div>
 
-                <p class="text-sm font-light text-gray-400">
+                <p class="text-sm font-light text-gray-400 my-3">
                     Don’t have an account yet?
                     <a href={{ route('register') }} class="font-medium text-blue-500 hover:underline">Register</a>
                 </p>
             </form>
+
+            {{-- Log in with Gooogle or Facebook --}}
+            <div class="flex items-center text-gray-400">
+                <div class="w-full h-[1px] bg-gray-400"></div>
+                <h1 class="text-md mx-5">or</h1>
+                <div class="w-full h-[1px] bg-gray-400"></div>
+            </div>
+            <h1 class="text-sm font-light text-gray-400 my-2">Log in with </h1>
+            <div class="flex">
+                {{-- Google --}}
+                <a href="/socialite/google"
+                    class="py-2 px-4md:mr-5 flex justify-center items-center bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-sm md:text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
+                    <i class="mr-2 fa-brands fa-google"></i>
+                    Google
+                </a>
+
+                {{-- <a  href="/socialite/facebook"
+                    class="py-2 px-4 ml-1 md:ml-5 flex justify-center items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-sm md:text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
+                    <i class="mr-2 fa-brands fa-facebook-f"></i>
+                    Facebook
+                </a> --}}
+            </div>
         </div>
     </div>
 </div>

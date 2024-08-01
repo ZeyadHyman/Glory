@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SocialLoginController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
@@ -9,7 +10,11 @@ Route::view('dashboard', 'dashboard')
     ->name('dashboard');
 
 Route::view('profile', 'profile')
-    ->middleware(['auth'])
+    ->middleware(['auth', 'verified'])
     ->name('profile');
 
-require __DIR__.'/auth.php';
+
+Route::get('/socialite/{driver}', [SocialLoginController::class, 'toProvider']);
+Route::get('/auth/{driver}/login/', [SocialLoginController::class, 'handleCallback']);
+
+require __DIR__ . '/auth.php';

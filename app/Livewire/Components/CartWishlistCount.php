@@ -7,6 +7,7 @@ use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
+
 class CartWishlistCount extends Component
 {
     public $wishlist_count = 0;
