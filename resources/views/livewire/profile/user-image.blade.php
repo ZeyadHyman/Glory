@@ -35,7 +35,7 @@ new class extends Component {
         $user = Auth::user();
 
         $validated = $this->validate([
-            'profile_image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'profile_image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:10000'],
         ]);
 
         if ($user->profile_image) {

@@ -36,7 +36,7 @@ new #[Layout('layouts.guest')] class extends Component {
 <div class="flex justify-center items-center w-full h-[80vh]">
     @section('pageTitle', 'Forget Password')
 
-    <div class="w-full md:w-1/2 lg:w-1/3 bg-gray-800 rounded-lg shadow dark:border dark:border-gray-700 ">
+    <div class="w-full mx-5 md:w-1/2 lg:w-1/3 bg-[#1d364a50] rounded-lg shadow dark:border dark:border-gray-700 ">
         <div class="p-6 space-y-4 sm:p-8">
             <h1 class="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl">
                 Forget Your Password

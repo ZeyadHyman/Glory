@@ -13,8 +13,15 @@ if (Auth::user()) {
 <x-app-layout>
 
     @section('pageTitle', 'profile')
-    <div class="py-12">
+    <div class="py-12 mb-10">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 space-y-6">
+
+            <div class="bg-[#1d364a50] shadow-lg rounded-lg block lg:hidden">
+                <div>
+                    <livewire:profile.logout />
+                </div>
+            </div>
+
             <div class="p-4 sm:p-8 bg-[#1d364a50] shadow-lg rounded-lg">
                 <livewire:profile.user-image />
             </div>
@@ -38,6 +45,7 @@ if (Auth::user()) {
                     <livewire:profile.delete-user-form />
                 </div>
             </div>
+
         </div>
     </div>
 </x-app-layout>

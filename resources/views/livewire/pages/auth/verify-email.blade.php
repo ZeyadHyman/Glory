@@ -13,7 +13,7 @@ new #[Layout('layouts.guest')] class extends Component {
     public function sendVerification(): void
     {
         if (Auth::user()->hasVerifiedEmail()) {
-            $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+            $this->redirectIntended(default: route('home', absolute: false), navigate: true);
 
             return;
         }
@@ -37,7 +37,7 @@ new #[Layout('layouts.guest')] class extends Component {
 <div class="flex justify-center items-center w-full h-[80vh]">
     @section('pageTitle', 'Email Verification')
 
-    <div class="w-full md:w-1/2 lg:w-1/3 bg-gray-800 rounded-lg shadow dark:border dark:border-gray-700 ">
+    <div class="w-full mx-5 md:w-1/2 lg:w-1/3 bg-[#1d364a50] rounded-lg shadow dark:border dark:border-gray-700 ">
         <div class="p-6 space-y-4 sm:p-8">
             @if (!auth()->user()->hasVerifiedEmail())
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl">
@@ -65,12 +65,19 @@ new #[Layout('layouts.guest')] class extends Component {
                 </div>
             @else
                 <div class="flex flex-col">
-                    <h1 class="text-xl font-bold leading-tight tracking-tight text-white md:text-lg">
-                        <i class="fa fa-check mr-2 text-green-400 text-xl font-bold " aria-hidden="true"></i>
-                        Your Email is Verified Now
+                    <h1 class="text-lg font-semibold leading-tight tracking-tight text-white md:text-lg">
+                        <i class="fa fa-check mr-2 text-green-400 text-xl font-bold" aria-hidden="true"></i>
+                        Your Email is Verified
                     </h1>
-                    <a href={{ route('home')}} class="px-5 py-3 bg-red-500 text-zinc-50 rounded-xl text-sm mt-6 text-center">Return To Home Page</a>
+                    <p class="mt-4 text-gray-300">
+                        Your journey to celebrate legends begins now. Explore our exclusive collection and bring the
+                        glory of legends home! </p>
+                    <a href="{{ route('home') }}"
+                        class="px-5 py-3 bg-red-500 text-zinc-50 rounded-xl text-sm mt-6 text-center">
+                        Return To Home Page
+                    </a>
                 </div>
+
         </div>
     </div>
     @endif

@@ -16,11 +16,12 @@ class CartWishlistCount extends Component
     {
         if (Auth::check()) {
             $userId = Auth::id();
-            $this->wishlist_count = Wishlist::where('user_id', $userId)->count();        
+            $this->wishlist_count = Wishlist::where('user_id', $userId)->count();
             $this->cart_count = Cart::where('user_id', $userId)->count();
         }
-        
+
         return view('livewire.components.cart-wishlist-count');
     }
-    
 }
+
+

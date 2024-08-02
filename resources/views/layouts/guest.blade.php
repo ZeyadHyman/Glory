@@ -24,16 +24,19 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-screen bg-[#13212E]" id="body">
+<body class="min-h-screen bg-[#13212E] cover" id="body">
     <img src="{{ asset('images/cover_slogan.jpg') }}" class="h-[30vh] w-full object-cover hidden" alt=""
         id="cover">
 
     <main>
-        <livewire:layout.navigation />
+        <livewire:layout.desktopNavigation />
         {{ $slot }}
+        <livewire:layout.mobileNavigation />
+        <livewire:layout.footer />
     </main>
 
 
+    @yield('script')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const cover = document.getElementById('cover');
@@ -41,8 +44,8 @@
             if (window.location.pathname === '/') {
                 cover.classList.add('xl:block');
             }
-            if (window.location.pathname === '/login' || window.location.pathname === '/register') {
-                body.classList.add('cover');
+            if (window.location.pathname === '/') {
+                body.classList.remove('cover');
             }
         });
     </script>
