@@ -1,4 +1,4 @@
-<div class="mb-14 lg:mb-0 ">
+<div class="mb-14 lg:mb-0 mt-20">
     <!-- Contact and Social Links Section -->
     <div class="px-5 w-full text-center text-zinc-50 py-10 text-base bg-[#0c151d] flex flex-col lg:flex-row lg:justify-between lg:items-center lg:px-20">
         <!-- Contact Information -->
