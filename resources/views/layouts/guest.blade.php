@@ -25,8 +25,7 @@
 </head>
 
 <body class="min-h-screen bg-[#13212E] cover" id="body">
-    <img src="{{ asset('images/cover_slogan.jpg') }}" class="h-[30vh] w-full object-cover hidden" alt=""
-        id="cover">
+    <img src="{{ asset('images/cover_slogan.jpg') }}" class="h-[30vh] w-full object-cover hidden" id="cover">
 
     <main>
         <livewire:layout.desktopNavigation />

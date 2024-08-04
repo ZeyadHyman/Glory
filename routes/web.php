@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Session;
 
 Route::view('/', 'home')->name('home');
 
-Route::view('dashboard', 'dashboard')
+Route::view('dashboard', 'userDashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
