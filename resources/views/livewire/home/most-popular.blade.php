@@ -21,7 +21,7 @@
 
         <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative items-center">
             <div class="relative">
-                <img src={{ asset('images/Posters/Messi.jpeg') }} alt="test"
+                <img src={{ asset('images/Posters/Benzema.jpeg') }} alt="test"
                     class="rounded-xl h-full w-full object-cover ">
                 <div class="absolute top-2 right-2 rounded-xl bg-black/50 text-zinc-300 text-xs md:text-sm p-2 z-[1]">
                     CatEgory
@@ -37,7 +37,7 @@
 
         <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative items-center">
             <div class="relative">
-                <img src={{ asset('images/Posters/Messi.jpeg') }} alt="test"
+                <img src={{ asset('images/Posters/kaka.jpeg') }} alt="test"
                     class="rounded-xl h-full w-full object-cover ">
                 <div class="absolute top-2 right-2 rounded-xl bg-black/50 text-zinc-300 text-xs md:text-sm p-2 z-[1]">
                     CatEgory
@@ -53,7 +53,7 @@
 
         <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative items-center">
             <div class="relative">
-                <img src={{ asset('images/Posters/Messi.jpeg') }} alt="test"
+                <img src={{ asset('images/Posters/Ibrahimović.jpeg') }} alt="test"
                     class="rounded-xl h-full w-full object-cover ">
                 <div class="absolute top-2 right-2 rounded-xl bg-black/50 text-zinc-300 text-xs md:text-sm p-2 z-[1]">
                     CatEgory
@@ -68,23 +68,7 @@
         </div>
         <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative items-center">
             <div class="relative">
-                <img src={{ asset('images/Posters/Messi.jpeg') }} alt="test"
-                    class="rounded-xl h-full w-full object-cover ">
-                <div class="absolute top-2 right-2 rounded-xl bg-black/50 text-zinc-300 text-xs md:text-sm p-2 z-[1]">
-                    CatEgory
-                </div>
-            </div>
-
-            <div
-                class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-75 rounded-xl text-center text-zinc-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <h1 class="mt-16 mb-2 text-md md:text-xl font-bold">TeSt</h1>
-                <button class=" bg-slate-900 rounded p-2 text-sm">Order Now</button>
-            </div>
-        </div>
-
-        <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative items-center">
-            <div class="relative">
-                <img src={{ asset('images/Posters/Messi.jpeg') }} alt="test"
+                <img src={{ asset('images/Posters/toti.jpeg') }} alt="test"
                     class="rounded-xl h-full w-full object-cover ">
                 <div class="absolute top-2 right-2 rounded-xl bg-black/50 text-zinc-300 text-xs md:text-sm p-2 z-[1]">
                     CatEgory
@@ -100,7 +84,7 @@
 
         <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative items-center">
             <div class="relative">
-                <img src={{ asset('images/Posters/Messi.jpeg') }} alt="test"
+                <img src={{ asset('images/Posters/Messi (2).jpeg') }} alt="test"
                     class="rounded-xl h-full w-full object-cover ">
                 <div class="absolute top-2 right-2 rounded-xl bg-black/50 text-zinc-300 text-xs md:text-sm p-2 z-[1]">
                     CatEgory
@@ -116,7 +100,23 @@
 
         <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative items-center">
             <div class="relative">
-                <img src={{ asset('images/Posters/Messi.jpeg') }} alt="test"
+                <img src={{ asset('images/Posters/rondaldo.jpeg') }} alt="test"
+                    class="rounded-xl h-full w-full object-cover ">
+                <div class="absolute top-2 right-2 rounded-xl bg-black/50 text-zinc-300 text-xs md:text-sm p-2 z-[1]">
+                    CatEgory
+                </div>
+            </div>
+
+            <div
+                class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-75 rounded-xl text-center text-zinc-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <h1 class="mt-16 mb-2 text-md md:text-xl font-bold">TeSt</h1>
+                <button class=" bg-slate-900 rounded p-2 text-sm">Order Now</button>
+            </div>
+        </div>
+
+        <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative items-center">
+            <div class="relative">
+                <img src={{ asset('images/Posters/henry.jpeg') }} alt="test"
                     class="rounded-xl h-full w-full object-cover ">
                 <div class="absolute top-2 right-2 rounded-xl bg-black/50 text-zinc-300 text-xs md:text-sm p-2 z-[1]">
                     CatEgory
