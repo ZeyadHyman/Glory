@@ -37,7 +37,7 @@
 
         <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative items-center">
             <div class="relative">
-                <img src={{ asset('images/Posters/kaka.jpeg') }} alt="test"
+                <img src={{ asset('images/Posters/Kaka.jpg') }} alt="test"
                     class="rounded-xl h-full w-full object-cover ">
                 <div class="absolute top-2 right-2 rounded-xl bg-black/50 text-zinc-300 text-xs md:text-sm p-2 z-[1]">
                     CatEgory
@@ -68,7 +68,7 @@
         </div>
         <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative items-center">
             <div class="relative">
-                <img src={{ asset('images/Posters/toti.jpeg') }} alt="test"
+                <img src={{ asset('images/Posters/Totti.jpeg') }} alt="test"
                     class="rounded-xl h-full w-full object-cover ">
                 <div class="absolute top-2 right-2 rounded-xl bg-black/50 text-zinc-300 text-xs md:text-sm p-2 z-[1]">
                     CatEgory
@@ -84,7 +84,7 @@
 
         <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative items-center">
             <div class="relative">
-                <img src={{ asset('images/Posters/Messi (2).jpeg') }} alt="test"
+                <img src={{ asset('images/Posters/Messi(2).jpeg') }} alt="test"
                     class="rounded-xl h-full w-full object-cover ">
                 <div class="absolute top-2 right-2 rounded-xl bg-black/50 text-zinc-300 text-xs md:text-sm p-2 z-[1]">
                     CatEgory
@@ -100,7 +100,7 @@
 
         <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative items-center">
             <div class="relative">
-                <img src={{ asset('images/Posters/rondaldo.jpeg') }} alt="test"
+                <img src={{ asset('images/Posters/Ronaldo.jpeg') }} alt="test"
                     class="rounded-xl h-full w-full object-cover ">
                 <div class="absolute top-2 right-2 rounded-xl bg-black/50 text-zinc-300 text-xs md:text-sm p-2 z-[1]">
                     CatEgory
@@ -116,7 +116,7 @@
 
         <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative items-center">
             <div class="relative">
-                <img src={{ asset('images/Posters/henry.jpeg') }} alt="test"
+                <img src={{ asset('images/Posters/Henry.jpg') }} alt="test"
                     class="rounded-xl h-full w-full object-cover ">
                 <div class="absolute top-2 right-2 rounded-xl bg-black/50 text-zinc-300 text-xs md:text-sm p-2 z-[1]">
                     CatEgory
