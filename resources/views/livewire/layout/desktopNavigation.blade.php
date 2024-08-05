@@ -51,7 +51,7 @@ new class extends Component {
 
             window.addEventListener(scrollEvent, () => {
                 if (window.location.pathname === "/") {
-                    if (window.pageYOffset > 200) {
+                    if (window.pageYOffset > window.innerHeight * (30 / 100)) {
                         nav.classList.replace("md:w-4/6", "md:w-full");
                         nav.classList.replace("md:px-8", "md:px-48");
                         nav.classList.remove("md:rounded-full");
@@ -136,22 +136,23 @@ new class extends Component {
                 <div class="hidden lg:block"></div>
             @else
                 {{-- Center item: Search  --}}
-                <div class="place-self-center items-center hidden lg:inline-block">
+                <div class="place-self-center items-center hidden lg:inline-block w-full">
                     <label for="default-search" class="mb-2 text-sm font-medium sr-only text-white">Search</label>
-                    <div class="relative">
+                    <div class="relative w-full">
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </div>
-                        <button x-on:click.prevent="$dispatch('open-modal', 'searchModal')">
+                        <button x-on:click.prevent="$dispatch('open-modal', 'searchModal')" style="width: 100%">
                             <input type="search" id="default-search"
                                 class="block w-full p-2 ps-10 text-sm rounded-lg bg-stone-100 border focus:outline-stone-100 outline-none placeholder-gray-400 text-cyan-900"
                                 placeholder="Search..." readonly />
                         </button>
 
+
                         <x-modal name="searchModal" :show="false" maxWidth="full" focusable>
                             <div class="py-10 w-full flex items-center justify-center">
                                 <div class="w-1/3">
-                                    <h1 class="text-zinc-50 text-xl mb-2">Tell me what's in your mind</h1>
+                                    <h1 class="text-zinc-50 text-xl mb-5">Tell me what's in your mind</h1>
                                     <div class="relative">
                                         <div
                                             class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">

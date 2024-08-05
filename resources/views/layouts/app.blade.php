@@ -31,8 +31,8 @@
         <livewire:layout.desktopNavigation />
         {{ $slot }}
         <livewire:layout.mobileNavigation />
-        <livewire:layout.footer />
     </main>
+    <livewire:layout.footer />
 
 
     @yield('script')
