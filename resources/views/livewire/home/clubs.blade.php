@@ -1,6 +1,6 @@
 <div class="bg-[#13212E] md:rounded-xl p-5">
     <h1 class="text-zinc-50 font-bold text-3xl md:text-4xl mb-5 ">
-        Movies
+        Clubs
     </h1>
     <div class="flex flex-wrap justify-center gap-3 lg:gap-5">
 
@@ -9,7 +9,7 @@
             <div
                 class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative w-full sm:w-1/2 md:w-1/3 lg:w-1/4 ">
                 <div class="relative">
-                    <img src="https://i.pinimg.com/474x/5d/c1/c2/5dc1c2931a9c783d57998c2184b9775d.jpg"
+                    <img src="https://paintastic-shop.com/cdn/shop/files/IMG-8055.jpg?v=1720019683&width=1680"
                         alt="{{ $product->name }}" class="rounded-xl h-full w-full object-cover">
                 </div>
                 <div
@@ -25,7 +25,7 @@
                 </div>
                 <div
                     class="absolute mt-3 opacity-0 group-hover:opacity-100 duration-500 ease-in-out translate-y-full group-hover:translate-y-0  ml-0 group-hover:ml-4 transition-all rounded-xl bg-black/50 text-zinc-50 text-xs md:text-sm p-2 z-[1]">
-                    Movies & Series
+                    Clubs
                 </div>
                 @if (Auth::check())
                     @if ($product->in_wishlist)

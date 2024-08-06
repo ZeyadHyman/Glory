@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Movies extends Component
+class Clubs extends Component
 {
     use WithPagination;
 
@@ -63,7 +63,7 @@ class Movies extends Component
         $wishlistProductIds = Wishlist::where('user_id', $userId)->pluck('product_id')->toArray();
         $sessionWishlist = Session::get('wishlist', []);
         
-        $products = Product::where('category', 'movies')
+        $products = Product::where('category', 'clubs')
         ->orWhere('category', 'series')
         ->paginate($this->perPage);
 
@@ -74,7 +74,7 @@ class Movies extends Component
             return $product;
         });
 
-        return view('livewire.home.movies', [
+        return view('livewire.home.clubs', [
             'products' => $products,
         ]);
     }

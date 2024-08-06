@@ -22,7 +22,7 @@ new #[Layout('layouts.guest')] class extends Component {
 
             Session::flash('success', 'Logged in successfully.');
 
-            $this->redirectIntended(default: route('home', absolute: false), navigate: true);
+            $this->redirectIntended(default: route('home', absolute: false));
         } catch (\Exception $e) {
             Session::flash('error', 'Invalid email or password.');
 

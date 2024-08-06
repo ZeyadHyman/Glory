@@ -1,6 +1,6 @@
 <div class="bg-[#13212E] md:rounded-xl p-5">
     <h1 class="text-zinc-50 font-bold text-3xl md:text-4xl mb-5 ">
-        Movies
+        T-shirts
     </h1>
     <div class="flex flex-wrap justify-center gap-3 lg:gap-5">
 
@@ -9,8 +9,8 @@
             <div
                 class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative w-full sm:w-1/2 md:w-1/3 lg:w-1/4 ">
                 <div class="relative">
-                    <img src="https://i.pinimg.com/474x/5d/c1/c2/5dc1c2931a9c783d57998c2184b9775d.jpg"
-                        alt="{{ $product->name }}" class="rounded-xl h-full w-full object-cover">
+                    <img src="https://m.media-amazon.com/images/I/41X5wmuVkWL._AC_.jpg" alt="{{ $product->name }}"
+                        class="rounded-xl h-full w-full object-cover">
                 </div>
                 <div
                     class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 rounded-xl text-center text-zinc-50 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100 ">
@@ -25,7 +25,7 @@
                 </div>
                 <div
                     class="absolute mt-3 opacity-0 group-hover:opacity-100 duration-500 ease-in-out translate-y-full group-hover:translate-y-0  ml-0 group-hover:ml-4 transition-all rounded-xl bg-black/50 text-zinc-50 text-xs md:text-sm p-2 z-[1]">
-                    Movies & Series
+                    T-shirts
                 </div>
                 @if (Auth::check())
                     @if ($product->in_wishlist)
@@ -52,6 +52,7 @@
                         </button>
                     @endif
                 @endif
+
             </div>
         @endforeach
 

@@ -5,32 +5,52 @@ namespace App\Livewire;
 use App\Models\Product;
 use App\Models\Wishlist as ModelsWishlist;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class Wishlist extends Component
 {
+    public $products = [];
+
     public function render()
     {
-        $userId = Auth::id();
-        $wishlist_products = ModelsWishlist::where('user_id', $userId)->get();
-        $products = [];
-        foreach ($wishlist_products as $wishlist_product) {
-            $product = Product::where('id', $wishlist_product->id)->first();
-            array_push($products, $product);
+        $this->products = [];
+
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $wishlist_products = ModelsWishlist::where('user_id', $userId)->pluck('product_id');
+            foreach ($wishlist_products as $productId) {
+                $product = Product::find($productId);
+                if ($product) {
+                    $this->products[] = $product;
+                }
+            }
+        } else {
+            $wishlistProductIds = Session::get('wishlist', []);
+            foreach ($wishlistProductIds as $productId) {
+                $product = Product::find($productId);
+                if ($product) {
+                    $this->products[] = $product;
+                }
+            }
         }
 
         return view('livewire.wishlist', [
-            'products' => $products
+            'products' => $this->products
         ]);
     }
 
     public function remove($id)
     {
-
-        ModelsWishlist::where('id', $id)->delete();
+        if (Auth::check()) {
+            ModelsWishlist::where('user_id', Auth::id())->where('product_id', $id)->delete();
+        } else {
+            $wishlist = Session::get('wishlist', []);
+            $wishlist = array_diff($wishlist, [$id]);
+            Session::put('wishlist', $wishlist);
+        }
 
         $this->render();
-
-        $this->dispatch('wishlistUpdated');
+        $this->dispatch('wishlistSessionUpdated');
     }
 }

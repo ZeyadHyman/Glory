@@ -134,11 +134,11 @@
             <div class="items-center place-content-end mr-5 md:mr-0 hidden lg:flex">
                 @auth
                     @livewire('components.cart-wishlist-count')
-                    <div class="ml-3 relative group" id="profile">
+                    <div class="ml-2 relative group" id="profile">
                         <button>
                             @if (Auth::user()->profile_image)
                                 <img src={{ $user_image }} alt="Profile Image"
-                                    class="rounded-full w-9 h-9 mt-1 object-cover">
+                                    class="rounded-full w-8 h-8 object-cover">
                             @else
                                 <i class="fa fa-user-circle text-3xl text-cyan-900" aria-hidden="true"></i>
                             @endif
@@ -178,7 +178,7 @@
                 @else
                     <div class=" flex items-center group w-full h-full justify-end" id="profile">
                         @livewire('components.cart-wishlist-count')
-                        <i class="ml-3 fa-regular fa-user-circle text-3xl text-cyan-900 mr-2 sm:transition-transform sm:duration-300 sm:group-hover:translate-x-0 sm:translate-x-1"
+                        <i class="ml-2 fa-regular fa-user-circle text-3xl text-cyan-900 mr-2 sm:transition-transform sm:duration-300 sm:group-hover:translate-x-0 sm:translate-x-1"
                             aria-hidden="true"></i>
                         <div
                             class="text-cyan-900 font-bold text-sm sm:text-sm sm:transition-all sm:duration-500 sm:opacity-0 sm:-translate-x-10 sm:group-hover:opacity-100 sm:group-hover:translate-x-0 sm:hidden sm:group-hover:block ">
