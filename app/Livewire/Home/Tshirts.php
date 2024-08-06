@@ -40,6 +40,7 @@ class Tshirts extends Component
         }
 
         $this->dispatch('wishlistUpdated');
+
     }
 
     public function toggleWishlistSession($productId)
@@ -55,6 +56,7 @@ class Tshirts extends Component
 
         Session::save();
         $this->dispatch('wishlistSessionUpdated');
+
     }
 
     public function render()

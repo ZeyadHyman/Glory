@@ -1,5 +1,3 @@
-
-
 @section('script')
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -133,48 +131,59 @@
             {{-- Right item: Icons and Profile Dropdown  --}}
             <div class="items-center place-content-end mr-5 md:mr-0 hidden lg:flex">
                 @auth
-                    @livewire('components.cart-wishlist-count')
-                    <div class="ml-2 relative group" id="profile">
-                        <button>
-                            @if (Auth::user()->profile_image)
-                                <img src={{ $user_image }} alt="Profile Image"
-                                    class="rounded-full w-8 h-8 object-cover">
-                            @else
-                                <i class="fa fa-user-circle text-3xl text-cyan-900" aria-hidden="true"></i>
-                            @endif
-                        </button>
-                        {{-- Profile DropDown --}}
-                        <div
-                            class="dropdown absolute hidden right-1 top-full mt-2  bg-white/80 rounded-b-lg opacity-0 translate-y-2 transition-all duration-300 ease-in-out lg:group-focus-within:opacity-100 lg:group-focus-within:translate-y-0 lg:group-focus-within:block">
-                            <div class="px-4 pb-2 pt-3">
-                                <button class="w-full text-start">
-                                    <a href={{ route('dashboard') }}
-                                        class="text-cyan-900 font-bold hover:text-cyan-700 transition-all hover:transition-all">
-                                        {{ __('dashboard') }}
-                                    </a>
-                                </button>
-                            </div>
-                            <div class="px-4 py-2">
+                    @if (Auth::user()->role == 'admin')
+                        <a href={{ route('dashboard') }}
+                            class="text-cyan-900 font-bold hover:text-cyan-700 transition-all hover:transition-all">
+                            {{ __('Dashboard') }}
+                        </a>
+                        <a
+                            class="cursor-pointer text-red-500 font-bold hover:text-red-400 transition-all hover:transition-all mx-5">
+                            {{ __('Log Out') }}
+                        </a>
+                    @else
+                        @livewire('components.cart-wishlist-count')
+                        <div class="ml-2 relative group" id="profile">
+                            <button>
+                                @if (Auth::user()->profile_image)
+                                    <img src={{ $user_image }} alt="Profile Image"
+                                        class="rounded-full w-8 h-8 object-cover">
+                                @else
+                                    <i class="fa fa-user-circle text-3xl text-cyan-900" aria-hidden="true"></i>
+                                @endif
+                            </button>
+                            {{-- Profile DropDown --}}
+                            <div
+                                class="dropdown absolute hidden right-1 top-full mt-2  bg-white/80 rounded-b-lg opacity-0 translate-y-2 transition-all duration-300 ease-in-out lg:group-focus-within:opacity-100 lg:group-focus-within:translate-y-0 lg:group-focus-within:block">
+                                <div class="px-4 pb-2 pt-3">
+                                    <button class="w-full text-start">
+                                        <a href={{ route('dashboard') }}
+                                            class="text-cyan-900 font-bold hover:text-cyan-700 transition-all hover:transition-all">
+                                            {{ __('Dashboard') }}
+                                        </a>
+                                    </button>
+                                </div>
+                                <div class="px-4 py-2">
 
-                                <button class="w-full text-start">
-                                    <a href={{ route('profile') }}
-                                        class="text-cyan-900 font-bold hover:text-cyan-700 transition-all hover:transition-all">
-                                        {{ __('profile') }}
-                                    </a>
-                                </button>
-                            </div>
+                                    <button class="w-full text-start">
+                                        <a href={{ route('profile') }}
+                                            class="text-cyan-900 font-bold hover:text-cyan-700 transition-all hover:transition-all">
+                                            {{ __('Profile') }}
+                                        </a>
+                                    </button>
+                                </div>
 
-                            <div class="px-4 py-2">
-                                <button wire:click="logout" class="w-full text-start">
-                                    <a
-                                        class="cursor-pointer text-red-500 font-bold hover:text-red-400 transition-all hover:transition-all">
+                                <div class="px-4 py-2">
+                                    <button wire:click="logout" class="w-full text-start">
+                                        <a
+                                            class="cursor-pointer text-red-500 font-bold hover:text-red-400 transition-all hover:transition-all">
 
-                                        {{ __('Log Out') }}
-                                    </a>
-                                </button>
+                                            {{ __('Log Out') }}
+                                        </a>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @else
                     <div class=" flex items-center group w-full h-full justify-end" id="profile">
                         @livewire('components.cart-wishlist-count')
