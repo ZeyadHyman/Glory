@@ -7,12 +7,14 @@ use Illuminate\Support\Facades\Session;
 
 Route::view('/', 'home')->name('home');
 
+Route::view('/wishlist', 'wishlist')->name('wishlist');
+
 Route::view('dashboard', 'userDashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
 
-Route::get('/zz', function(){
+Route::get('/zz', function () {
     dd(Session::all());
 });
 
@@ -31,7 +33,7 @@ Route::view('profile', 'profile')
     ->middleware(['auth', 'verified'])
     ->name('profile');
 
-Route::get('/z', function(){
+Route::get('/z', function () {
     Session::put('cart', [0]);
     Session::push('cart', 5);
     Session::put('wishlist', [0]);

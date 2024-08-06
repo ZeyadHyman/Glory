@@ -28,3 +28,32 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+
+/* Container for the pagination dots */
+.splide__pagination {
+    display: flex;
+    justify-content: center;
+    bottom: 10;
+}
+
+/* Individual pagination dots */
+.splide__pagination__page {
+    width: 8px; /* Size of the dots */
+    height: 8px; /* Size of the dots */
+    background-color: #13212E; /* Default color */
+    opacity: 60%;
+    border-radius: 50%; /* Make them circular */
+    margin: 0 3px; /* Spacing between dots */
+    cursor: pointer; /* Cursor change on hover */
+    transition: background-color 0.3s; /* Smooth color transition */
+}
+
+/* Active dot */
+.splide__pagination__page.is-active {
+    background-color: #fff; /* Active color */
+    }
+
+/* Hover effect */
+.splide__pagination__page:hover {
+    background-color: #888; /* Hover color */
+}

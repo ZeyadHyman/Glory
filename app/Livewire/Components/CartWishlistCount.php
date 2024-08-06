@@ -5,6 +5,7 @@ namespace App\Livewire\Components;
 use App\Models\Cart;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 
@@ -12,6 +13,8 @@ class CartWishlistCount extends Component
 {
     public $wishlist_count = 0;
     public $cart_count = 0;
+
+    #[On('wishlistUpdated')]
     public function render()
     {
         if (Auth::check()) {

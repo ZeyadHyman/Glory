@@ -27,13 +27,12 @@
 <body class="min-h-screen bg-[#13212E] cover" id="body">
     <img src="{{ asset('images/cover_slogan.jpg') }}" class="h-[30vh] w-full object-cover hidden" id="cover">
 
-    <livewire:layout.desktopNavigation />
+    <livewire:layout.desktop-navigation />
     <main>
         {{ $slot }}
-        <livewire:layout.mobileNavigation />
+        <livewire:layout.mobile-navigation />
     </main>
     <livewire:layout.footer />
-
 
     @yield('script')
     <script>
