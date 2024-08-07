@@ -1,12 +1,17 @@
-
 <nav class="block lg:hidden fixed w-full bottom-0 justify-center z-50 bg-[#D0D3D5] p-2" id="navbar">
     @auth
         @if (Auth::user()->role == 'admin')
             <div class="w-full text-center felx justify-center p-4">
-                <a href={{ route('dashboard') }}
-                    class="text-cyan-900 font-bold  hover:text-cyan-700 transition-all hover:transition-all">
-                    {{ __('dashboard') }}
-                </a>
+                    <a href={{ route('dashboard') }}
+                        class="text-cyan-900 font-bold hover:text-cyan-700 transition-all hover:transition-all">
+                        {{ __('Dashboard') }}
+                    </a>
+
+
+                    <a wire:click="logout"
+                        class="cursor-pointer text-red-500 font-bold hover:text-red-400 transition-all hover:transition-all mx-5">
+                        {{ __('Log Out') }}
+                    </a>
             </div>
         @endauth
     @else

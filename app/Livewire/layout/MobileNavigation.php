@@ -5,10 +5,12 @@ namespace App\Livewire\Layout;
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use App\Models\Cart;
 use App\Models\SocialLogin;
 use App\Models\Wishlist;
-use Livewire\Attributes\On;
+use App\Livewire\Actions\Logout;
+
 
 class MobileNavigation extends Component
 {
@@ -59,7 +61,11 @@ class MobileNavigation extends Component
             }
         }
     }
-
+    public function logout(Logout $logout): void
+    {
+        $logout();
+        $this->redirect('/');
+    }
     public function render()
     {
         return view('livewire.layout.mobile-navigation');

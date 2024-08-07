@@ -1,3 +1,9 @@
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        tshirts.mount()
+    })
+</script>
+
 <div class="bg-[#13212E]  md:rounded-xl mt-5 p-5">
     <h1 class="text-zinc-50 font-bold text-2xl md:text-3xl mb-5 ">
         T-shirts
@@ -7,10 +13,10 @@
     <div class="hidden lg:flex flex-wrap justify-center gap-3 lg:gap-5">
         @foreach ($products as $product)
             <div
-                class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative w-full sm:w-1/2 md:w-1/3 lg:w-1/4 ">
+                class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative w-full sm:w-1/2 md:w-1/3 lg:w-1/4 animation">
                 <div class="relative">
-                    <img src="https://rukminim2.flixcart.com/image/416/416/l1pc3gw0/poster/8/b/d/large-cristiano-ronaldo-poster-cr-a3-original-imagd7jb4hncbqjz.jpeg?q=70&crop=false" alt="{{ $product->name }}"
-                        class="rounded-xl h-full w-full object-cover">
+                    <img src="https://rukminim2.flixcart.com/image/416/416/l1pc3gw0/poster/8/b/d/large-cristiano-ronaldo-poster-cr-a3-original-imagd7jb4hncbqjz.jpeg?q=70&crop=false"
+                        alt="{{ $product->name }}" class="rounded-xl h-full w-full object-cover">
                 </div>
                 <div
                     class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 rounded-xl text-center text-zinc-50 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100 ">
@@ -67,16 +73,16 @@
     </div>
 
     {{-- Mobile Version --}}
-    <section class="splide splide-players mt-2 block lg:hidden" aria-labelledby="carousel-heading">
+    <section class="splide splide-tshirts mt-2 block lg:hidden" aria-labelledby="carousel-heading">
         <div class="splide__track">
             <ul class="splide__list">
                 @foreach ($products as $product)
-                    <li class="splide__slide mr-5 text-center text-zinc-50 place-content-center ">
+                    <li class="splide__slide mr-5 text-center text-zinc-50 place-content-center animation">
                         <div
                             class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative w-full sm:w-1/2 md:w-1/3 lg:w-1/4 ">
                             <div class="relative">
-                                <img src="https://rukminim2.flixcart.com/image/416/416/l1pc3gw0/poster/8/b/d/large-cristiano-ronaldo-poster-cr-a3-original-imagd7jb4hncbqjz.jpeg?q=70&crop=false" alt="{{ $product->name }}"
-                                    class="rounded-xl h-full w-full object-cover">
+                                <img src="https://rukminim2.flixcart.com/image/416/416/l1pc3gw0/poster/8/b/d/large-cristiano-ronaldo-poster-cr-a3-original-imagd7jb4hncbqjz.jpeg?q=70&crop=false"
+                                    alt="{{ $product->name }}" class="rounded-xl h-full w-full object-cover">
                             </div>
                             <div
                                 class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 rounded-xl text-center text-zinc-50 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100 ">

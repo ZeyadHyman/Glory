@@ -61,3 +61,17 @@
 .splide__pagination__page:hover {
     background-color: #888; /* Hover color */
 }
+
+
+/* Products Animation */
+
+.animation {
+    opacity: 0;
+    transform: scale(0.95) rotate(-2deg);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.animation.visible {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}

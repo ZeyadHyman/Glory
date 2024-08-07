@@ -2,7 +2,7 @@ import "./bootstrap";
 import Splide from "@splidejs/splide";
 
 document.addEventListener("DOMContentLoaded", () => {
-    new Splide(".splide-added", {
+    const added = new Splide(".splide-added", {
         type: "loop",
         drag: "free",
         focus: "center",
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
     }).mount();
 
-    new Splide(".splide-tshirts", {
+    const tshirts = new Splide(".splide-tshirts", {
         type: "loop",
         drag: "free",
         focus: "center",
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
     }).mount();
 
-    new Splide(".splide-clubs", {
+    const clubs = new Splide(".splide-clubs", {
         type: "loop",
         drag: "free",
         focus: "center",
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
     }).mount();
 
-    new Splide(".splide-movies", {
+    const movies = new Splide(".splide-movies", {
         type: "loop",
         drag: "free",
         focus: "center",
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
     }).mount();
 
-    new Splide(".splide-players", {
+    const players = new Splide(".splide-players", {
         type: "loop",
         drag: "free",
         focus: "center",
@@ -76,4 +76,20 @@ document.addEventListener("DOMContentLoaded", () => {
             2650: { perPage: 4.5 },
         },
     }).mount();
+
+    const animations = document.querySelectorAll('.animation');
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    });
+
+    animations.forEach(animation => {
+        observer.observe(animation);
+    });
+
 });

@@ -136,7 +136,8 @@
                             class="text-cyan-900 font-bold hover:text-cyan-700 transition-all hover:transition-all">
                             {{ __('Dashboard') }}
                         </a>
-                        <a
+
+                        <a wire:click="logout"
                             class="cursor-pointer text-red-500 font-bold hover:text-red-400 transition-all hover:transition-all mx-5">
                             {{ __('Log Out') }}
                         </a>
