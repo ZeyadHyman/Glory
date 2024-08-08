@@ -13,7 +13,7 @@ class Movies extends Component
 {
     use WithPagination;
 
-    public $perPage = 6;
+    public $perPage = 3;
     public $page = 1;
 
     public function loadMore()

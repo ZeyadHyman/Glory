@@ -5,19 +5,9 @@
         Recently Added
     </h1>
 
-    <section class="splide splide-added mt-2" aria-labelledby="carousel-heading">
+    <section class="splide mt-2" id="splide-added" aria-labelledby="carousel-heading">
         <div class="splide__track">
             <ul class="splide__list">
-                <li class="splide__slide mr-5 text-center text-zinc-50 place-content-center ">
-                    <div class="relative h-full">
-                        <img src={{ 'https://images.pexels.com/photos/20827831/pexels-photo-20827831/free-photo-of-person-fingers-holding-dandelion-on-meadow.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }} alt="test"
-                            class="rounded-xl h-full w-full object-cover ">
-                        <div
-                            class="absolute top-2 right-2 rounded-xl bg-black/50 text-zinc-50 text-xs md:text-sm p-2 z-[1]">
-                            Players
-                        </div>
-                    </div>
-                </li>
                 <li class="splide__slide mr-5 text-center text-zinc-50 place-content-center ">
                     <div class="relative h-full">
                         <img src={{ asset('images/Posters/Benzema.jpeg') }} alt="test"

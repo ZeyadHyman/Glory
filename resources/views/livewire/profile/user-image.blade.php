@@ -97,7 +97,7 @@ new class extends Component {
             height: 5px;
             margin-left: 5px;
             background-color: #4CAF50;
-            animation: loading 5s ease-in-out;
+            animation: loading 7s ease-in-out;
         }
     </style>
     <form wire:submit.prevent="updateProfileImage" class="space-y-6">

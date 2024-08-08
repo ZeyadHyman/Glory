@@ -1,38 +1,27 @@
 <?php
 
-use App\Http\Controllers\SocialLoginController;
+use App\Http\Controllers\ProducDetails;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 
-
+// Public Routes
 Route::view('/', 'home')->name('home');
-
 Route::view('/wishlist', 'wishlist')->name('wishlist');
-
-Route::view('dashboard', 'userDashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-
-Route::view('profile', 'profile')
-    ->middleware(['auth', 'verified'])
-    ->name('profile');
+Route::view('/pageNotFound', 'pageNotFound')->name('pageNotFound');
+Route::get('/productDetails/{productId}', [ProducDetails::class, 'index'])->name('product-details');
 
 
-Route::get('/socialite/{driver}', [SocialLoginController::class, 'toProvider']);
-Route::get('/auth/{driver}/login/', [SocialLoginController::class, 'handleCallback']);
+// Authenticated User Routes
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::view('dashboard', 'userDashboard')->name('dashboard');
+    Route::view('profile', 'profile')->name('profile');
+});
 
-require __DIR__ . '/auth.php';
-
-
+// Admin Routes
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('adminDashboard');
-    })->name('adminDashboard');
-
-    Route::get('/admin/users', function () {
-        return view('livewire.admin.users');
-    })->name('admin.users');
-
+    Route::view('/admin/dashboard', 'adminDashboard')->name('adminDashboard');
+    Route::view('/admin/users', 'livewire.admin.users')->name('admin.users');
 });
 
 
+// Include authentication-related routes
+require __DIR__ . '/auth.php';

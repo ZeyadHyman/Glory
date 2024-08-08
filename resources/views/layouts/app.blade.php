@@ -8,16 +8,23 @@
 
     {{-- App Title --}}
     <title>{{ config('app.name') }} - @yield('pageTitle')</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
 
     {{-- App Icon --}}
-    <link rel="shortcut icon" href={{ asset('images/star_white.png') }} type="image/x-icon">
-
+    <link rel="shortcut icon" href="{{ asset('images/star_white.png') }}" type="image/x-icon">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
+    @livewireStyles
+    @livewireScripts
+    <!-- Splide.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js" defer></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -32,8 +39,6 @@
     <livewire:layout.footer />
 
     @yield('script')
-    @livewireScripts
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
