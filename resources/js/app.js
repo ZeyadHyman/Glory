@@ -1,6 +1,7 @@
 import "./bootstrap";
 import Splide from "@splidejs/splide";
 
+
 document.addEventListener("DOMContentLoaded", () => {
     const added = new Splide(".splide-added", {
         type: "loop",
@@ -77,19 +78,18 @@ document.addEventListener("DOMContentLoaded", () => {
         },
     }).mount();
 
-    const animations = document.querySelectorAll('.animation');
+    const animations = document.querySelectorAll(".animation");
 
     const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+                entry.target.classList.add("visible");
                 observer.unobserve(entry.target);
             }
         });
     });
 
-    animations.forEach(animation => {
+    animations.forEach((animation) => {
         observer.observe(animation);
     });
-
 });

@@ -1,8 +1,3 @@
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        players.mount()
-    })
-</script>
 
 <div class="bg-[#13212E]  md:rounded-xl mt-5 p-5">
     <h1 class="text-zinc-50 font-bold text-2xl md:text-3xl mb-5 ">
@@ -13,7 +8,7 @@
     <div class="hidden lg:flex flex-wrap justify-center gap-3 lg:gap-5">
         @foreach ($products as $product)
             <div
-                class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative w-full sm:w-1/2 md:w-1/3 lg:w-1/4 animation">
+                class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative w-full sm:w-1/2 md:w-1/3 lg:w-1/4 ">
                 <div class="relative">
                     <img src="{{ asset('images/posters/Messi.jpeg') }}" alt="{{ $product->name }}"
                         class="rounded-xl h-full w-full object-cover">
@@ -77,7 +72,7 @@
         <div class="splide__track">
             <ul class="splide__list">
                 @foreach ($products as $product)
-                    <li class="splide__slide mr-5 text-center text-zinc-50 place-content-center animation">
+                    <li class="splide__slide mr-5 text-center text-zinc-50 place-content-center ">
                         <div
                             class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative w-full sm:w-1/2 md:w-1/3 lg:w-1/4 ">
                             <div class="relative">

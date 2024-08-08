@@ -132,7 +132,7 @@
             <div class="items-center place-content-end mr-5 md:mr-0 hidden lg:flex">
                 @auth
                     @if (Auth::user()->role == 'admin')
-                        <a href={{ route('dashboard') }}
+                        <a href={{ route('adminDashboard') }}
                             class="text-cyan-900 font-bold hover:text-cyan-700 transition-all hover:transition-all">
                             {{ __('Dashboard') }}
                         </a>

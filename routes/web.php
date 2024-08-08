@@ -24,7 +24,15 @@ Route::get('/auth/{driver}/login/', [SocialLoginController::class, 'handleCallba
 require __DIR__ . '/auth.php';
 
 
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view('adminDashboard');
+    })->name('adminDashboard');
+
+    Route::get('/admin/users', function () {
+        return view('livewire.admin.users');
+    })->name('admin.users');
+
+});
 
 
-
-Route::view('test', 'adminDashboard')->middleware('admin');

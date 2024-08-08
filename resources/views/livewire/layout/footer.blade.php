@@ -1,4 +1,6 @@
-<div class="mb-14 lg:mb-0 mt-20">
+
+
+<div class="mb-14 lg:mb-0 mt-20" id='test'>
     <!-- Contact and Social Links Section -->
     <div
         class="px-5 w-full text-center text-zinc-50 py-10 text-base bg-[#0c151d] flex flex-col lg:flex-row lg:justify-between lg:items-center lg:px-20">
@@ -12,20 +14,21 @@
             <h1 class="font-bold text-2xl block lg:hidden">Contact Us</h1>
             <h1 class="flex items-center">
                 <i class="fa-brands fa-whatsapp mr-2 text-white font-bold text-2xl" aria-hidden="true"></i>
-                <a  target="_blank" rel="noopener noreferrer" href="https://api.whatsapp.com/send/?phone=201159289796&text&type=phone_number&app_absent=0"
+                <a target="_blank" rel="noopener noreferrer"
+                    href="https://api.whatsapp.com/send/?phone=201159289796&text&type=phone_number&app_absent=0"
                     class="underline hover:text-zinc-50/80">
                     Whatsapp
                 </a>
             </h1>
             <h1 class="flex items-center">
                 <i class="fa-brands fa-facebook-f mr-4 text-white font-bold text-2xl" aria-hidden="true"></i>
-                <a  target="_blank" rel="noopener noreferrer" href="#" class="underline hover:text-zinc-50/80">
+                <a target="_blank" rel="noopener noreferrer" href="#" class="underline hover:text-zinc-50/80">
                     Facebook
                 </a>
             </h1>
             <h1 class="flex items-center">
                 <i class="fa-brands fa-instagram mr-2 text-white font-bold text-2xl" aria-hidden="true"></i>
-                <a  target="_blank" rel="noopener noreferrer" href="#" class="underline hover:text-zinc-50/80">
+                <a target="_blank" rel="noopener noreferrer" href="#" class="underline hover:text-zinc-50/80">
                     Instagram
                 </a>
             </h1>

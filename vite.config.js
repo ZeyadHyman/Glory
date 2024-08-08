@@ -3,7 +3,7 @@ import laravel from "laravel-vite-plugin";
 
 export default defineConfig({
     server: {
-        host: "192.168.1.9",
+        host: "192.168.1.8",
         port: 8000,
     },
     plugins: [
@@ -16,6 +16,7 @@ export default defineConfig({
     resolve: {
         alias: {
             "@": "/resources",
+            alpinejs: "alpinejs/dist/alpine.js",
         },
     },
 });

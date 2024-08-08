@@ -32,15 +32,25 @@
     <livewire:layout.footer />
 
     @yield('script')
+    @livewireScripts
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const cover = document.getElementById('cover');
             const body = document.getElementById('body');
+            const test = document.getElementById('test');
+
             if (window.location.pathname === '/') {
                 cover.classList.add('lg:block');
             }
             if (window.location.pathname === '/' || window.location.pathname === '/profile') {
                 body.classList.remove('cover');
+            }
+
+            // Hide the element with id "test" if the URL path is /admin/dashboard
+            if (window.location.pathname === '/admin/dashboard') {
+                test.style.display = 'none';
             }
         });
     </script>

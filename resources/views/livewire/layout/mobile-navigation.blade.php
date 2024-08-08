@@ -2,7 +2,7 @@
     @auth
         @if (Auth::user()->role == 'admin')
             <div class="w-full text-center felx justify-center p-4">
-                    <a href={{ route('dashboard') }}
+                    <a href={{ route('adminDashboard') }}
                         class="text-cyan-900 font-bold hover:text-cyan-700 transition-all hover:transition-all">
                         {{ __('Dashboard') }}
                     </a>

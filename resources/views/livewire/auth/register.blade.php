@@ -19,7 +19,22 @@ new #[Layout('layouts.guest')] class extends Component {
      */
     public function register(): void
     {
-        
+        // Check if the email is valid.
+        $ch = curl_init();
+        $url = 'https://emailvalidation.abstractapi.com/v1/?api_key=16e60aad9c3041caa78babde647d94e6&email=' . urlencode($this->email);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        $data = curl_exec($ch);
+        curl_close($ch);
+
+        $emailValidation = json_decode($data, true);
+        if($emailValidation){
+            if ($emailValidation['deliverability'] == 'UNDELIVERABLE') {
+                session()->flash('emailError', 'Invalid Email.');
+            }
+        }
+
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
@@ -27,16 +42,17 @@ new #[Layout('layouts.guest')] class extends Component {
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
-        
-        Session::flush();
-        
-        event(new Registered(($user = User::create($validated))));
+
+        $user = User::create($validated);
+        event(new Registered($user));
 
         Auth::login($user);
 
-        $this->redirect(route('home', absolute: false));
+        $this->redirect(route('dashboard', absolute: false));
     }
-}; ?>
+};
+?>
+
 
 <div>
     @section('pageTitle', 'Registration')
@@ -71,6 +87,7 @@ new #[Layout('layouts.guest')] class extends Component {
                             class="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                             placeholder="example@example.com" required>
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                        <h1 class="text-sm text-red-600 dark:text-red-400 space-y-1">{{ session('emailError') }}</h1>
                     </div>
 
 
