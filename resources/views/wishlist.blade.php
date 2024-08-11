@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('pageTitle', 'Wishlist')
-    
-        @livewire('wishlist')
+
+    @livewire('wishlist')
 
 </x-app-layout>

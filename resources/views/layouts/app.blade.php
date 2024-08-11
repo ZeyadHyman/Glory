@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -22,6 +22,7 @@
     @livewireScripts
     <!-- Splide.js -->
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
@@ -32,6 +33,13 @@
     <img src="{{ asset('images/cover_slogan.jpg') }}" class="h-[30vh] w-full object-cover hidden" id="cover">
 
     <livewire:layout.desktop-navigation />
+
+    <div class="spinner-overlay" id="spinner">
+        <div class="spinner">
+            <img class="h-20 w-20" src="{{ asset('images/star_white.png') }}" alt="">
+        </div>
+    </div>
+
     <main>
         {{ $slot }}
         <livewire:layout.mobile-navigation />
@@ -40,25 +48,6 @@
 
     @yield('script')
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const cover = document.getElementById('cover');
-            const body = document.getElementById('body');
-            const test = document.getElementById('test');
-
-            if (window.location.pathname === '/') {
-                cover.classList.add('lg:block');
-            }
-            if (window.location.pathname === '/' || window.location.pathname === '/profile') {
-                body.classList.remove('cover');
-            }
-
-            // Hide the element with id "test" if the URL path is /admin/dashboard
-            if (window.location.pathname === '/admin/dashboard') {
-                test.style.display = 'none';
-            }
-        });
-    </script>
 </body>
 
 </html>

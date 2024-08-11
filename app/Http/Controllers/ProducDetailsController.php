@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class ProducDetails extends Controller
+class ProducDetailsController extends Controller
 {
     public function index($productId)
     {
         $product = Product::where("id", $productId)->first();
         $productName = $product->name;
-        return view('product-details', [
+        $product->images = json_decode($product->images);
+        return view('productDetails', [
             'product' => $product,
             'productName' => $productName,
         ]);

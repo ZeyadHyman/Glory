@@ -53,7 +53,7 @@
                 <!-- Search Icon for Mobile -->
                 <div class=" lg:hidden block rounded-full">
 
-                    <button x-on:click.prevent="$dispatch('open-modal', 'searchModal')">
+                    <button x-on:click.prevent="$dispatch('open-modal', 'searchModal')" class='search'>
                         <i class="fa fa-search text-lg text-[#13212E]" aria-hidden="true"></i>
                     </button>
 
@@ -62,12 +62,36 @@
                             <div class="p-1">
                                 <h1 class="text-zinc-50 text-lg mb-2">Tell me what's in your mind</h1>
                                 <div class="relative">
-                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                    <div
+                                        class="absolute start-0 flex justify-center top-3 items-center ps-3 pointer-events-none">
                                         <i class="fa fa-search text-cyan-900" aria-hidden="true"></i>
                                     </div>
-                                    <input type="search" id="modal-search" x-ref="modalSearchInput"
+
+                                    <input type="search" id="modal -search" x-ref="modalSearchInput"
+                                        wire:model.live="search"
                                         class="block w-full p-2 ps-10 text-sm rounded-lg bg-stone-100 border focus:outline-stone-100 outline-none placeholder-gray-400 text-cyan-900"
                                         placeholder="Search..." />
+
+                                    <div class="">
+                                        @if ($searchedProducts->isNotEmpty())
+                                            <ul class="mt-4">
+                                                @foreach ($searchedProducts as $product)
+                                                    <li class="py-2 border-b text-zinc-50">
+                                                        <a
+                                                            href={{ route('product-details', ['productId' => $product->id]) }}>
+                                                            {{ $product->name }}
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            @if ($search)
+                                                @if ($search)
+                                                    <p class="mt-4 text-zinc-50">No results found.</p>
+                                                @endif
+                                            @endif
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +125,7 @@
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </div>
-                        <button x-on:click.prevent="$dispatch('open-modal', 'searchModal')" style="width: 100%">
+                        <button x-on:click.prevent="$dispatch('open-modal', 'searchModal')" class='search' style="width: 100%">
                             <input type="search" id="default-search"
                                 class="block w-full p-2 ps-10 text-sm rounded-lg bg-stone-100 border focus:outline-stone-100 outline-none placeholder-gray-400 text-cyan-900"
                                 placeholder="Search..." readonly />
@@ -114,12 +138,31 @@
                                     <h1 class="text-zinc-50 text-xl mb-5">Tell me what's in your mind</h1>
                                     <div class="relative">
                                         <div
-                                            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                            class="absolute start-0 flex justify-center top-3 items-center ps-3 pointer-events-none">
                                             <i class="fa fa-search text-cyan-900" aria-hidden="true"></i>
                                         </div>
                                         <input type="search" id="modal-search" x-ref="modalSearchInput"
+                                            wire:model.live.debounce.1ms="search"
                                             class="block w-full p-2 ps-10 text-sm rounded-lg bg-stone-100 border focus:outline-stone-100 outline-none placeholder-gray-400 text-cyan-900"
                                             placeholder="Search..." />
+                                        <div class="">
+                                            @if ($searchedProducts->isNotEmpty())
+                                                <ul class="mt-4">
+                                                    @foreach ($searchedProducts as $product)
+                                                        <li class="py-2 border-b text-zinc-50">
+                                                            <a
+                                                                href={{ route('product-details', ['productId' => $product->id]) }}>
+                                                                {{ $product->name }}
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @else
+                                                @if ($search)
+                                                    <p class="mt-4 text-zinc-50">No results found.</p>
+                                                @endif
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>

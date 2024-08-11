@@ -1,13 +1,15 @@
 <?php
 
-use App\Http\Controllers\ProducDetails;
+use App\Http\Controllers\ProducDetailsController;
+use App\Http\Controllers\productsByCategoryController;
 use Illuminate\Support\Facades\Route;
 
 // Public Routes
 Route::view('/', 'home')->name('home');
 Route::view('/wishlist', 'wishlist')->name('wishlist');
 Route::view('/pageNotFound', 'pageNotFound')->name('pageNotFound');
-Route::get('/productDetails/{productId}', [ProducDetails::class, 'index'])->name('product-details');
+Route::get('/productDetails/{productId}', [ProducDetailsController::class, 'index'])->name('product-details');
+Route::get('/productsByCategory/{category}', [productsByCategoryController::class, 'index'])->name('products-by-category');
 
 
 // Authenticated User Routes

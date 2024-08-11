@@ -1,5 +1,3 @@
-
-
 <div class="mb-14 lg:mb-0 mt-20" id='footer'>
     <!-- Contact and Social Links Section -->
     <div

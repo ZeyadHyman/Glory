@@ -11,8 +11,7 @@
 @import "animate.css";
 
 /* Splide */
-@import '@splidejs/splide/dist/css/splide.min.css';
-
+@import "@splidejs/splide/dist/css/splide.min.css";
 
 @tailwind base;
 @tailwind components;
@@ -24,6 +23,43 @@
         font-weight: 500;
         font-style: normal;
     }
+}
+
+/* SCrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+}
+::-webkit-scrollbar-thumb {
+    background: #1f364b;
+    border: 100px none #ffffff;
+    border-radius: 0px;
+    transition: 3s all ease-in-out;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #26415a;
+    transition: 3s all ease-in-out;
+}
+::-webkit-scrollbar-thumb:active {
+    background: #26415a;
+}
+::-webkit-scrollbar-track {
+    background: #ffffff;
+    border: 78px none #ffffff;
+    border-radius: 0px;
+}
+::-webkit-scrollbar-track:hover {
+    background: #ffffff;
+}
+::-webkit-scrollbar-track:active {
+    background: #ffffff;
+}
+::-webkit-scrollbar-corner {
+    background: transparent;
 }
 
 .cover {
@@ -44,7 +80,7 @@
 .splide__pagination__page {
     width: 8px; /* Size of the dots */
     height: 8px; /* Size of the dots */
-    background-color: #13212E; /* Default color */
+    background-color: #13212e; /* Default color */
     opacity: 60%;
     border-radius: 50%; /* Make them circular */
     margin: 0 3px; /* Spacing between dots */
@@ -55,10 +91,35 @@
 /* Active dot */
 .splide__pagination__page.is-active {
     background-color: #fff; /* Active color */
-    }
+}
 
 /* Hover effect */
 .splide__pagination__page:hover {
     background-color: #888; /* Hover color */
 }
 
+
+/* Page Spinner */
+.spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.692);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    display: none;
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}

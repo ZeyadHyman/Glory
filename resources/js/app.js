@@ -3,65 +3,116 @@ import Splide from "@splidejs/splide";
 
 $(document).ready(function () {
     const path = window.location.pathname;
+    const spinner = document.getElementById("spinner");
+    const currentUrl = window.location.href;
+    const cover = document.getElementById("cover");
+    const body = document.getElementById("body");
+    const test = document.getElementById("test");
+    const footer = document.getElementById("footer");
 
-    if (path.startsWith("/productDetails/")) {
-        const mainSliderElement = $("#main-slider")[0];
-        if (mainSliderElement) {
-            const main = new Splide(mainSliderElement, {
-                type: "fade",
-                heightRatio: 0.5,
-                pagination: false,
-                arrows: false,
-                cover: true,
-            }).mount();
+    const handlePathChanges = () => {
+        if (path === "/") {
+            cover.classList.add("lg:block");
         }
-
-        const thumbnailSliderElement = $("#thumbnail-slider")[0];
-        if (thumbnailSliderElement) {
-            const thumbnails = new Splide(thumbnailSliderElement, {
-                rewind: true,
-                fixedWidth: 104,
-                fixedHeight: 58,
-                isNavigation: true,
-                gap: 10,
-                arrows: false,
-                focus: "center",
-                pagination: false,
-                cover: true,
-                dragMinThreshold: {
-                    mouse: 4,
-                    touch: 10,
-                },
-                breakpoints: {
-                    640: {
-                        fixedWidth: 66,
-                        fixedHeight: 38,
-                    },
-                },
-            }).mount();
+        if (path === "/" || path === "/profile") {
+            body.classList.remove("cover");
         }
-    }
+        if (path === "/admin/dashboard") {
+            footer.style.display = "none";
+        }
+    };
 
-    if (path === "/") {
-
-        const animations = $(".animation");
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    $(entry.target).addClass("visible");
-                    observer.unobserve(entry.target);
+    const setupSpinner = () => {
+        document.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", function () {
+                if (link.href !== currentUrl) {
+                    spinner.style.display = "flex";
                 }
             });
         });
+    };
 
-        animations.each((index, animation) => {
-            observer.observe(animation);
-        });
+    const setupProductDetails = () => {
+        if (path.startsWith("/productDetails/")) {
+            const splide = new Splide("#main-carousel", {
+                pagination: false,
+                arrows: false,
+                drag: false,
+            }).mount();
 
-        const addedElement = $("#splide-added")[0];
-        if (addedElement) {
-            const added = new Splide(addedElement, {
+            const thumbnails = document.getElementsByClassName("thumbnail");
+            let current;
+
+            const initThumbnail = (thumbnail, index) => {
+                thumbnail.addEventListener("click", () => splide.go(index));
+            };
+
+            Array.from(thumbnails).forEach((thumbnail, index) =>
+                initThumbnail(thumbnail, index),
+            );
+
+            splide.on("mounted move", () => {
+                const thumbnail = thumbnails[splide.index];
+                if (thumbnail) {
+                    if (current) current.classList.remove("is-active");
+                    thumbnail.classList.add("is-active");
+                    current = thumbnail;
+                }
+            });
+
+            const isScreenSizeValid = () =>
+                window.matchMedia("(min-width: 768px)").matches;
+
+            const openModal = (imageSrc) => {
+                if (isScreenSizeValid()) {
+                    $("#modalImage").attr("src", imageSrc);
+                    $("#imageModal").removeClass("hidden");
+                }
+            };
+
+            const closeModal = () => {
+                if (isScreenSizeValid()) {
+                    $("#imageModal").addClass("hidden");
+                    $("#imageModal").fadeOut(300);
+                }
+            };
+
+            $(".open-modal").on("click", function () {
+                openModal($(this).data("image"));
+            });
+
+            $("#closeModal").on("click", closeModal);
+
+            $("#imageModal").on("click", function (event) {
+                if ($(event.target).is("#imageModal")) closeModal();
+            });
+
+            $(window).on("resize", function () {
+                if (!isScreenSizeValid()) closeModal();
+            });
+
+            const productElement = $(".splide-product")[0];
+            if (productElement) {
+                new Splide(productElement, {
+                    type: "loop",
+                    focus: "center",
+                    arrows: false,
+                    pagination: true,
+                    perPage: 1,
+                }).mount();
+            }
+        }
+    };
+
+    const setupHomePage = () => {
+        if (path === "/") {
+            const setupSplide = (element, options) => {
+                if (element) {
+                    new Splide(element, options).mount();
+                }
+            };
+
+            setupSplide($("#splide-added")[0], {
                 type: "loop",
                 drag: "free",
                 focus: "center",
@@ -78,16 +129,12 @@ $(document).ready(function () {
                     1440: { perPage: 3.5 },
                     2650: { perPage: 4.5 },
                 },
-            }).mount();
-        }
+            });
 
-        const playersElement = $(".splide-players")[0];
-        if (playersElement) {
-            const players = new Splide(playersElement, {
+            const commonSplideOptions = {
                 type: "loop",
                 drag: "free",
                 focus: "center",
-                perPage: 2.5,
                 arrows: false,
                 pagination: false,
                 breakpoints: {
@@ -95,75 +142,33 @@ $(document).ready(function () {
                     800: { perPage: 2.5 },
                     1024: { perPage: 3.5 },
                 },
-            }).mount();
-        }
+            };
 
-        const clubsElement = $(".splide-clubs")[0];
-        if (clubsElement) {
-            const clubs = new Splide(clubsElement, {
-                type: "loop",
-                drag: "free",
-                focus: "center",
+            setupSplide($(".splide-players")[0], {
+                ...commonSplideOptions,
                 perPage: 2.5,
-                arrows: false,
-                pagination: false,
-                breakpoints: {
-                    450: { perPage: 1.5 },
-                    800: { perPage: 2.5 },
-                    1024: { perPage: 3.5 },
-                },
-            }).mount();
+            });
+            setupSplide($(".splide-clubs")[0], {
+                ...commonSplideOptions,
+                perPage: 2.5,
+            });
+            setupSplide($(".splide-movies")[0], {
+                ...commonSplideOptions,
+                perPage: 2.5,
+            });
+            setupSplide($(".splide-tshirts")[0], {
+                ...commonSplideOptions,
+                perPage: 2.5,
+            });
+            setupSplide($(".splide-category")[0], {
+                ...commonSplideOptions,
+                perPage: 2.5,
+            });
         }
+    };
 
-        const moviesElement = $(".splide-movies")[0];
-        if (moviesElement) {
-            const movies = new Splide(moviesElement, {
-                type: "loop",
-                drag: "free",
-                focus: "center",
-                perPage: 2.5,
-                arrows: false,
-                pagination: false,
-                breakpoints: {
-                    450: { perPage: 1.5 },
-                    800: { perPage: 2.5 },
-                    1024: { perPage: 3.5 },
-                },
-            }).mount();
-        }
-
-        const tshirtsElement = $(".splide-tshirts")[0];
-        if (tshirtsElement) {
-            const tshirts = new Splide(tshirtsElement, {
-                type: "loop",
-                drag: "free",
-                focus: "center",
-                perPage: 2.5,
-                arrows: false,
-                pagination: false,
-                breakpoints: {
-                    450: { perPage: 1.5 },
-                    800: { perPage: 2.5 },
-                    1024: { perPage: 3.5 },
-                },
-            }).mount();
-        }
-
-        const categoryElement = $(".splide-category")[0];
-        if (categoryElement) {
-            const category = new Splide(categoryElement, {
-                type: "loop",
-                drag: "free",
-                focus: "center",
-                perPage: 2.5,
-                arrows: false,
-                pagination: false,
-                breakpoints: {
-                    450: { perPage: 1.5 },
-                    800: { perPage: 2.5 },
-                    1024: { perPage: 3.5 },
-                },
-            }).mount();
-        }
-    }
+    handlePathChanges();
+    setupSpinner();
+    setupProductDetails();
+    setupHomePage();
 });

@@ -53,4 +53,15 @@ class Wishlist extends Component
         $this->render();
         $this->dispatch('wishlistSessionUpdated');
     }
+    public function removeAll()
+    {
+        if (Auth::check()) {
+            ModelsWishlist::where('user_id', Auth::id())->delete();
+        } else {
+            Session::forget('wishlist');
+        }
+
+        $this->render();
+        $this->dispatch('wishlistSessionUpdated');
+    }
 }

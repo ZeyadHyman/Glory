@@ -120,7 +120,7 @@ new #[Layout('layouts.guest')] class extends Component {
                     </div>
 
                     {{-- Register Button --}}
-                    <button type="submit"
+                    <button type="submit" id="register"
                         class="mt-5 w-full text-white bg-[#0b2031] hover:bg-[#223849] transition-all focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                         <span wire:loading.remove wire:target="register">Register</span>
                         <span wire:loading wire:target="register">
