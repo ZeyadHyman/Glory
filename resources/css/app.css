@@ -115,10 +115,26 @@
 }
 
 .spinner {
+    animation: fadeIn 1s ease-out infinite;
+}
+
+/* .spinner {
     animation: spin 1s linear infinite;
+} */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
     100% {
         transform: rotate(360deg);
     }
