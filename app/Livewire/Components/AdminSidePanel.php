@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class AdminSidePanel extends Component
 {
-    public $activeTab = 'dashboard';
+    public $activeTab = 'products';
 
     public function setActiveTab($tab)
     {

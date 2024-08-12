@@ -17,7 +17,7 @@ class productsByCategoryController extends Controller
             $categoryName = ucfirst(strtolower($category));
         }
 
-        return view('productsByCategory', [
+        return view('product.productsByCategory', [
             'products' => $products,
             'categoryName' => $categoryName,
         ]);

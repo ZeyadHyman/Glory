@@ -4,7 +4,7 @@
         <h1 class="text-zinc-50 font-bold text-2xl md:text-3xl mb-5 ">
             T-shirts
         </h1>
-        <a href="{{ route('products-by-category', ['category' => 'tshirts']) }}"
+        <a href="{{ route('products-by-category', ['category' => 't-shirts']) }}"
             class="block lg:hidden mb-5 border-white border text-white px-4 py-2 rounded hover:border-[#275f38] hover:text-white/50 transition duration-300">
             View All
         </a>
@@ -47,7 +47,7 @@
                 Load More
             </button>
         @else
-            <a href="{{ route('products-by-category', ['category' => 'tshirts']) }}"
+            <a href="{{ route('products-by-category', ['category' => 't-shirts']) }}"
                 class="hidden lg:block border-white border text-white px-4 py-2 rounded hover:border-[#275f38] hover:text-white/50 transition duration-300">
                 View All
             </a>

@@ -22,7 +22,6 @@ class Movies extends Component
         $this->perPage += 3;
     }
 
-
     public function render()
     {
         $userId = Auth::id();

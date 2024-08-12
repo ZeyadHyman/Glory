@@ -12,7 +12,7 @@ class ProducDetailsController extends Controller
         $product = Product::where("id", $productId)->first();
         $productName = $product->name;
         $product->images = json_decode($product->images);
-        return view('productDetails', [
+        return view('product.productDetails', [
             'product' => $product,
             'productName' => $productName,
         ]);

@@ -7,7 +7,6 @@ $(document).ready(function () {
     const currentUrl = window.location.href;
     const cover = document.getElementById("cover");
     const body = document.getElementById("body");
-    const test = document.getElementById("test");
     const footer = document.getElementById("footer");
 
     const handlePathChanges = () => {
@@ -117,15 +116,15 @@ $(document).ready(function () {
                 drag: "free",
                 focus: "center",
                 arrows: false,
-                pagination: true,
+                pagination: false,
                 perPage: 5.5,
                 autoplay: true,
                 interval: 3000,
                 pauseOnHover: true,
                 speed: 600,
                 breakpoints: {
-                    640: { perPage: 1.5 },
-                    1024: { perPage: 2.5 },
+                    640: { perPage: 1.5, pagination: true },
+                    1024: { perPage: 2.5, pagination: true },
                     1440: { perPage: 3.5 },
                     2650: { perPage: 4.5 },
                 },
