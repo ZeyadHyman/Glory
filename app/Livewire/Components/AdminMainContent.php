@@ -15,6 +15,8 @@ class AdminMainContent extends Component
     public $newUserRole;
     public $userData;
     public $activeTab = 'products';
+    public $sortBy = 'id';
+    public $sortDirection = 'asc';
     protected $listeners = ['tabChanged' => 'handleTabChanged'];
 
     public function updateItem($userId)
@@ -25,6 +27,17 @@ class AdminMainContent extends Component
         $this->resetPage();
     }
 
+    public function sortingBy($field)
+    {
+        if ($this->sortBy === $field) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortBy = $field;
+            $this->sortDirection = 'asc'; 
+        }
+
+        $this->render();
+    }
 
     public function handleTabChanged($tab)
     {
@@ -36,6 +49,7 @@ class AdminMainContent extends Component
     {
         $this->resetPage();
     }
+
     public function deleteItem($id)
     {
         if ($this->activeTab == 'products') {
@@ -49,6 +63,7 @@ class AdminMainContent extends Component
         $this->render();
     }
 
+
     public function render()
     {
         $data = collect();
@@ -59,8 +74,7 @@ class AdminMainContent extends Component
             if ($this->search) {
                 $query->where('name', 'like', '%' . $this->search . '%');
             }
-
-            $data = $query->paginate(8);
+            $data = $query->orderBy($this->sortBy, $this->sortDirection)->paginate(8);
         }
 
         if ($this->activeTab == 'users') {
@@ -70,7 +84,7 @@ class AdminMainContent extends Component
                 $query->where('name', 'like', '%' . $this->search . '%');
             }
 
-            $data = $query->paginate(8);
+            $data = $query->orderBy('name')->paginate(8);
         }
 
         return view('livewire.components.admin-main-content', [

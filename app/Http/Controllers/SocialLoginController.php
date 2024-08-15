@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SocialLogin;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Session;
 
@@ -22,7 +23,7 @@ class SocialLoginController extends Controller
         $db_user =  User::where('email', $user->getEmail())->first();
 
         if ($user_account) {
-            auth()->login($user_account->user);
+            Auth::login($user_account->user);
             Session::regenerate();
 
             return redirect()->route('home');
@@ -54,7 +55,7 @@ class SocialLoginController extends Controller
         }
 
 
-        auth()->login($db_user, true);
+        Auth::login($db_user, true);
         Session::regenerate();
 
         return redirect()->route('home');

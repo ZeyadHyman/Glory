@@ -17,12 +17,6 @@
                     Users
                 </button>
             </li>
-            <li>
-                <button wire:click="setActiveTab('settings')"
-                    class="{{ $activeTab == 'settings' ? 'bg-gray-700' : 'hover:bg-gray-600 transition-all hover:transition-all' }} w-full text-start block p-2 rounded cursor-pointer">
-                    Settings
-                </button>
-            </li>
         </ul>
     </div>
 </div>

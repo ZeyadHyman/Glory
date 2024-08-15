@@ -40,7 +40,7 @@
 
     <!-- Load More Button -->
     <div class="mt-5 hidden lg:flex justify-end">
-        @if ($products->count() < 7)
+        @if ($products->count() < 5)
             <button
                 class="border-white border text-white px-4 py-2 rounded hover:border-[#27445f] hover:text-white/50 transition duration-300"
                 wire:click="loadMore" wire:loading.class="opacity-50" wire:loading.attr="disabled">
@@ -78,7 +78,7 @@
                             </div>
                             <div
                                 class="absolute mt-3 opacity-0 group-hover:opacity-100 duration-500 ease-in-out translate-y-full group-hover:translate-y-0  ml-0 group-hover:ml-4 transition-all rounded-xl bg-black/50 text-zinc-50 text-xs md:text-sm p-2 z-[1]">
-                                Players
+                                {{ $product->category }}
                             </div>
                             @livewire('components.wishlist-button', ['product' => $product])
                         </div>

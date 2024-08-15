@@ -159,6 +159,14 @@ $(document).ready(function () {
                 ...commonSplideOptions,
                 perPage: 2.5,
             });
+            setupSplide($(".splide-anime")[0], {
+                ...commonSplideOptions,
+                perPage: 2.5,
+            });
+            setupSplide($(".splide-cars")[0], {
+                ...commonSplideOptions,
+                perPage: 2.5,
+            });
             setupSplide($(".splide-category")[0], {
                 ...commonSplideOptions,
                 perPage: 2.5,

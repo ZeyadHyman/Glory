@@ -1,4 +1,4 @@
-<div class="mx-4 sm:mx-10 lg:mx-32 my-5 lg:my-10  mt-10 {{ count($products) == 1? "h-[75vh]": ''}}">
+<div class="mx-4 sm:mx-10 lg:mx-32 my-5 lg:my-10  mt-10 {{ count($products) == 1 ? 'h-[75vh]' : '' }}">
     @if ($products)
         <div class="flex justify-between items-center mb-10">
             <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-zinc-50 ">Your Wishlist</h1>
@@ -549,6 +549,12 @@
                         style="fill:#3D774D"></path>
                 </g>
             </svg>
+        </div>
+        <div class="flex justify-center items-center">
+            <a href="{{ route('home') }}"
+                class="text-center px-4 py-2 sm:px-8 sm:py-4 transition-all duration-300 bg-[#9e1f1f] hover:bg-[39e1f1fb7] border border-transparent hover:border-white/50 rounded-xl text-zinc-50 flex items-center justify-center  gap-2 focus:outline-none focus:ring-2 focus:ring-[#0b1d2c] focus:ring-opacity-50">
+                Fill It Out Now
+            </a>
         </div>
     @endif
 </div>

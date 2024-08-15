@@ -8,6 +8,8 @@
         <livewire:home.clubs />
         <livewire:home.tshirts />
         <livewire:home.movies />
+        <livewire:home.cars />
+        <livewire:home.anime />
         <livewire:home.category />
     </div>
 

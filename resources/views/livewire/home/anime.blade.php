@@ -1,9 +1,9 @@
 <div class="bg-[#13212E] md:rounded-xl mt-5 p-5">
     <div class="flex justify-between items-center">
         <h1 class="text-zinc-50 font-bold text-2xl md:text-3xl mb-5 ">
-            Clubs
+            Anime
         </h1>
-        <a href="{{ route('products-by-category', ['category' => 'clubs']) }}"
+        <a href="{{ route('products-by-category', ['category' => 'anime']) }}"
             class="block lg:hidden mb-5 border-white border text-white px-4 py-2 rounded hover:border-[#275f38] hover:text-white/50 transition duration-300">
             View All
         </a>
@@ -17,7 +17,7 @@
             @endphp
             <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative w-1/5 h-auto ">
                 <div class="relative h-full">
-                    <img src={{ 'https://paintastic-shop.com/cdn/shop/files/IMG-8055.jpg?v=1720019683&width=1680'}} alt="{{ $product->name }}" class="rounded-xl h-full w-full object-cover">
+                    <img src={{ 'https://printblow.com/wp-content/uploads/2022/06/CULTUREPOSTER94FRAMED-570x570.webp' }} alt="{{ $product->name }}" class="rounded-xl h-full w-full object-cover">
                 </div>
                 <div
                     class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 rounded-xl text-center text-zinc-50 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100 ">
@@ -49,7 +49,7 @@
                 Load More
             </button>
         @else
-            <a href="{{ route('products-by-category', ['category' => 'clubs']) }}"
+            <a href="{{ route('products-by-category', ['category' => 'anime']) }}"
                 class="hidden lg:block border-white border text-white px-4 py-2 rounded hover:border-[#275f38] hover:text-white/50 transition duration-300">
                 View All
             </a>
@@ -57,7 +57,7 @@
     </div>
 
     {{-- Mobile Version --}}
-    <section class="splide splide-clubs mt-2 block lg:hidden" aria-labelledby="carousel-heading">
+    <section class="splide splide-anime mt-2 block lg:hidden" aria-labelledby="carousel-heading">
         <div class="splide__track">
             <ul class="splide__list">
                 @foreach ($products as $product)
@@ -67,7 +67,7 @@
                     <li class="splide__slide mr-5 text-center text-zinc-50 place-content-center ">
                         <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative w-full ">
                             <div class="relative">
-                                <img src={{ 'https://paintastic-shop.com/cdn/shop/files/IMG-8055.jpg?v=1720019683&width=1680'}} alt="{{ $product->name }}"
+                                <img src={{ 'https://printblow.com/wp-content/uploads/2022/06/CULTUREPOSTER94FRAMED-570x570.webp' }} alt="{{ $product->name }}"
                                     class="rounded-xl h-full w-full object-cover">
                             </div>
                             <div

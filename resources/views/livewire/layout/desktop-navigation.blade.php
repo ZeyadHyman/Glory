@@ -2,24 +2,14 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const nav = document.getElementById("nav");
-            const navbar = document.getElementById("navbar");
 
             window.addEventListener('scroll', () => {
-                if (window.location.pathname === "/") {
-                    if (window.pageYOffset > window.innerHeight * (30 / 100)) {
-                        nav.classList.replace("md:w-4/6", "md:w-full");
-                        nav.classList.replace("md:px-8", "md:px-48");
-                        nav.classList.remove("md:rounded-full");
-                    } else {
-                        nav.classList.replace("md:w-full", "md:w-4/6");
-                        nav.classList.replace("md:px-48", "md:px-8");
-                        nav.classList.add("md:rounded-full");
-                    }
-                }
-                elseif(window.location.pathname === "/admin/dashboard") {
-                    break;
-                } else {
-                    if (window.pageYOffset > 40) {
+                const isHomePage = window.location.pathname === "/";
+                const isAdminPage = window.location.pathname === "/admin/dashboard";
+                const scrollThreshold = isHomePage ? window.innerHeight * (30 / 100) : 40;
+
+                if (!isAdminPage) {
+                    if (window.pageYOffset > scrollThreshold) {
                         nav.classList.replace("md:w-4/6", "md:w-full");
                         nav.classList.replace("md:px-8", "md:px-48");
                         nav.classList.remove("md:rounded-full");
@@ -33,6 +23,7 @@
         });
     </script>
 @endsection
+
 
 
 <nav class="sticky w-full top-0 pb-[1px] flex justify-center z-50 lg:mt-5" id="navbar">
@@ -189,7 +180,7 @@
                             <button>
                                 @if (Auth::user()->profile_image)
                                     <img src={{ $user_image }} alt="Profile Image"
-                                        class="rounded-full w-8 h-8 object-cover">
+                                        class="rounded-full w-10 h-10 object-cover">
                                 @else
                                     <i class="fa fa-user-circle text-3xl text-cyan-900" aria-hidden="true"></i>
                                 @endif
