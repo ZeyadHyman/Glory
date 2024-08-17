@@ -53,14 +53,11 @@ new #[Layout('layouts.guest')] class extends Component {
     // Check if the email is valid using Laravel's Http facade.
     public function register(): void
     {
-        $this->emailValidation();
-
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
-        
         if ($this->emailError == '') {
             $validated['password'] = Hash::make($validated['password']);
 

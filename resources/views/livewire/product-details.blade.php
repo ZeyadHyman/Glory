@@ -74,7 +74,7 @@
         </section>
     </div>
 
-    <div class="block md:hidden">
+    <div class="flex md:hidden flex-col">
         <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-zinc-50">
             {{ $product->name }}
         </h1>
@@ -103,19 +103,32 @@
     <!-- Product Details -->
     <div class="w-full mt-8 md:mt-0 text-center md:text-left px-4 md:px-8 lg:px-12 xl:px-16">
         <div class="hidden md:block">
-
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-zinc-50 ">
                 {{ $product->name }}
             </h1>
-            <p class="text-base md:text-lg lg:text-xl text-gray-300 mt-2">
+            <p class="mt-2 text-base md:text-lg lg:text-xl text-gray-300">
                 {{ $product->description }}
             </p>
         </div>
 
         {{-- Price --}}
-        <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-zinc-50 mt-8 text-start">{{ $product->price }} EGP
-            <s class="text-xl md:text-2xl lg:text-3xl font-normal text-gray-400">500 EGP</s>
-        </h1>
+        @if ($product->discount)
+            <div class="flex flex-col mt-8 text-start space-y-2">
+                <div class="flex items-center space-x-2">
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-green-400">
+                        {{ number_format($product->price * (1 - $product->discount / 100), 2) }} EGP
+                    </h1>
+                    <s class="text-lg md:text-xl lg:text-2xl font-medium text-gray-500">
+                        {{ number_format($product->price, 2) }} EGP
+                    </s>
+                </div>
+            </div>
+        @else
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-zinc-50 mt-8 text-start">
+                {{ number_format($product->price, 2) }} EGP
+            </h1>
+        @endif
+
 
         {{-- Frame Color --}}
         <div x-data="{ selectedColor: @entangle('frame_color') }">
@@ -125,12 +138,20 @@
             <div class="flex mt-2 flex-wrap gap-2">
                 @foreach ($product->frame_colors as $color)
                     <button
-                        :class="{ 'bg-{{ $color }}-500 border-red-500': selectedColor === '{{ $color }}' }"
+                        :class="{
+                            'bg-black border-none': '{{ $color }}'
+                            === 'black' && selectedColor === '{{ $color }}',
+                            'bg-white border-none text-blue-950': '{{ $color }}'
+                            === 'white' && selectedColor === '{{ $color }}',
+                            'bg-{{ $color }}-500 border-none': '{{ $color }}'
+                            !== 'black' && selectedColor === '{{ $color }}',
+                        }"
                         @click="selectedColor = '{{ $color }}'"
-                        class="text-zinc-50 px-4 py-2 rounded-xl border border-white">
+                        class="text-zinc-50 px-4 py-2 rounded-xl border">
                         {{ $color }}
                     </button>
                 @endforeach
+
             </div>
         </div>
 
@@ -160,14 +181,14 @@
             </label>
             <div class="relative flex items-center mt-2">
                 <button type="button" @click="quantity = Math.max(1, quantity - 1)"
-                    class="flex-shrink-0 bg-gray-700 hover:bg-gray-600 border-gray-600 inline-flex items-center justify-center border border-gray-600 rounded-md h-8 w-8 focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                    class="flex-shrink-0 bg-gray-700 hover:bg-gray-600 border-gray-600 inline-flex items-center justify-center border rounded-md h-8 w-8 focus:ring-gray-700 focus:ring-2 focus:outline-none">
                     <i class="fa fa-minus text-white" aria-hidden="true"></i>
                 </button>
                 <input type="text" x-model="quantity"
                     class="flex-shrink-0 text-white border-0 bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[3rem] text-center"
                     readonly />
                 <button type="button" @click="quantity = quantity + 1"
-                    class="flex-shrink-0 bg-gray-700 hover:bg-gray-600 border-gray-600 inline-flex items-center justify-center border border-gray-600 rounded-md h-8 w-8 focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                    class="flex-shrink-0 bg-gray-700 hover:bg-gray-600 inline-flex items-center justify-center border border-gray-600 rounded-md h-8 w-8 focus:ring-gray-700 focus:ring-2 focus:outline-none">
                     <i class="fa fa-plus text-white" aria-hidden="true"></i>
                 </button>
             </div>
