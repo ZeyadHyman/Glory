@@ -38,13 +38,13 @@
             @foreach ($product->images as $image)
                 <li
                     class="thumbnail overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105 hover:transition-transform">
-                    <img class="h-full w-full object-cover rounded-md" src="{{ $image }}" alt="Thumbnail Image">
+                    <img class="h-full w-full object-cover rounded-md" src="{{ asset('storage/' . $image) }}"
+                        alt="Thumbnail Image">
                 </li>
             @endforeach
             <li
                 class="thumbnail overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105 hover:transition-transform">
-                <img class="h-full w-full object-cover rounded-md"
-                    src="{{ asset('images/size_guide.jpg') }}"
+                <img class="h-full w-full object-cover rounded-md" src="{{ asset('images/size_guide.jpg') }}"
                     alt="Thumbnail Image">
             </li>
         </ul>
@@ -56,16 +56,16 @@
                 <ul class="splide__list">
                     @foreach ($product->images as $image)
                         <li class="splide__slide">
-                            <button class="open-modal h-full w-full object-cover" data-image="{{ $image }}">
-                                <img class="h-full w-full object-cover" src="{{ $image }}" alt="Main Image">
+                            <button class="open-modal h-full w-full object-cover"
+                                data-image="{{ asset('storage/' . $image) }}">
+                                <img class="h-full w-full object-cover" src="{{ asset('storage/' . $image) }}"
+                                    alt="Main Image">
                             </button>
                         </li>
                     @endforeach
                     <li class="splide__slide">
-                        <button class="open-modal h-full w-full "
-                            data-image="{{ asset('images/size_guide.jpg') }}">
-                            <img class="h-full w-full object-cover"
-                                src="{{ asset('images/size_guide.jpg') }}"
+                        <button class="open-modal h-full w-full " data-image="{{ asset('images/size_guide.jpg') }}">
+                            <img class="h-full w-full object-cover" src="{{ asset('images/size_guide.jpg') }}"
                                 alt="Main Image">
                         </button>
                     </li>
@@ -88,14 +88,12 @@
             <ul class="splide__list">
                 @foreach ($product->images as $image)
                     <li class="splide__slide">
-                        <img class="h-full w-full object-cover" src="{{ $image }}" alt="Main Image">
+                        <img class="h-full w-full object-cover" src="{{ asset('storage/' . $image) }}" alt="Main Image">
                     </li>
                 @endforeach
                 <li class="splide__slide">
-                    <img class="h-full w-full object-cover"
-                        src="{{ asset('images/size_guide.jpg') }}"
-                        alt="Main Image">
-                        {{-- https://cdn.shopify.com/s/files/1/0593/4894/2931/files/Sizes_Image_1024x1024.webp?v=1712768521 --}}
+                    <img class="h-full w-full object-cover" src="{{ asset('images/size_guide.jpg') }}" alt="Main Image">
+                    {{-- https://cdn.shopify.com/s/files/1/0593/4894/2931/files/Sizes_Image_1024x1024.webp?v=1712768521 --}}
                 </li>
 
             </ul>
@@ -125,18 +123,14 @@
                 <span class="text-zinc-50" x-text="selectedColor"></span>
             </h1>
             <div class="flex mt-2 flex-wrap gap-2">
-                <button :class="{ 'bg-red-500 border-red-500': selectedColor === 'RED' }"
-                    @click="selectedColor = 'RED'" class="text-zinc-50 px-4 py-2 rounded-xl border border-white">
-                    RED
-                </button>
-                <button :class="{ 'bg-blue-500 border-blue-500': selectedColor === 'BLUE' }"
-                    @click="selectedColor = 'BLUE'" class="text-zinc-50 px-4 py-2 rounded-xl border border-white">
-                    BLUE
-                </button>
-                <button :class="{ 'bg-black border-black': selectedColor === 'BLACK' }"
-                    @click="selectedColor = 'BLACK'" class="text-zinc-50 px-4 py-2 rounded-xl border border-white">
-                    BLACK
-                </button>
+                @foreach ($product->frame_colors as $color)
+                    <button
+                        :class="{ 'bg-{{ $color }}-500 border-red-500': selectedColor === '{{ $color }}' }"
+                        @click="selectedColor = '{{ $color }}'"
+                        class="text-zinc-50 px-4 py-2 rounded-xl border border-white">
+                        {{ $color }}
+                    </button>
+                @endforeach
             </div>
         </div>
 
@@ -146,30 +140,16 @@
                 <span class="text-zinc-50" x-text="selectedSize"></span>
             </h1>
             <div class="flex mt-2 flex-wrap gap-2">
-                <button
-                    :class="{
-                        'bg-white border-white text-gray-600': selectedSize === '10x30',
-                        'bg-transparent border-gray-300 text-zinc-50': selectedSize !== '10x30'
-                    }"
-                    @click="selectedSize = '10x30'" class="px-4 py-2 rounded-xl border">
-                    10x30
-                </button>
-                <button
-                    :class="{
-                        'bg-white border-white text-gray-600': selectedSize === '40x50',
-                        'bg-transparent border-gray-300 text-zinc-50': selectedSize !== '40x50'
-                    }"
-                    @click="selectedSize = '40x50'" class="px-4 py-2 rounded-xl border">
-                    40x50
-                </button>
-                <button
-                    :class="{
-                        'bg-white border-white text-gray-600': selectedSize === '30x20',
-                        'bg-transparent border-gray-300 text-zinc-50': selectedSize !== '30x20'
-                    }"
-                    @click="selectedSize = '30x20'" class="px-4 py-2 rounded-xl border">
-                    30x20
-                </button>
+                @foreach ($product->frame_sizes as $size)
+                    <button
+                        :class="{
+                            'bg-white border-white text-gray-600': selectedSize === '{{ $size }}',
+                            'bg-transparent border-gray-300 text-zinc-50': selectedSize !== '{{ $size }}'
+                        }"
+                        @click="selectedSize = '{{ $size }}'" class="px-4 py-2 rounded-xl border">
+                        {{ $size }}
+                    </button>
+                @endforeach
             </div>
         </div>
 

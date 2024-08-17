@@ -19,7 +19,6 @@
 
     <!-- Scripts -->
     @livewireStyles
-    @livewireScripts
     <!-- Splide.js -->
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js" defer></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
@@ -45,7 +44,8 @@
         <livewire:layout.mobile-navigation />
     </main>
     <livewire:layout.footer />
-
+    
+    @livewireScripts
     @yield('script')
 
 </body>

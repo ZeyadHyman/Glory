@@ -22,8 +22,11 @@ class AdminMainContent extends Component
     public function updateItem($userId)
     {
         $user = User::find($userId);
-        $user->role = $this->newUserRole;
-        $user->save();
+        if ($this->newUserRole) {
+            $user->role = $this->newUserRole;
+            $user->save();
+        }
+
         $this->resetPage();
     }
 
@@ -33,7 +36,7 @@ class AdminMainContent extends Component
             $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
         } else {
             $this->sortBy = $field;
-            $this->sortDirection = 'asc'; 
+            $this->sortDirection = 'asc';
         }
 
         $this->render();
@@ -84,7 +87,7 @@ class AdminMainContent extends Component
                 $query->where('name', 'like', '%' . $this->search . '%');
             }
 
-            $data = $query->orderBy('name')->paginate(8);
+            $data = $query->orderBy('role')->paginate(8);
         }
 
         return view('livewire.components.admin-main-content', [

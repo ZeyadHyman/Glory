@@ -30,7 +30,7 @@
                 </div>
                 <div
                     class="absolute mt-3 opacity-0 group-hover:opacity-100 duration-500 ease-in-out translate-y-full group-hover:translate-y-0  ml-0 group-hover:ml-4 transition-all rounded-xl bg-black/50 text-zinc-50 text-xs md:text-sm p-2 z-[1]">
-                    Players
+                    {{ $product->category}} & Series
                 </div>
                 @livewire('components.wishlist-button', ['product' => $product])
 

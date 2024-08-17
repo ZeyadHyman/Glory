@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProducDetailsController;
 use App\Http\Controllers\productsByCategoryController;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Admin\AddProduct;
+use App\Livewire\Admin\EditProdcut;
 
 // Public Routes
 Route::view('/', 'home')->name('home');
@@ -20,10 +22,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 // Admin Routes
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::view('/admin/dashboard', 'adminDashboard')->name('adminDashboard');
-    Route::view('/admin/users', 'livewire.admin.users')->name('admin.users');
+    Route::get('/admin/dashboard', function () {
+        return view('adminDashboard');
+    })->name('adminDashboard');
+    Route::get('/admin/addProduct', AddProduct::class)->name('addProduct');
+    Route::get('/admin/editProduct/{productId}', EditProdcut::class)->name('editProduct');
 });
 
 
-// Include authentication-related routes
+
+
 require __DIR__ . '/auth.php';

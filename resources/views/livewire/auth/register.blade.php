@@ -11,42 +11,66 @@ use Livewire\Volt\Component;
 new #[Layout('layouts.guest')] class extends Component {
     public string $name = '';
     public string $email = '';
+    public string $emailError = '';
     public string $password = '';
     public string $password_confirmation = '';
+    public string $passwordError = 'no error';
 
-    /**
-     * Handle an incoming registration request.
-     */
+    public function emailValidation()
+    {
+        $this->emailError = '';
+
+        $this->validate([
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+        ]);
+        $response = Http::timeout(10)->get('https://emailvalidation.abstractapi.com/v1/', [
+            'api_key' => '16e60aad9c3041caa78babde647d94e6',
+            'email' => $this->email,
+        ]);
+
+        if ($response->successful()) {
+            $emailValidation = $response->json();
+
+            if (isset($emailValidation['deliverability']) && $emailValidation['deliverability'] == 'UNDELIVERABLE') {
+                $this->emailError = 'Invalid Email.';
+                return;
+            }
+        } else {
+            $this->emailError = '';
+            return;
+        }
+    }
+
+    public function passwordValidation()
+    {
+        $this->validate([
+            'password' => ['required', 'string', 'confirmed', Rules\Password::min(8)->mixedCase()->numbers()->symbols()->uncompromised()],
+        ]);
+
+        $this->passwordError = '';
+    }
+
+    // Check if the email is valid using Laravel's Http facade.
     public function register(): void
     {
-        // Check if the email is valid.
-        $ch = curl_init();
-        $url = 'https://emailvalidation.abstractapi.com/v1/?api_key=16e60aad9c3041caa78babde647d94e6&email=' . urlencode($this->email);
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        $data = curl_exec($ch);
-        curl_close($ch);
-
-        $emailValidation = json_decode($data, true);
-        if($emailValidation){
-            if ($emailValidation['deliverability'] == 'UNDELIVERABLE') {
-                session()->flash('emailError', 'Invalid Email.');
-            }
-        }
+        $this->emailValidation();
 
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
+        
+        if ($this->emailError == '') {
+            $validated['password'] = Hash::make($validated['password']);
 
-        $validated['password'] = Hash::make($validated['password']);
+            $user = User::create($validated);
+            event(new Registered($user));
 
-        $user = User::create($validated);
-        event(new Registered($user));
-
-        Auth::login($user);
+            Auth::login($user);
+        } else {
+            return;
+        }
 
         $this->redirect(route('dashboard', absolute: false));
     }
@@ -70,7 +94,7 @@ new #[Layout('layouts.guest')] class extends Component {
                             <i class="fa fa-user mr-1" aria-hidden="true"></i>
                             Name
                         </label>
-                        <input type="text" name="name" id="name" wire:model='name'
+                        <input type="text" name="name" id="name" wire:model.live='name'
                             class="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                             placeholder="Zeyad Hyman" required>
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
@@ -78,45 +102,82 @@ new #[Layout('layouts.guest')] class extends Component {
 
 
                     {{-- Email --}}
-                    <div>
+                    <div class="relative">
                         <label for="email" class="block mb-2 mt-5  text-sm font-medium text-white">
                             <i class="fa fa-envelope mr-1" aria-hidden="true"></i>
                             Email
                         </label>
-                        <input type="email" name="email" id="email" wire:model='email'
-                            class="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        <input type="email" name="email" id="email" wire:model.live='email'
+                            wire:blur='emailValidation'
+                            class=" bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                             placeholder="example@example.com" required>
-                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                        <h1 class="text-sm text-red-600 dark:text-red-400 space-y-1">{{ session('emailError') }}</h1>
+                        @if ($emailError == 'no error' && !$errors->get('email'))
+                            <div class="absolute bottom-2 right-4">
+                                <i class="fa-solid fa-check text-xl text-emerald-700" aria-hidden="true"></i>
+                            </div>
+                        @else
+                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                            <h1 class="text-sm text-red-600 dark:text-red-400 space-y-1 mt-2">{{ $emailError }}</h1>
+                        @endif
                     </div>
 
 
                     {{-- Password --}}
-                    <div>
-                        <label for="password" class="block mb-2 mt-5  text-sm font-medium text-white">
+                    <div x-data="{ showPassword: false }" class="relative">
+                        <label for="password" class="block mb-2 mt-5 text-sm font-medium text-white">
                             <i class="fa fa-lock mr-1" aria-hidden="true"></i>
                             Password
                         </label>
-                        <input type="password" name="password" id="password" placeholder="••••••••"
-                            wire:model='password'
-                            class="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            required>
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
-
+                        <div class="relative">
+                            <input :type="showPassword ? 'text' : 'password'" name="password" id="password"
+                                placeholder="••••••••" wire:model.live='password'
+                                class="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                required>
+                            @if ($password)
+                                <button @click="showPassword = !showPassword" type="button"
+                                    class="absolute inset-y-0 right-0 flex items-center pr-3">
+                                    <i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'" class="text-gray-400"
+                                        aria-hidden="true"></i>
+                                </button>
+                            @endif
+                        </div>
+                        @if ($passwordError == '' && !$errors->get('password'))
+                            <div class="absolute bottom-2 right-10">
+                                <i class="fa-solid fa-check text-xl text-emerald-700" aria-hidden="true"></i>
+                            </div>
+                        @else
+                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                        @endif
                     </div>
 
                     {{-- Password Confirmation --}}
-                    <div>
-                        <label for="password" class="block mb-2 mt-5  text-sm font-medium text-white">
+                    <div x-data="{ showPasswordConfirmation: false }" class="relative">
+                        <label for="password_confirmation" class="block mb-2 mt-5 text-sm font-medium text-white">
                             <i class="fa fa-lock mr-1" aria-hidden="true"></i>
                             Confirm Password
                         </label>
-                        <input type="password" name="password" id="password" placeholder="••••••••"
-                            wire:model='password_confirmation'
-                            class="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            required>
-                        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                        <div class="relative">
+                            <input :type="showPasswordConfirmation ? 'text' : 'password'" name="password_confirmation"
+                                id="password_confirmation" placeholder="••••••••" wire:blur='passwordValidation'
+                                wire:model.live='password_confirmation'
+                                class="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                required>
+                            @if ($password_confirmation)
+                                <button @click="showPasswordConfirmation = !showPasswordConfirmation" type="button"
+                                    class="absolute inset-y-0 right-0 flex items-center pr-3">
+                                    <i :class="showPasswordConfirmation ? 'fa fa-eye-slash' : 'fa fa-eye'"
+                                        class="text-gray-400" aria-hidden="true"></i>
+                            @endif
 
+                            </button>
+                        </div>
+                        @if ($passwordError == '' && !$errors->get('password_confirmation'))
+                            <div class="absolute bottom-2 right-10">
+                                <i class="fa-solid fa-check text-xl text-emerald-700" aria-hidden="true"></i>
+                            </div>
+                        @else
+                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                        @endif
                     </div>
 
                     {{-- Register Button --}}
@@ -147,7 +208,7 @@ new #[Layout('layouts.guest')] class extends Component {
                     </div>
                 </form>
 
-                {{-- Sign Up with Gooogle or Facebook --}}
+                {{-- Sign Up with Gooogle --}}
                 <div class="flex items-center text-gray-400">
                     <div class="w-full h-[1px] bg-gray-400"></div>
                     <h1 class="text-md mx-5">or</h1>

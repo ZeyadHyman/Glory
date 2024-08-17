@@ -18,3 +18,4 @@ class ProducDetailsController extends Controller
         ]);
     }
 }
+    
