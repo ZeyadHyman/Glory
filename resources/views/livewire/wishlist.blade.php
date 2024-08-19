@@ -12,11 +12,13 @@
         <div class="flex flex-col gap-5">
             @foreach ($products as $product)
                 @php
-                    $images = json_decode($product->images, true);
+                    $product->images = json_decode($product->images);
                 @endphp
+
                 <div class="flex flex-col md:flex-row gap-4 md:gap-6 items-start md:items-center">
                     <div class="w-full md:w-1/3 lg:w-1/4">
-                        <img class="w-full h-auto rounded-xl" src="{{ $images[0] }}" alt="{{ $product->name }}">
+                        <img class="w-full h-auto rounded-xl" src={{ asset('storage/' . $product->images[0]) }}
+                            alt="{{ $product->name }}">
                     </div>
                     <div class="flex-1 w-full h-full">
                         <h1 class="text-start text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-zinc-50 mb-2">
@@ -44,7 +46,7 @@
         <div class="flex flex-col items-center justify-center ">
             <h1 class="text-zinc-50 text-4xl text-center">Your Wishlist's Empty</h1>
             <img src="{{ asset('images/empty.png') }}" alt="" class="w-full md:w-2/5">
-        
+
         </div>
         <div class="flex justify-center items-center">
             <a href="{{ route('home') }}"

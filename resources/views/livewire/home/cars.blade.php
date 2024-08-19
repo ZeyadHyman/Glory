@@ -12,9 +12,14 @@
     {{-- Desktop Version --}}
     <div class="hidden lg:flex flex-wrap justify-center gap-5 w-full ">
         @foreach ($products as $product)
+            @php
+                $product->images = json_decode($product->images);
+            @endphp
+
             <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative w-1/5 h-auto ">
                 <div class="relative h-full">
-                    <img src={{ 'https://www.posterized.in/cdn/shop/files/FordMustangBossw.jpg?v=1690896770&width=600' }} alt="{{ $product->name }}" class="rounded-xl h-full w-full object-cover">
+                    <img src={{ asset('storage/' . $product->images[0]) }} alt="{{ $product->name }}"
+                        class="rounded-xl h-full w-full object-cover">
                 </div>
                 <div
                     class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 rounded-xl text-center text-zinc-50 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100 ">
@@ -29,7 +34,7 @@
                 </div>
                 <div
                     class="absolute mt-3 opacity-0 group-hover:opacity-100 duration-500 ease-in-out translate-y-full group-hover:translate-y-0  ml-0 group-hover:ml-4 transition-all rounded-xl bg-black/50 text-zinc-50 text-xs md:text-sm p-2 z-[1]">
-                    {{ $product->category}}
+                    {{ $product->category }}
                 </div>
                 @livewire('components.wishlist-button', ['product' => $product])
 
@@ -60,8 +65,8 @@
                 @foreach ($products as $product)
                     <li class="splide__slide mr-5 text-center text-zinc-50 place-content-center ">
                         <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative w-full ">
-                            <div class="relative">
-                                <img src={{ 'https://www.posterized.in/cdn/shop/files/FordMustangBossw.jpg?v=1690896770&width=600' }} alt="{{ $product->name }}"
+                            <div class="relative h-full">
+                                <img src={{ asset('storage/' . $product->images[0]) }} alt="{{ $product->name }}"
                                     class="rounded-xl h-full w-full object-cover">
                             </div>
                             <div

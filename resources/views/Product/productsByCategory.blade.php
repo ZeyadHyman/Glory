@@ -12,10 +12,14 @@
 
         <div class="flex flex-wrap justify-center gap-5">
             @foreach ($products as $product)
+                @php
+                    $product->images = json_decode($product->images);
+                @endphp
+
                 <div
                     class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 h-auto">
                     <div class="relative h-full">
-                        <img src="{{ asset('images/posters/Messi.jpeg') }}" alt="{{ $product->name }}"
+                        <img class="w-full h-auto rounded-xl" src={{ asset('storage/' . $product->images[0]) }}
                             class="rounded-xl h-full w-full object-cover">
                     </div>
                     <div

@@ -53,10 +53,17 @@ class EditProduct extends Component
     public function deleteImage($index)
     {
         $imagePath = $this->images[$index];
+
         if (Storage::disk('public')->exists($imagePath)) {
             Storage::disk('public')->delete($imagePath);
         }
+
         array_splice($this->images, $index, 1);
+
+        $product = Product::findOrFail($this->productId);
+        $product->images = json_encode($this->images);
+        $product->save();
+
     }
 
 
@@ -86,7 +93,7 @@ class EditProduct extends Component
         if ($this->newImages) {
             $imagePaths = $this->images;
             foreach ($this->newImages as $image) {
-                $imagePaths[] = $image->store('images', 'public');
+                $imagePaths[] = $image->store('posters', 'public');
             }
             $product->images = json_encode($imagePaths);
         } else {

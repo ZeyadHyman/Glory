@@ -131,7 +131,6 @@ $(document).ready(function () {
             });
 
             const commonSplideOptions = {
-                type: "loop",
                 drag: "free",
                 focus: "center",
                 arrows: false,

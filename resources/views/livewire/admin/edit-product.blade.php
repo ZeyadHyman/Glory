@@ -111,7 +111,7 @@
 
                 <!-- Image  -->
                 <div class="mb-4">
-                    @if (count($images) > 1)
+                    @if (count($images) > 0)
                         <div class="flex flex-wrap gap-4">
                             @foreach ($images as $index => $image)
                                 <div class="relative">
@@ -129,9 +129,9 @@
                     @endif
                 </div>
                 <div class="mb-8">
-                    <input type="file" wire:model="images" multiple
+                    <input type="file" wire:model="newImages" multiple
                         class="block text-sm text-white bg-transparent border-0 border-b-2 border-gray-600 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
-                    @error('images.*')
+                    @error('newImages.*')
                         <span class="text-red-600">{{ $message }}</span>
                     @enderror
                 </div>

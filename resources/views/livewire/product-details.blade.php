@@ -55,10 +55,10 @@
             <div class="splide__track">
                 <ul class="splide__list">
                     @foreach ($product->images as $image)
-                        <li class="splide__slide">
+                        <li class="splide__slide h-[70vh]">
                             <button class="open-modal h-full w-full object-cover"
                                 data-image="{{ asset('storage/' . $image) }}">
-                                <img class="h-full w-full object-cover" src="{{ asset('storage/' . $image) }}"
+                                <img class="h-full w-auto object-fill" src="{{ asset('storage/' . $image) }}"
                                     alt="Main Image">
                             </button>
                         </li>
@@ -75,9 +75,19 @@
     </div>
 
     <div class="flex md:hidden flex-col">
-        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-zinc-50">
-            {{ $product->name }}
-        </h1>
+        <div class="flex justify-between w-full ">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-zinc-50">
+                {{ $product->name }}
+            </h1>
+            @auth
+                @if (Auth::user()->role == 'admin')
+                    <a href="{{ route('editProduct', ['productId' => $product->id]) }}"
+                        class="text-zinc-100 hover:text-gray-500 text-xl px-6 py-4 bg-red-500 hover:bg-red-400 transition-all hover:transition-all rounded-3xl">
+                        Edit
+                    </a>
+                @endif
+            @endauth
+        </div>
         <p class="text-base md:text-lg lg:text-xl text-gray-300 mt-2">
             {{ $product->description }}
         </p>
@@ -88,24 +98,32 @@
             <ul class="splide__list">
                 @foreach ($product->images as $image)
                     <li class="splide__slide">
-                        <img class="h-full w-full object-cover" src="{{ asset('storage/' . $image) }}" alt="Main Image">
+                        <img class="h-auto w-full object-cover" src="{{ asset('storage/' . $image) }}" alt="Product Image">
                     </li>
                 @endforeach
                 <li class="splide__slide">
-                    <img class="h-full w-full object-cover" src="{{ asset('images/size_guide.jpg') }}" alt="Main Image">
-                    {{-- https://cdn.shopify.com/s/files/1/0593/4894/2931/files/Sizes_Image_1024x1024.webp?v=1712768521 --}}
+                    <img class="h-auto w-full object-cover" src="{{ asset('images/size_guide.jpg') }}" alt="Size Guide">
                 </li>
-
             </ul>
         </div>
     </section>
-
+    
     <!-- Product Details -->
     <div class="w-full mt-8 md:mt-0 text-center md:text-left px-4 md:px-8 lg:px-12 xl:px-16">
         <div class="hidden md:block">
-            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-zinc-50 ">
-                {{ $product->name }}
-            </h1>
+            <div class="flex justify-between w-full ">
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-zinc-50">
+                    {{ $product->name }}
+                </h1>
+                @auth
+                    @if (Auth::user()->role == 'admin')
+                        <a href="{{ route('editProduct', ['productId' => $product->id]) }}"
+                            class="text-zinc-100 hover:text-gray-500 text-xl px-6 py-4 bg-red-500 hover:bg-red-400 transition-all hover:transition-all rounded-3xl">
+                            Edit This Product
+                        </a>
+                    @endif
+                @endauth
+            </div>
             <p class="mt-2 text-base md:text-lg lg:text-xl text-gray-300">
                 {{ $product->description }}
             </p>
