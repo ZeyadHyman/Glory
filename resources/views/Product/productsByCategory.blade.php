@@ -19,8 +19,7 @@
                 <div
                     class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 h-auto">
                     <div class="relative h-full">
-                        <img class="w-full h-auto rounded-xl" src={{ asset('storage/' . $product->images[0]) }}
-                            class="rounded-xl h-full w-full object-cover">
+                        <img class="w-full h-full rounded-xl object-cover" src={{ asset('storage/' . $product->images[0]) }}>
                     </div>
                     <div
                         class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 rounded-xl text-center text-zinc-50 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100">

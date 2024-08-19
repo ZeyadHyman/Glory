@@ -44,7 +44,7 @@
 
     <!-- Load More Button -->
     <div class="mt-5 hidden lg:flex justify-end">
-        @if ($products->count() < 5)
+        @if ($products->count() < 5 && $products->count() > 3)
             <button
                 class="border-white border text-white px-4 py-2 rounded hover:border-[#27445f] hover:text-white/50 transition duration-300"
                 wire:click="loadMore" wire:loading.class="opacity-50" wire:loading.attr="disabled">
