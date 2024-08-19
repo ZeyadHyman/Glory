@@ -15,16 +15,18 @@
                 </form>
 
                 <div class="flex flex-wrap space-x-2">
-                    <!-- Sorting and Action Buttons -->
                     @foreach (['id' => 'Reset', 'price' => 'Sort by Price', 'name' => 'Sort by Name', 'category' => 'Sort by Category'] as $sort => $label)
-                        <button wire:click="sortingBy('{{ $sort }}')"
+                        <button wire:click.prevent="sortingBy('{{ $sort }}')"
                             class="px-6 py-2 transition-all bg-[#1f815b] hover:bg-[#1f815bd5] border-transparent hover:border-white/50 rounded-lg text-white flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#0b1d2c] focus:ring-opacity-50">
                             {{ $label }}
-                            @if ($sortBy === $sort)
-                                <i
-                                    class="fas fa-sort-{{ $sortDirection === 'asc' ? 'amount-up' : 'amount-down' }} ml-1"></i>
+                            @if ($sort === 'id')
                             @else
-                                <i class="fas fa-sort ml-1"></i>
+                                @if ($sortBy === $sort)
+                                    <i
+                                        class="fas fa-sort-{{ $sortDirection === 'asc' ? 'amount-up' : 'amount-down' }} ml-1"></i>
+                                @else
+                                    <i class="fas fa-sort ml-1"></i>
+                                @endif
                             @endif
                         </button>
                     @endforeach
@@ -35,7 +37,6 @@
                     </a>
                 </div>
             </div>
-
             @if ($data->isNotEmpty())
                 <div class="relative overflow-x-auto sm:rounded-lg bg-gray-800 mb-5">
                     <table class="w-full text-sm text-left text-gray-400">
@@ -91,7 +92,7 @@
                     </table>
                 </div>
 
-                {{ $data->links('vendor.pagination.tailwind') }}
+                {{ $data->links() }}
             @else
                 <p class="text-zinc-50 text-xl sm:text-2xl lg:text-4xl text-center">No products found.</p>
             @endif
@@ -180,7 +181,7 @@
                     </table>
                 </div>
 
-                {{ $data->links('vendor.pagination.tailwind') }}
+                {{ $data->links() }}
             @else
                 <p class="text-zinc-50 text-xl sm:text-2xl lg:text-4xl text-center">No Users found.</p>
             @endif

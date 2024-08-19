@@ -18,7 +18,7 @@ class AddProduct extends Component
     public $discount;
     public $frame_sizes = [];
     public $frame_colors = [];
-    public $images = []; // Array of files
+    public $images = [];
     public $selectAllSizes = false;
     public $selectAllColors = false;
 
@@ -42,12 +42,18 @@ class AddProduct extends Component
             $imagePaths[] = $image->store('images/Posters', 'public');
         }
 
-        Product::create(array_merge($data, ['images' => json_encode($imagePaths)]));
+        $data['images'] = json_encode($imagePaths);
+
+        $product = Product::create($data);
 
         $this->reset();
 
-        session()->flash('message', 'Product added successfully!');
+        return redirect()->route('product-details', [
+            'productId' => $product->id,
+        ]);
     }
+
+
 
     public function toggleSizes()
     {

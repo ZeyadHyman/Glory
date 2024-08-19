@@ -19,10 +19,10 @@
                     <select name="category" wire:model="category"
                         class="block py-2.5 px-3 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-600 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer">
                         <option class="text-slate-800" value="" selected>Select a category</option>
-                        <option class="text-slate-800" value="player">Player</option>
+                        <option class="text-slate-800" value="players">Player</option>
                         <option class="text-slate-800" value="clubs">Clubs</option>
                         <option class="text-slate-800" value="t-shirt">T-shirt</option>
-                        <option class="text-slate-800" value="movies_series">Movies & Series</option>
+                        <option class="text-slate-800" value="movies">Movies & Series</option>
                         <option class="text-slate-800" value="cars">Cars</option>
                         <option class="text-slate-800" value="anime">Anime</option>
                     </select>
@@ -65,94 +65,55 @@
             </div>
 
             <!-- Frame Sizes and Colors -->
-            <div class="flex space-x-10">
-                <div class="flex flex-col space-y-4 mb-8">
-                    <h1 class="w-full border-gray-300 rounded-lg focus:ring-blue-500 text-zinc-50">Frame Sizes</h1>
-                    <div class="flex items-center mb-2">
+            <div class="flex space-x-10 mb-8">
+                <!-- Frame Sizes -->
+                <div class="flex-1">
+                    <h1 class="text-xl font-semibold text-zinc-50 mb-4 border-b-2 border-gray-300 pb-2">Frame Sizes</h1>
+                    <div class="flex items-center mb-4">
                         <input id="select_all_sizes" type="checkbox" wire:model="selectAllSizes"
                             wire:click="toggleSizes"
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 rounded">
-                        <label for="select_all_sizes" class="ml-2 text-gray-400">Select All Sizes</label>
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded" />
+                        <label for="select_all_sizes" class="ml-2 text-gray-400 text-sm">Select All Sizes</label>
                     </div>
-                    <div class="flex flex-wrap gap-4">
-                        <div class="flex items-center">
-                            <input id="size_small" type="checkbox" name="frame_sizes[]" value="small"
-                                wire:model="frame_sizes"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 rounded"
-                                @if (in_array('small', $frame_sizes)) checked @endif>
-                            <label for="size_small" class="ml-2 text-gray-400">Small</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="size_medium" type="checkbox" name="frame_sizes[]" value="medium"
-                                wire:model="frame_sizes"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 rounded"
-                                @if (in_array('medium', $frame_sizes)) checked @endif>
-                            <label for="size_medium" class="ml-2 text-gray-400">Medium</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="size_large" type="checkbox" name="frame_sizes[]" value="large"
-                                wire:model="frame_sizes"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 rounded"
-                                @if (in_array('large', $frame_sizes)) checked @endif>
-                            <label for="size_large" class="ml-2 text-gray-400">Large</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="size_xlarge" type="checkbox" name="frame_sizes[]" value="xlarge"
-                                wire:model="frame_sizes"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 rounded"
-                                @if (in_array('xlarge', $frame_sizes)) checked @endif>
-                            <label for="size_xlarge" class="ml-2 text-gray-400">Extra Large</label>
-                        </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        @foreach (['small', 'medium', 'large', 'xlarge'] as $size)
+                            <div class="flex items-center space-x-2">
+                                <input id="size_{{ $size }}" type="checkbox" name="frame_sizes[]"
+                                    value="{{ $size }}" wire:model="frame_sizes"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
+                                    @if (in_array($size, $frame_sizes)) checked @endif />
+                                <label for="size_{{ $size }}"
+                                    class="text-gray-400 text-sm capitalize">{{ $size }}</label>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
 
-                <div class="flex flex-col space-y-4 mb-8">
-                    <h1 class="w-full border-gray-300 rounded-lg focus:ring-blue-500 text-zinc-50">Frame Colors</h1>
-                    <div class="flex items-center mb-2">
+                <!-- Frame Colors -->
+                <div class="flex-1">
+                    <h1 class="text-xl font-semibold text-zinc-50 mb-4 border-b-2 border-gray-300 pb-2">Frame Colors
+                    </h1>
+                    <div class="flex items-center mb-4">
                         <input id="select_all_colors" type="checkbox" wire:model="selectAllColors"
                             wire:click="toggleColors"
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 rounded">
-                        <label for="select_all_colors" class="ml-2 text-gray-400">Select All Colors</label>
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded" />
+                        <label for="select_all_colors" class="ml-2 text-gray-400 text-sm">Select All Colors</label>
                     </div>
-                    <div class="flex flex-wrap gap-4">
-                        <div class="flex items-center">
-                            <input id="color_red" type="checkbox" name="frame_colors[]" value="red"
-                                wire:model="frame_colors"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 rounded"
-                                @if (in_array('red', $frame_colors)) checked @endif>
-                            <label for="color_red" class="ml-2 text-gray-400">Red</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="color_blue" type="checkbox" name="frame_colors[]" value="blue"
-                                wire:model="frame_colors"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 rounded"
-                                @if (in_array('blue', $frame_colors)) checked @endif>
-                            <label for="color_blue" class="ml-2 text-gray-400">Blue</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="color_green" type="checkbox" name="frame_colors[]" value="green"
-                                wire:model="frame_colors"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 rounded"
-                                @if (in_array('green', $frame_colors)) checked @endif>
-                            <label for="color_green" class="ml-2 text-gray-400">Green</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="color_black" type="checkbox" name="frame_colors[]" value="black"
-                                wire:model="frame_colors"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 rounded"
-                                @if (in_array('black', $frame_colors)) checked @endif>
-                            <label for="color_black" class="ml-2 text-gray-400">Black</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="color_white" type="checkbox" name="frame_colors[]" value="white"
-                                wire:model="frame_colors"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 rounded"
-                                @if (in_array('white', $frame_colors)) checked @endif>
-                            <label for="color_white" class="ml-2 text-gray-400">White</label>
-                        </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        @foreach (['red', 'blue', 'green', 'black', 'white'] as $color)
+                            <div class="flex items-center space-x-2">
+                                <input id="color_{{ $color }}" type="checkbox" name="frame_colors[]"
+                                    value="{{ $color }}" wire:model="frame_colors"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
+                                    @if (in_array($color, $frame_colors)) checked @endif />
+                                <label for="color_{{ $color }}"
+                                    class="text-gray-400 text-sm capitalize">{{ $color }}</label>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
+
 
             <div class="flex space-x-10">
                 <div class="flex flex-col space-y-4 mb-8">

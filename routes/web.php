@@ -4,7 +4,7 @@ use App\Http\Controllers\ProducDetailsController;
 use App\Http\Controllers\productsByCategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\AddProduct;
-use App\Livewire\Admin\EditProdcut;
+use App\Livewire\Admin\EditProduct;
 
 // Public Routes
 Route::view('/', 'home')->name('home');
@@ -26,7 +26,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         return view('adminDashboard');
     })->name('adminDashboard');
     Route::get('/admin/addProduct', AddProduct::class)->name('addProduct');
-    Route::get('/admin/editProduct/{productId}', EditProdcut::class)->name('editProduct');
+    Route::get('/admin/editProduct/{productId}', EditProduct::class)->name('editProduct');
 });
 
 
