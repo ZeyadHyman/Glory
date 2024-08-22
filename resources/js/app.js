@@ -170,6 +170,10 @@ $(document).ready(function () {
                 ...commonSplideOptions,
                 perPage: 2.5,
             });
+            setupSplide($(".splide-related-designs")[0], {
+                ...commonSplideOptions,
+                perPage: 2.5,
+            });
         }
     };
 

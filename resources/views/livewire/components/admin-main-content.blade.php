@@ -146,36 +146,39 @@
                         </thead>
                         <tbody>
                             @foreach ($data as $user)
-                                <tr class="bg-gray-800 border-b border-gray-700 hover:bg-gray-600">
-                                    @php
-                                        $filteredAttributes = array_filter(
-                                            $user->getAttributes(),
-                                            fn($key) => !in_array($key, [
-                                                'created_at',
-                                                'updated_at',
-                                                'remember_token',
-                                                'profile_image_changed',
-                                                'email_verified_at',
-                                                'profile_image',
-                                                'password',
-                                            ]),
-                                            ARRAY_FILTER_USE_KEY,
-                                        );
-                                    @endphp
+                                @if ($user->id == Auth()->id())
+                                @else
+                                    <tr class="bg-gray-800 border-b border-gray-700 hover:bg-gray-600">
+                                        @php
+                                            $filteredAttributes = array_filter(
+                                                $user->getAttributes(),
+                                                fn($key) => !in_array($key, [
+                                                    'created_at',
+                                                    'updated_at',
+                                                    'remember_token',
+                                                    'profile_image_changed',
+                                                    'email_verified_at',
+                                                    'profile_image',
+                                                    'password',
+                                                ]),
+                                                ARRAY_FILTER_USE_KEY,
+                                            );
+                                        @endphp
 
-                                    @foreach ($filteredAttributes as $value)
-                                        <td class="px-4 sm:px-6 py-3 overflow-hidden text-ellipsis">
-                                            {{ $value }}
+                                        @foreach ($filteredAttributes as $value)
+                                            <td class="px-4 sm:px-6 py-3 overflow-hidden text-ellipsis">
+                                                {{ $value }}
+                                            </td>
+                                        @endforeach
+                                        <td
+                                            class="px-4 sm:px-6 py-3 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                                            <button class="text-cyan-500 hover:text-cyan-700"
+                                                @click="openEditModal = true; editItemId = '{{ $user->id }}'">
+                                                Edit Role
+                                            </button>
                                         </td>
-                                    @endforeach
-                                    <td
-                                        class="px-4 sm:px-6 py-3 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-                                        <button class="text-cyan-500 hover:text-cyan-700"
-                                            @click="openEditModal = true; editItemId = '{{ $user->id }}'">
-                                            Edit Role
-                                        </button>
-                                    </td>
-                                </tr>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

@@ -21,12 +21,12 @@ class DesktopNavigation extends Component
     public function mount()
     {
         $this->searchedProducts = new Collection();
-
+        
         if (Auth::user()) {
             $userId = Auth::id();
             $exists = SocialLogin::where('user_id', $userId)->exists();
             $imageChanged = Auth::user()->profile_image_changed;
-
+            
             if ($imageChanged) {
                 $this->user_image = asset('storage/profile_images/' . (Auth::user()->profile_image ?: ''));
             } elseif ($exists) {
@@ -36,7 +36,7 @@ class DesktopNavigation extends Component
             }
         }
     }
-
+    
     public function render()
     {
         if ($this->search) {

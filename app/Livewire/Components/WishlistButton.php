@@ -43,6 +43,7 @@ class WishlistButton extends Component
             Session::put('wishlist', $wishlist);
         }
 
+        session()->flash('message', 'Item added to your wishlist!');
         Session::save();
         $this->dispatch('wishlistSessionUpdated');
         $this->mount();

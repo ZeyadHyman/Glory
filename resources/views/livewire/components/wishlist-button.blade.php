@@ -1,4 +1,5 @@
 <div class="absolute place-self-end mt-1 text-xl flex items-center justify-center text-center md:text-sm p-2 z-[1]">
+
     @if (Auth::check())
         @if ($product->in_wishlist)
             <button wire:click="toggleWishlist({{ $product->id }})"
@@ -24,4 +25,6 @@
             </button>
         @endif
     @endif
+
+
 </div>
