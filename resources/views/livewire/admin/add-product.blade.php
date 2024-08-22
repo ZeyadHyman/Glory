@@ -1,4 +1,41 @@
 <div class="flex justify-center items-center">
+    <style>
+        /* Keyframes for the loading bar animation */
+        @keyframes loading {
+            0% {
+                width: 0%;
+            }
+
+            20% {
+                width: 20%;
+            }
+
+            40% {
+                width: 40%;
+            }
+
+            65% {
+                width: 65%;
+            }
+
+            80% {
+                width: 80%;
+            }
+
+            100% {
+                width: 97%;
+            }
+
+        }
+
+        .loading-bar {
+            width: 0%;
+            height: 5px;
+            margin-left: 5px;
+            background-color: #4CAF50;
+            animation: loading 7s ease-in-out;
+        }
+    </style>
     @section('pageTitle', 'Add New Product')
     <div class="mt-10 w-1/2 rounded-xl py-10 px-12 border border-white/50 shadow-xl bg-[#13212E]">
         <form wire:submit.prevent="addProduct">
@@ -21,7 +58,7 @@
                         <option class="text-slate-800" value="" selected>Select a category</option>
                         <option class="text-slate-800" value="players">Player</option>
                         <option class="text-slate-800" value="clubs">Clubs</option>
-                        <option class="text-slate-800" value="t-shirt">T-shirt</option>
+                        <option class="text-slate-800" value="t-shirts">T-shirt</option>
                         <option class="text-slate-800" value="movies">Movies & Series</option>
                         <option class="text-slate-800" value="cars">Cars</option>
                         <option class="text-slate-800" value="anime">Anime</option>
@@ -116,7 +153,7 @@
 
 
             <div class="flex space-x-10">
-                <div class="flex flex-col space-y-4 mb-8">
+                <div class="flex flex-col space-y-4 mb-8 relative">
                     <label for="images" class="text-white">Upload Images</label>
                     <input id="images" type="file" wire:model="images" multiple
                         class="w-full border-gray-300 rounded-lg focus:ring-blue-500 text-zinc-50">
@@ -124,10 +161,9 @@
                     @error('images.*')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
+                    <div wire:loading wire:target="images" class="loading-bar absolute top-5 left-0 w-full"></div>
                 </div>
             </div>
-
-
 
             <!-- Submit -->
             <button type="submit"

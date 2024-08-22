@@ -26,13 +26,13 @@ if (Auth::user()) {
                 <livewire:profile.user-image />
             </div>
 
+            @if (!$exists)
             <div class="p-4 sm:p-8 bg-[#1d364a50] shadow-lg rounded-lg">
                 <div class="max-w-xl">
                     <livewire:profile.update-profile-information-form />
                 </div>
             </div>
 
-            @if (!$exists)
                 <div class="p-4 sm:p-8 bg-[#1d364a50] shadow-lg rounded-lg">
                     <div class="max-w-xl">
                         <livewire:profile.update-password-form />

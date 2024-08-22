@@ -77,7 +77,7 @@ class EditProduct extends Component
             'discount' => 'nullable|numeric|min:0|max:100',
             'frame_sizes' => 'array',
             'frame_colors' => 'array',
-            'newImages.*' => 'nullable|image|max:1024',
+            'newImages.*' => 'nullable|image',
         ]);
 
         $product = Product::findOrFail($this->productId);

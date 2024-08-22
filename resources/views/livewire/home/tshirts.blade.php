@@ -14,7 +14,9 @@
     <div class="hidden lg:flex flex-wrap justify-center gap-5 w-full ">
         @foreach ($products as $product)
             @php
-                $product->images = json_decode($product->images);
+                if (is_string($product->images)) {
+                    $product->images = json_decode($product->images, true);
+                }
             @endphp
 
             <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative w-1/5 h-auto ">

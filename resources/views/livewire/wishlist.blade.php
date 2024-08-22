@@ -12,7 +12,9 @@
         <div class="flex flex-col gap-5">
             @foreach ($products as $product)
                 @php
-                    $product->images = json_decode($product->images);
+                    if (is_string($product->images)) {
+                        $product->images = json_decode($product->images, true);
+                    }
                 @endphp
 
                 <div class="flex flex-col md:flex-row gap-4 md:gap-6 items-start md:items-center">

@@ -1,4 +1,41 @@
 <div>
+    <style>
+        /* Keyframes for the loading bar animation */
+        @keyframes loading {
+            0% {
+                width: 0%;
+            }
+
+            20% {
+                width: 20%;
+            }
+
+            40% {
+                width: 40%;
+            }
+
+            65% {
+                width: 65%;
+            }
+
+            80% {
+                width: 80%;
+            }
+
+            100% {
+                width: 97%;
+            }
+
+        }
+
+        .loading-bar {
+            width: 0%;
+            height: 5px;
+            margin-left: 5px;
+            background-color: #4CAF50;
+            animation: loading 7s ease-in-out;
+        }
+    </style>
     @section('pageTitle', 'Edit Product')
     <div class="flex justify-center items-center">
         <div class="mt-10 w-1/2 rounded-xl py-10 px-12 border border-white/50 shadow-xl bg-[#13212E]">
@@ -128,12 +165,13 @@
                         <p class="text-gray-400">No images available.</p>
                     @endif
                 </div>
-                <div class="mb-8">
+                <div class="mb-8 relative">
                     <input type="file" wire:model="newImages" multiple
                         class="block text-sm text-white bg-transparent border-0 border-b-2 border-gray-600 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
                     @error('newImages.*')
                         <span class="text-red-600">{{ $message }}</span>
                     @enderror
+                    <div wire:loading wire:target="newImages" class="loading-bar absolute top-5 left-0 w-full"></div>
                 </div>
 
                 <!-- Submit Button -->

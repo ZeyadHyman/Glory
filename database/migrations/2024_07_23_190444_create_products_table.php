@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->json('images');
             $table->integer('price');
+            $table->integer('discount')->nullable();
             $table->json('frame_sizes');
             $table->json('frame_colors');
             $table->string('category');

@@ -56,7 +56,7 @@
                 <div class="splide__track">
                     <ul class="splide__list">
                         @foreach ($product->images as $image)
-                            <li class="splide__slide h-[70vh]">
+                            <li class="splide__slide max-h-[70vh]">
                                 <button class="open-modal h-full w-full object-cover"
                                     data-image="{{ asset('storage/' . $image) }}">
                                     <img class="h-full w-auto object-fill" src="{{ asset('storage/' . $image) }}"
@@ -235,15 +235,18 @@
             </div>
         </div>
     </div>
-    
+
     {{-- Related Products --}}
     <div class="px-4 py-10 md:px-10 lg:px-20 xl:px-40 mt-10">
-        <h1 class="text-zinc-50 text-2xl md:text-3xl lg:text-4xl font-bold mb-8 ">Related Designs</h1>
+        <h1 class="text-zinc-50 text-2xl md:text-3xl lg:text-4xl font-bold mb-8 ">Related products</h1>
         <div class="flex flex-wrap gap-6">
             @foreach ($relatedProducts as $product)
                 @php
-                    $product->images = json_decode($product->images);
+                    if (is_string($product->images)) {
+                        $product->images = json_decode($product->images, true);
+                    }
                 @endphp
+
 
                 <div
                     class="relative flex flex-col text-zinc-50 shadow-lg group rounded-xl overflow-hidden w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5">

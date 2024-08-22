@@ -6,7 +6,7 @@
             window.addEventListener('scroll', () => {
                 const isHomePage = window.location.pathname === "/";
                 const isAdminPage = window.location.pathname === "/admin/dashboard";
-                const scrollThreshold = isHomePage ? window.innerHeight * (30 / 100) : 40;
+                const scrollThreshold = isHomePage ? window.innerHeight * (40 / 100) : 40;
 
                 if (!isAdminPage) {
                     if (window.pageYOffset > scrollThreshold) {
