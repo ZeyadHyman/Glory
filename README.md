@@ -60,18 +60,3 @@ For administrative access to the site, use the following credentials:
 
 **Note**: For security purposes, it's strongly recommended to change these default credentials after your initial login.
 
-## Configuration
-
-Customize your application by adjusting the settings in the `.env` file. Key settings include:
-
--   **APP_NAME**: Set the name of your application.
--   **DB_CONNECTION**: Define your database connection details.
--   **MAIL_MAILER**: Configure email settings for notifications and communication.
-
-## Testing
-
-Ensure the application functions as expected by running the test suite:
-
-```bash
-php artisan test
-```
