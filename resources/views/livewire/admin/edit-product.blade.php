@@ -148,6 +148,11 @@
 
                 <!-- Image  -->
                 <div class="mb-4">
+                    @php
+                        if (is_string($images)) {
+                            $images = json_decode($images, true);
+                        }
+                    @endphp
                     @if (count($images) > 0)
                         <div class="flex flex-wrap gap-4">
                             @foreach ($images as $index => $image)
@@ -165,6 +170,7 @@
                         <p class="text-gray-400">No images available.</p>
                     @endif
                 </div>
+
                 <div class="mb-8 relative">
                     <input type="file" wire:model="newImages" multiple
                         class="block text-sm text-white bg-transparent border-0 border-b-2 border-gray-600 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" />

@@ -37,7 +37,7 @@ class EditProduct extends Component
         $this->discount = $product->discount;
         $this->frame_sizes = $product->frame_sizes ?? [];
         $this->frame_colors = $product->frame_colors ?? [];
-        $this->images = $product->images ? json_decode($product->images, true) : [];
+        $this->images = is_array($product->images) ? $product->images : json_decode($product->images, true) ?? [];
     }
 
     public function toggleSizes()
@@ -63,7 +63,6 @@ class EditProduct extends Component
         $product = Product::findOrFail($this->productId);
         $product->images = json_encode($this->images);
         $product->save();
-
     }
 
 
@@ -93,7 +92,7 @@ class EditProduct extends Component
         if ($this->newImages) {
             $imagePaths = $this->images;
             foreach ($this->newImages as $image) {
-                $imagePaths[] = $image->store('posters', 'public');
+                $imagePaths[] = $image->store('images/posters', 'public');
             }
             $product->images = json_encode($imagePaths);
         } else {

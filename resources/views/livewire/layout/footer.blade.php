@@ -13,7 +13,8 @@
             <h1 class="flex items-center">
                 <i class="fa-brands fa-whatsapp mr-2 text-white font-bold text-2xl" aria-hidden="true"></i>
                 <a target="_blank" rel="noopener noreferrer"
-                    href="https://api.whatsapp.com/send/?phone=201159289796&text&type=phone_number&app_absent=0"
+                href="#"
+                    {{-- href="https://api.whatsapp.com/send/?phone=201159289796&text&type=phone_number&app_absent=0" --}}
                     class="underline hover:text-zinc-50/80">
                     Whatsapp
                 </a>

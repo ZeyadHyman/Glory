@@ -29,16 +29,18 @@ $wishlist_count_session = count($wishlist);
                 <i class="fa-regular fa-heart text-xl md:text-2xl text-cyan-900"></i>
             @endif
         </a>
-        <i class="fa fa-cart-shopping text-xl md:text-2xl text-cyan-900 relative px-3" aria-hidden="true">
-            <span
-                class="absolute -top-2 right-1 w-5 h-5 flex items-center justify-center bg-cyan-900 text-zinc-50 text-xs rounded-full">
-                @auth
-                    {{ $cart_count }}
-                @else
-                    {{ $cart_count_session }}
-                @endauth
-            </span>
-        </i>
+        <a href="{{ route('cart') }}">
+            <i class="fa fa-cart-shopping text-xl md:text-2xl text-cyan-900 relative px-3" aria-hidden="true">
+                <span
+                    class="absolute -top-2 right-1 w-5 h-5 flex items-center justify-center bg-cyan-900 text-zinc-50 text-xs rounded-full">
+                    @auth
+                        {{ $cart_count }}
+                    @else
+                        {{ $cart_count_session }}
+                    @endauth
+                </span>
+            </i>
+        </a>
     </div>
 
 </div>

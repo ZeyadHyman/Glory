@@ -2,16 +2,16 @@
     @auth
         @if (Auth::user()->role == 'admin')
             <div class="w-full text-center felx justify-center p-4">
-                    <a href={{ route('adminDashboard') }}
-                        class="text-cyan-900 font-bold hover:text-cyan-700 transition-all hover:transition-all">
-                        {{ __('Dashboard') }}
-                    </a>
+                <a href={{ route('adminDashboard') }}
+                    class="text-cyan-900 font-bold hover:text-cyan-700 transition-all hover:transition-all">
+                    {{ __('Dashboard') }}
+                </a>
 
 
-                    <a wire:click="logout"
-                        class="cursor-pointer text-red-500 font-bold hover:text-red-400 transition-all hover:transition-all mx-5">
-                        {{ __('Log Out') }}
-                    </a>
+                <a wire:click="logout"
+                    class="cursor-pointer text-red-500 font-bold hover:text-red-400 transition-all hover:transition-all mx-5">
+                    {{ __('Log Out') }}
+                </a>
             </div>
         @endauth
     @else
@@ -54,16 +54,18 @@
             {{-- Cart --}}
             <div
                 class="place-self-center rounded-full w-9 h-9 mt-1 bg-[#d0d3d53b] flex items-center justify-center transition-all hover:bg-[#9697978f] hover:w-10 hover:h-10">
-                <i class="fa fa-cart-shopping text-2xl text-cyan-900 relative">
-                    <span
-                        class="select-none absolute -top-2 -right-2 w-5 h-5 flex items-center justify-center bg-cyan-900 text-zinc-50 text-xs rounded-full">
-                        @auth
-                            {{ $cart_count }}
-                        @else
-                            {{ $cart_count_session }}
-                        @endauth
-                    </span>
-                </i>
+                <a href="{{ route('cart') }}">
+                    <i class="fa fa-cart-shopping text-2xl text-cyan-900 relative">
+                        <span
+                            class="select-none absolute -top-2 -right-2 w-5 h-5 flex items-center justify-center bg-cyan-900 text-zinc-50 text-xs rounded-full">
+                            @auth
+                                {{ $cart_count }}
+                            @else
+                                {{ $cart_count_session }}
+                            @endauth
+                        </span>
+                    </i>
+                </a>
             </div>
 
             {{-- Profile --}}

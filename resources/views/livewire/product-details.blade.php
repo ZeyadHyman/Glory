@@ -36,6 +36,11 @@
                 <h1 class="text-zinc-50 text-xs mb-2 hidden md:block">Click on Image to Expand it
                     <i class="fa fa-arrow-right animate-back-and-forth" aria-hidden="true"></i>
                 </h1>
+                @php
+                    if (is_string($product->images)) {
+                        $product->images = json_decode($product->images, true);
+                    }
+                @endphp
                 @foreach ($product->images as $image)
                     <li
                         class="thumbnail overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105 hover:transition-transform">
@@ -137,16 +142,16 @@
                 <div class="flex flex-col mt-8 text-start space-y-2">
                     <div class="flex items-center space-x-2">
                         <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-green-400">
-                            {{ number_format($product->price * (1 - $product->discount / 100), 2) }} EGP
+                            {{ $product->price * (1 - $product->discount / 100) }} EGP
                         </h1>
                         <s class="text-lg md:text-xl lg:text-2xl font-medium text-gray-500">
-                            {{ number_format($product->price, 2) }} EGP
+                            {{ $product->price }} EGP
                         </s>
                     </div>
                 </div>
             @else
                 <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-zinc-50 mt-8 text-start">
-                    {{ number_format($product->price, 2) }} EGP
+                    {{ $product->price }} EGP
                 </h1>
             @endif
 
@@ -162,10 +167,12 @@
                             :class="{
                                 'bg-black border-none': '{{ $color }}'
                                 === 'black' && selectedColor === '{{ $color }}',
-                                'bg-white border-none text-blue-950': '{{ $color }}'
-                                === 'white' && selectedColor === '{{ $color }}',
-                                'bg-{{ $color }}-500 border-none': '{{ $color }}'
-                                !== 'black' && selectedColor === '{{ $color }}',
+                                'bg-white border-none text-slate-600': '{{ $color }}'
+                                === 'white' &&
+                                selectedColor === '{{ $color }}',
+                                'bg-{{ $color }}-500 border-none ': '{{ $color }}'
+                                !== 'black' &&
+                                selectedColor === '{{ $color }}',
                             }"
                             @click="selectedColor = '{{ $color }}'"
                             class="text-zinc-50 px-4 py-2 rounded-xl border">
@@ -215,15 +222,18 @@
                 </div>
             </div>
 
-            {{-- Add to Cart & Wishlist --}}
+            <!-- Add to Cart & Wishlist -->
             <div class="flex md:flex-row gap-4 mt-8">
-                <button
-                    class="px-8 py-4 transition-all duration-300 bg-[#251f81] hover:bg-[#352e9b] border border-transparent hover:border-white/50 rounded-xl text-zinc-50 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#0b1d2c] focus:ring-opacity-50">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    <span>Add To Cart</span>
-                </button>
+                <form wire:submit.prevent="addToCart">
+                    <button type="submit"
+                        class="px-8 py-4 transition-all duration-300 bg-[#251f81] hover:bg-[#352e9b] border border-transparent hover:border-white/50 rounded-xl text-zinc-50 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#0b1d2c] focus:ring-opacity-50">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <span>Add To Cart</span>
+                    </button>
+                </form>
                 @livewire('components.product-details-wishlist', ['product_id' => $product->id])
             </div>
+
         </div>
 
         <!-- Modal -->
@@ -246,7 +256,6 @@
                         $product->images = json_decode($product->images, true);
                     }
                 @endphp
-
 
                 <div
                     class="relative flex flex-col text-zinc-50 shadow-lg group rounded-xl overflow-hidden w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5">
@@ -274,6 +283,4 @@
             @endforeach
         </div>
     </div>
-
-
 </div>

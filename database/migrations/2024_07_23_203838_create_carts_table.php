@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->integer('amount');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
+            $table->integer('quantity');
+            $table->decimal('price', 8, 2);
+            $table->json('image');
+            $table->string('frame_size')->nullable();
+            $table->string('frame_color')->nullable();
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

@@ -38,4 +38,4 @@ Route::middleware('auth')->group(function () {
 
 // Social Login Routes
 Route::get('/socialite/{driver}', [SocialLoginController::class, 'toProvider']);
-Route::get('/auth/{driver}/login/', [SocialLoginController::class, 'handleCallback']);
+Route::get('/auth/{driver}/login', [SocialLoginController::class, 'handleCallback']);

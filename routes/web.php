@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\categorydController;
 use App\Http\Controllers\ProducDetailsController;
 use App\Http\Controllers\productsByCategoryController;
 use Illuminate\Support\Facades\Route;
@@ -10,16 +11,11 @@ use Illuminate\Support\Facades\DB;
 // Public Routes
 Route::view('/', 'home')->name('home');
 Route::view('/wishlist', 'wishlist')->name('wishlist');
+Route::view('/cart', 'cart')->name('cart');
 Route::view('/pageNotFound', 'pageNotFound')->name('pageNotFound');
+Route::view('/categories', 'category')->name('categories');
 Route::get('/productDetails/{productId}', [ProducDetailsController::class, 'index'])->name('product-details');
-Route::get('/productsByCategory/{category}', [productsByCategoryController::class, 'index'])->name('products-by-category');
-
-
-Route::get('/db-version', function () {
-    $version = DB::select("SELECT VERSION() AS version");
-    return response()->json($version);
-});
-
+Route::get('/Category/{category}', [productsByCategoryController::class, 'index'])->name('products-by-category');
 
 
 // Authenticated User Routes

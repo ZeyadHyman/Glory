@@ -23,6 +23,7 @@ class MobileNavigation extends Component
     #[On('profile-image-updated')]
     #[On('profile-image-deleted')]
     #[On('wishlistSessionUpdated')]
+    #[On('sessionUpdated')]
     public function mount()
     {
         $this->updateSessionCounts();

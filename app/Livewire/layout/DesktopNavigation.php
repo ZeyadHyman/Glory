@@ -18,6 +18,7 @@ class DesktopNavigation extends Component
 
     #[On('profile-image-updated')]
     #[On('profile-image-deleted')]
+    #[On('sessionUpdated')]
     public function mount()
     {
         $this->searchedProducts = new Collection();
