@@ -17,14 +17,16 @@ class AuthenticationTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertSeeVolt('pages.auth.login');
+            ->assertSeeVolt('auth.login');
     }
 
     public function test_users_can_authenticate_using_the_login_screen(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'password' => bcrypt('password'), // Ensure the password is hashed
+        ]);
 
-        $component = Volt::test('pages.auth.login')
+        $component = Volt::test('auth.login')
             ->set('form.email', $user->email)
             ->set('form.password', 'password');
 
@@ -32,16 +34,18 @@ class AuthenticationTest extends TestCase
 
         $component
             ->assertHasNoErrors()
-            ->assertRedirect(route('dashboard', absolute: false));
+            ->assertRedirect(route('home', absolute: false));
 
-        $this->assertAuthenticated();
+        $this->assertAuthenticatedAs($user); // Updated method
     }
 
-    public function test_users_can_not_authenticate_with_invalid_password(): void
+    public function test_users_cannot_authenticate_with_invalid_password(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'password' => bcrypt('password'),
+        ]);
 
-        $component = Volt::test('pages.auth.login')
+        $component = Volt::test('auth.login')
             ->set('form.email', $user->email)
             ->set('form.password', 'wrong-password');
 
@@ -49,7 +53,7 @@ class AuthenticationTest extends TestCase
 
         $component
             ->assertHasErrors()
-            ->assertNoRedirect();
+            ->assertRedirect(route('login', absolute: false)); // Redirect to login
 
         $this->assertGuest();
     }
@@ -60,11 +64,11 @@ class AuthenticationTest extends TestCase
 
         $this->actingAs($user);
 
-        $response = $this->get('/dashboard');
+        $response = $this->get('/');
 
         $response
             ->assertOk()
-            ->assertSeeVolt('layout.navigation');
+            ->assertSeeVolt('layout.desktop-navigation');
     }
 
     public function test_users_can_logout(): void
@@ -73,7 +77,7 @@ class AuthenticationTest extends TestCase
 
         $this->actingAs($user);
 
-        $component = Volt::test('layout.navigation');
+        $component = Volt::test('layout.desktop-navigation');
 
         $component->call('logout');
 

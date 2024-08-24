@@ -16,12 +16,12 @@ class RegistrationTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertSeeVolt('pages.auth.register');
+            ->assertSeeVolt('auth.register');
     }
 
     public function test_new_users_can_register(): void
     {
-        $component = Volt::test('pages.auth.register')
+        $component = Volt::test('auth.register')
             ->set('name', 'Test User')
             ->set('email', 'test@example.com')
             ->set('password', 'password')
@@ -29,7 +29,7 @@ class RegistrationTest extends TestCase
 
         $component->call('register');
 
-        $component->assertRedirect(route('dashboard', absolute: false));
+        $component->assertRedirect(route('home', absolute: false));
 
         $this->assertAuthenticated();
     }

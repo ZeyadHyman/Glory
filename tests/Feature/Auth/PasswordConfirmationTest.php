@@ -18,7 +18,7 @@ class PasswordConfirmationTest extends TestCase
         $response = $this->actingAs($user)->get('/confirm-password');
 
         $response
-            ->assertSeeVolt('pages.auth.confirm-password')
+            ->assertSeeVolt('auth.confirm-password')
             ->assertStatus(200);
     }
 
@@ -28,13 +28,13 @@ class PasswordConfirmationTest extends TestCase
 
         $this->actingAs($user);
 
-        $component = Volt::test('pages.auth.confirm-password')
+        $component = Volt::test('auth.confirm-password')
             ->set('password', 'password');
 
         $component->call('confirmPassword');
 
         $component
-            ->assertRedirect('/dashboard')
+            ->assertRedirect('/')
             ->assertHasNoErrors();
     }
 
@@ -44,7 +44,7 @@ class PasswordConfirmationTest extends TestCase
 
         $this->actingAs($user);
 
-        $component = Volt::test('pages.auth.confirm-password')
+        $component = Volt::test('auth.confirm-password')
             ->set('password', 'wrong-password');
 
         $component->call('confirmPassword');
