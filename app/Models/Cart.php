@@ -12,6 +12,7 @@ class Cart extends Model
         'user_id',
         'product_id',
         'price',
+        'discount',
         'quantity',
         'frame_size',
         'frame_color',

@@ -1,5 +1,5 @@
 <div class="container mx-auto p-4">
-    <div x-data="{ openEditModal: false, editItemId: null, open: false, confirmDeleteId: null }">
+    <div x-data="{ openEditModal: @entangle('openEditModal'), editItemId: null, open: false, confirmDeleteId: null }">
         @if ($activeTab == 'products')
             <div class="pb-4 flex justify-between">
                 <form wire:submit.prevent='handleSearching' class="flex flex-col sm:flex-row items-start sm:items-center">
@@ -205,16 +205,16 @@
             </div>
         </div>
 
-        <!-- Edit Modal -->
+        <!-- Edit Role Modal -->
         <div x-show="openEditModal" x-cloak
             class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
             <div class="bg-gray-900 p-6 rounded-lg w-11/12 sm:w-1/3">
                 <h3 class="text-lg font-semibold text-white">Edit User Role</h3>
-                <form wire:submit.prevent="updateUserRole" class="space-y-4">
+                <form wire:submit.prevent="updateUserRole(editItemId)" class="space-y-4">
                     <div class="flex flex-col">
-                        <label for="role" class="text-gray-400">Role</label>
+                        <label for="role" class="text-zinc-50">Role</label>
                         <select id="role" wire:model="userRole" name="role"
-                            class="block w-full mt-1 px-3 py-2 text-sm text-gray-900 border border-gray-600 rounded-lg bg-gray-700 focus:ring-emerald-500 focus:border-emerald-500">
+                            class="block w-full mt-1 px-3 py-2 text-sm text-zinc-50 border border-gray-600 rounded-lg bg-gray-700 focus:ring-emerald-500 focus:border-emerald-500">
                             <option value="admin">Admin</option>
                             <option value="user">User</option>
                         </select>

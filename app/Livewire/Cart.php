@@ -34,14 +34,27 @@ class Cart extends Component
 
     public function removeItem($productId)
     {
+        $components = explode('-', $productId);
+
+        $productIdValue = $components[0];
+        $frameSize = $components[1] ?? null;
+        $frameColor = $components[2] ?? null;
+
         if (Auth::check()) {
             CartItem::where('user_id', Auth::id())
-                ->where('product_id', $productId)
+                ->where('product_id', $productIdValue)
+                ->when($frameSize, function ($query, $frameSize) {
+                    return $query->where('frame_size', $frameSize);
+                })
+                ->when($frameColor, function ($query, $frameColor) {
+                    return $query->where('frame_color', $frameColor);
+                })
                 ->delete();
         } else {
             $cart = session()->get('cart', []);
-            if (isset($cart[$productId])) {
-                unset($cart[$productId]);
+            $cartKey = $productIdValue . '-' . ($frameSize !== null ? $frameSize . '-' : '') . ($frameColor !== null ? $frameColor : '');
+            if (isset($cart[$cartKey])) {
+                unset($cart[$cartKey]);
                 session()->put('cart', $cart);
             }
         }
@@ -49,6 +62,7 @@ class Cart extends Component
         $this->loadCartItems();
         $this->dispatch('sessionUpdated');
     }
+
 
     private function loadCartItems()
     {

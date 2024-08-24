@@ -47,7 +47,7 @@
     @else
         <div class="flex flex-col items-center justify-center ">
             <h1 class="text-zinc-50 text-4xl text-center">Your Wishlist's Empty</h1>
-            <img src="{{ asset('images/empty.png') }}" alt="" class="w-full md:w-2/5">
+            <img src="{{ asset('images/empty_wishlist.png') }}" alt="" class="w-full md:w-2/5">
 
         </div>
         <div class="flex justify-center items-center">

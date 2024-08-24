@@ -23,7 +23,7 @@
                 <form method="GET" action="{{ route('products-by-category', ['category' => $categoryName]) }}">
                     <div class="relative">
                         <select name="sort" onchange="this.form.submit()"
-                            class="bg-gray-800 text-white py-2 pr-10 pl-3 rounded-md shadow-lg focus:outline-none focus:ring-2 focus:ring-red-600">
+                            class="bg-slate-700 text-white py-2 pr-10 pl-3 rounded-md shadow-lg focus:outline-none focus:ring-2 focus:ring-white">
                             <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Latest</option>
                             <option value="price-asc" {{ request('sort') == 'price-asc' ? 'selected' : '' }}>Price: Low
                                 to High</option>
@@ -34,7 +34,6 @@
                             <option value="name-desc" {{ request('sort') == 'name-desc' ? 'selected' : '' }}>Name: Z-A
                             </option>
                         </select>
-                        <i class="fas fa-chevron-down absolute right-3 top-2 text-gray-400 pointer-events-none"></i>
                     </div>
                 </form>
             </div>

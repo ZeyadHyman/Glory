@@ -41,14 +41,16 @@ class ProductDetails extends Component
                 Cart::create([
                     'user_id' => $userId,
                     'product_id' => $this->product->id,
+                    'quantity' => $this->quantity,
                     'name' => $this->product->name,
                     'price' => $this->product->price,
-                    'quantity' => $this->quantity,
+                    'discount' => $this->product->discount ?? 0.00,
                     'frame_size' => $this->frame_size,
                     'frame_color' => $this->frame_color,
                     'image' => $image,
                 ]);
             }
+
 
             session()->flash('message', 'Product updated in your cart successfully!');
         } else {
@@ -63,6 +65,7 @@ class ProductDetails extends Component
                     'product_id' => $this->product->id,
                     'name' => $this->product->name,
                     'price' => $this->product->price,
+                    'discount' => $this->product->discount,
                     'quantity' => $this->quantity,
                     'frame_size' => $this->frame_size,
                     'frame_color' => $this->frame_color,

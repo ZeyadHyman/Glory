@@ -12,21 +12,22 @@ class AdminMainContent extends Component
     use WithPagination;
 
     public $search = '';
-    public $newUserRole;
+    public $userRole;
     public $userData;
     public $activeTab = 'products';
     public $sortBy = 'id';
     public $sortDirection = 'asc';
+    public $openEditModal = false;
     protected $listeners = ['tabChanged' => 'handleTabChanged'];
 
-    public function updateItem($userId)
+    public function updateUserRole($userId)
     {
         $user = User::find($userId);
-        if ($this->newUserRole) {
-            $user->role = $this->newUserRole;
+        if ($this->userRole) {
+            $user->role = $this->userRole;
             $user->save();
         }
-
+        $this->openEditModal = false;
         $this->resetPage();
     }
 

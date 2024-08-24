@@ -15,25 +15,23 @@
                 @endphp
                 @foreach ($cartItems as $item)
                     @php
-                        $itemTotal = $item['price'] * ($item['quantity'] ?? 1);
+                        $itemPrice = $item['price'];
+                        $itemDiscount = $item['discount'] ?? 0;
+                        $discountedPrice = $itemPrice - $itemPrice * ($itemDiscount / 100);
+                        $itemTotal = $discountedPrice * ($item['quantity'] ?? 1);
                         $totalPrice += $itemTotal;
+
                         if (is_string($item['image'])) {
                             $item['image'] = json_decode($item['image'], true);
                         }
                     @endphp
                     <div class="relative p-4 bg-gray-800 rounded-lg shadow-lg grid grid-cols-2 gap-4">
-                        @auth
-                            <button wire:click="removeItem('{{ $item['product_id'] }}')"
-                                class="absolute top-2 right-2 w-9 h-9 bg-red-600 hover:bg-red-500 text-white rounded-full shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-300">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        @else
-                            <button
-                                wire:click="removeItem('{{ $item['product_id'] . '-' . $item['frame_size'] . '-' . $item['frame_color'] }}')"
-                                class="absolute top-2 right-2 w-9 h-9 bg-red-600 hover:bg-red-500 text-white rounded-full shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-300">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        @endauth
+
+                        <button
+                            wire:click="removeItem('{{ $item['product_id'] . '-' . $item['frame_size'] . '-' . $item['frame_color'] }}')"
+                            class="absolute top-2 right-2 w-9 h-9 bg-red-600 hover:bg-red-500 text-white rounded-full shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-300">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
 
                         <div class="w-full h-full md:h-auto overflow-hidden relative">
                             @if (is_array($item['image']) && !empty($item['image']))
@@ -49,7 +47,10 @@
                                     {{ $item['name'] }}
                                 </h2>
                                 <p class="text-md sm:text-lg text-gray-300 mb-1">
-                                    Price: {{ $item['price'] }} EGP
+                                    Price: {{ $itemPrice }} EGP
+                                </p>
+                                <p class="text-md sm:text-lg text-gray-300 mb-1">
+                                    Discount: {{ $itemDiscount }}%
                                 </p>
                                 <p class="text-md sm:text-lg text-gray-300 mb-1">
                                     Quantity: {{ $item['quantity'] ?? 1 }}
@@ -73,7 +74,8 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8 p-4 bg-gray-700 rounded-lg shadow-md">
                 <h2 class="text-2xl sm:text-3xl font-bold text-zinc-50">Total Price</h2>
                 <p class="text-xl sm:text-2xl font-semibold text-zinc-50 text-right">
-                    {{ $totalPrice }} EGP</p>
+                    {{ $totalPrice }} EGP
+                </p>
             </div>
 
             <!-- Checkout Button -->
@@ -87,7 +89,7 @@
     @else
         <div class="flex flex-col items-center justify-center text-center">
             <h1 class="text-zinc-50 text-4xl font-bold mb-4">Your Cart's Empty</h1>
-            <img src="{{ asset('images/empty.png') }}" alt="Empty Cart" class="w-full md:w-2/5 mb-6">
+            <img src="{{ asset('images/empty_cart.png') }}" alt="Empty Cart" class="w-full md:w-2/5 mb-6">
             <a href="{{ route('home') }}"
                 class="text-center px-6 py-3 bg-red-600 hover:bg-red-500 text-white rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-300">
                 Fill It Out Now
