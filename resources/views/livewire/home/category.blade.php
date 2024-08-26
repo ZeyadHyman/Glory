@@ -1,4 +1,4 @@
-<div class="bg-[#13212E] md:rounded-xl mt-5 p-5">
+<div class="bg-[#13212E] md:rounded-xl mt-5">
     <h1 class="text-zinc-50 font-bold text-3xl md:text-4xl mb-8 text-center">
         Categories
     </h1>
@@ -7,7 +7,7 @@
     <div class=" grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-10 w-full h-full hidden lg:grid">
         @foreach ([['route' => 'players', 'image' => 'players_cat.png', 'title' => 'Players'], ['route' => 'clubs', 'image' => 'Clubs_cat.png', 'title' => 'Clubs'], ['route' => 't-shirts', 'image' => 'tshirts_cat.jpg', 'title' => 'T-shirts'], ['route' => 'movies', 'image' => 'movies_cat.jpg', 'title' => 'Movies & Series'], ['route' => 'cars', 'image' => 'cars_cat.png', 'title' => 'Cars'], ['route' => 'anime', 'image' => 'anime_cat.png', 'title' => 'Anime']] as $category)
             <a href="{{ route('products-by-category', ['category' => $category['route']]) }}"
-                class="h-full w-full p-5 border border-gray-600 rounded-xl shadow-xl flex-1 group relative overflow-hidden bg-white/50 hover:bg-white/60 transition-transform duration-300">
+                class="h-full w-full p-2 border border-gray-600 rounded-xl shadow-xl flex-1 group relative overflow-hidden bg-white/50 hover:bg-white/60 transition-transform duration-300">
                 <img class="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-110"
                     src="{{ asset('images/Categories/' . $category['image']) }}" alt="{{ $category['title'] }}">
                 <div

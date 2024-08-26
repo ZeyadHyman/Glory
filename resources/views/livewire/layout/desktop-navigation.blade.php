@@ -65,12 +65,12 @@
                                         @if ($searchedProducts->isNotEmpty())
                                             <ul class="mt-4">
                                                 @foreach ($searchedProducts as $product)
-                                                    <li class="py-2 border-b text-zinc-50">
-                                                        <a
-                                                            href={{ route('product-details', ['productId' => $product->id]) }}>
+                                                    <a
+                                                        href={{ route('product-details', ['productId' => $product->id]) }}>
+                                                        <li class="py-2 border-b text-zinc-50">
                                                             {{ $product->name }}
-                                                        </a>
-                                                    </li>
+                                                        </li>
+                                                    </a>
                                                 @endforeach
                                             </ul>
                                         @else
@@ -139,12 +139,12 @@
                                             @if ($searchedProducts->isNotEmpty())
                                                 <ul class="mt-4">
                                                     @foreach ($searchedProducts as $product)
-                                                        <li class="py-2 border-b text-zinc-50">
-                                                            <a
-                                                                href={{ route('product-details', ['productId' => $product->id]) }}>
+                                                        <a
+                                                            href={{ route('product-details', ['productId' => $product->id]) }}>
+                                                            <li class="py-2 border-b text-zinc-50">
                                                                 {{ $product->name }}
-                                                            </a>
-                                                        </li>
+                                                            </li>
+                                                        </a>
                                                     @endforeach
                                                 </ul>
                                             @else
@@ -234,6 +234,6 @@
             </div>
         </div>
     </div>
- 
+
 
 </nav>

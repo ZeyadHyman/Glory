@@ -11,16 +11,8 @@ class ProductsByCategoryController extends Controller
     {
         $query = Product::query();
 
-        if ($category == 'movies') {
-            $query->where(function ($query) use ($category) {
-                $query->where('category', $category)
-                    ->orWhere('category', 'series');
-            });
-            $categoryName = 'Movies & Series';
-        } else {
-            $query->where('category', $category);
-            $categoryName = ucfirst(strtolower($category));
-        }
+        $query->where('category', $category);
+        $categoryName = ucfirst(strtolower($category));
 
         $sort = $request->input('sort');
         switch ($sort) {

@@ -11,12 +11,22 @@
                 <i class="fas fa-list mr-1"></i> Categories
             </a>
             <span class="text-gray-500">&gt;</span>
-            <p class="font-semibold text-white">{{ $categoryName }}</p>
+            <p class="font-semibold text-white">
+                @if ($categoryName == 'Movies')
+                    Movies & Series
+                @else
+                    {{ $categoryName }}
+                @endif
+            </p>
         </nav>
 
         <div class="flex w-full items-center justify-between mt-10">
             <h1 class="text-zinc-100 font-bold text-3xl md:text-5xl mb-10 mt-10 text-center">
-                {{ $categoryName }}
+                @if ($categoryName == 'Movies')
+                    Movies & Series
+                @else
+                    {{ $categoryName }}
+                @endif
             </h1>
 
             <div class="flex justify-end">

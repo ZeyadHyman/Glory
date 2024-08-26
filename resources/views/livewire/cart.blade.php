@@ -25,15 +25,15 @@
                             $item['image'] = json_decode($item['image'], true);
                         }
                     @endphp
-                    <div class="relative p-4 bg-gray-800 rounded-lg shadow-lg grid grid-cols-2 gap-4">
+                    <div class="relative bg-gray-800 rounded-lg shadow-lg grid grid-cols-2 gap-4">
 
                         <button
                             wire:click="removeItem('{{ $item['product_id'] . '-' . $item['frame_size'] . '-' . $item['frame_color'] }}')"
                             class="absolute top-2 right-2 w-9 h-9 bg-red-600 hover:bg-red-500 text-white rounded-full shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-300">
-                            <i class="fas fa-trash-alt"></i>
+                            <i class="fa-solid fa-trash"></i>
                         </button>
 
-                        <div class="w-full h-full md:h-auto overflow-hidden relative">
+                        <div class="w-full h-full md:h-auto overflow-hidden relative rounded-l-lg">
                             @if (is_array($item['image']) && !empty($item['image']))
                                 <img class="w-full h-full object-cover absolute inset-0"
                                     src="{{ asset('storage/' . $item['image'][0]) }}" alt="{{ $item['name'] }}">
@@ -41,12 +41,14 @@
                                 <p class="text-gray-400">No image available</p>
                             @endif
                         </div>
-                        <div class="flex flex-col justify-between">
+                        <div class="py-4 pr-2 flex flex-col justify-between">
                             <div>
-                                <h2 class="text-xl sm:text-2xl font-semibold text-zinc-50 mb-2">
+                                <a class="text-2xl sm:text-3xl font-semibold text-zinc-50 hover:text-zinc-400 transition-all hover:transition-all mb-4"
+                                    href="{{ route('product-details', ['productId' => $item['product_id']]) }}">
                                     {{ $item['name'] }}
-                                </h2>
-                                <p class="text-md sm:text-lg text-gray-300 mb-1">
+                                </a>
+
+                                <p class="text-md sm:text-lg text-gray-300 mb-1 mt-4">
                                     Price: {{ $itemPrice }} EGP
                                 </p>
                                 <p class="text-md sm:text-lg text-gray-300 mb-1">
@@ -61,10 +63,10 @@
                                 <p class="text-md sm:text-lg text-gray-300">
                                     Color: {{ $item['frame_color'] ?? 'Not specified' }}
                                 </p>
+                                <p class="text-md sm:text-lg text-gray-300 mt-2 font-semibold">
+                                    Total: {{ $itemTotal }} EGP
+                                </p>
                             </div>
-                            <p class="text-md sm:text-lg text-gray-300 mt-2 font-semibold">
-                                Total: {{ $itemTotal }} EGP
-                            </p>
                         </div>
                     </div>
                 @endforeach
