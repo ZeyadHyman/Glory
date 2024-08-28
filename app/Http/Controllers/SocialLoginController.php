@@ -18,7 +18,6 @@ class SocialLoginController extends Controller
     }
     public function handleCallback($driver)
     {
-        \Log::info('OAuth Callback Parameters:', request()->all());
         $user = Socialite::driver($driver)->user();
         $user_account = SocialLogin::where("provider",  $driver)->where('provider_id', $user->getId())->first();
         $db_user =  User::where('email', $user->getEmail())->first();

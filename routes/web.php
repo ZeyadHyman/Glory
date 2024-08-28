@@ -1,12 +1,11 @@
 <?php
 
-use App\Http\Controllers\categorydController;
+use App\Http\Controllers\PaymentdController;
 use App\Http\Controllers\ProducDetailsController;
 use App\Http\Controllers\productsByCategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\AddProduct;
 use App\Livewire\Admin\EditProduct;
-use Illuminate\Support\Facades\DB;
 
 // Public Routes
 Route::view('/', 'home')->name('home');
@@ -32,8 +31,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/addProduct', AddProduct::class)->name('addProduct');
     Route::get('/admin/editProduct/{productId}', EditProduct::class)->name('editProduct');
 });
-
-
 
 
 require __DIR__ . '/auth.php';
