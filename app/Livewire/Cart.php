@@ -32,10 +32,10 @@ class Cart extends Component
         $this->dispatch('sessionUpdated');
     }
 
+
     public function removeItem($productId)
     {
         $components = explode('-', $productId);
-
         $productIdValue = $components[0];
         $frameSize = $components[1] ?? null;
         $frameColor = $components[2] ?? null;

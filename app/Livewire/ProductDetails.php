@@ -26,7 +26,6 @@ class ProductDetails extends Component
 
         if (Auth::check()) {
             $userId = Auth::id();
-
             $existingCartItem = Cart::where('user_id', $userId)
                 ->where('product_id', $this->product->id)
                 ->where('frame_size', $this->frame_size)
@@ -65,7 +64,7 @@ class ProductDetails extends Component
                     'product_id' => $this->product->id,
                     'name' => $this->product->name,
                     'price' => $this->product->price,
-                    'discount' => $this->product->discount,
+                    'discount' => $this->product->discount ?? 0.00,
                     'quantity' => $this->quantity,
                     'frame_size' => $this->frame_size,
                     'frame_color' => $this->frame_color,

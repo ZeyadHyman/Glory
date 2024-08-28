@@ -27,10 +27,7 @@ class DesktopNavigation extends Component
             $userId = Auth::id();
             $exists = SocialLogin::where('user_id', $userId)->exists();
             $imageChanged = Auth::user()->profile_image_changed;
-            
-            if ($imageChanged) {
-                $this->user_image = asset('storage/profile_images/' . (Auth::user()->profile_image ?: ''));
-            } elseif ($exists) {
+            if (!$imageChanged && $exists) {     
                 $this->user_image = Auth::user()->profile_image ?: '';
             } else {
                 $this->user_image = asset('storage/profile_images/' . (Auth::user()->profile_image ?: ''));

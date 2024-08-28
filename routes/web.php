@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\PaymentdController;
+use App\Http\Controllers\PayController;
 use App\Http\Controllers\ProducDetailsController;
 use App\Http\Controllers\productsByCategoryController;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +15,7 @@ Route::view('/pageNotFound', 'pageNotFound')->name('pageNotFound');
 Route::view('/categories', 'category')->name('categories');
 Route::get('/productDetails/{productId}', [ProducDetailsController::class, 'index'])->name('product-details');
 Route::get('/Category/{category}', [productsByCategoryController::class, 'index'])->name('products-by-category');
+Route::post('/payment', [PayController::class, 'pay'])->name('pay');
 
 
 // Authenticated User Routes
@@ -34,6 +35,3 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 
 require __DIR__ . '/auth.php';
-
-Route::get('/payments/verify/{payment?}',[PaymentdController::class,'payment_verify'])->name('verify-payment');
-Route::view('/test', 'test')->name('test');
