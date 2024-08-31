@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\Category;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -13,7 +14,8 @@ class EditProduct extends Component
 
     public $productId;
     public $name;
-    public $category;
+    public $categories;
+    public $category_id;
     public $description;
     public $price;
     public $discount;
@@ -31,7 +33,7 @@ class EditProduct extends Component
         $product = Product::findOrFail($this->productId);
 
         $this->name = $product->name;
-        $this->category = $product->category;
+        $this->category_id = $product->category_id;
         $this->description = $product->description;
         $this->price = $product->price;
         $this->discount = $product->discount;
@@ -42,73 +44,94 @@ class EditProduct extends Component
 
     public function toggleSizes()
     {
-        $this->frame_sizes = $this->selectAllSizes ? ['small', 'medium', 'large', 'xlarge'] : [];
+        if ($this->selectAllSizes) {
+            $this->frame_sizes = ['small', 'medium', 'large', 'xlarge'];
+        } else {
+            $this->frame_sizes = [];
+        }
     }
 
     public function toggleColors()
     {
-        $this->frame_colors = $this->selectAllColors ? ['red', 'blue', 'green', 'black', 'white'] : [];
+        if ($this->selectAllColors) {
+            $this->frame_colors = ['red', 'blue', 'green', 'black', 'white'];
+        } else {
+            $this->frame_colors = [];
+        }
     }
 
-    public function deleteImage($index)
+    public function removeImage($index)
     {
         $imagePath = $this->images[$index];
 
-        if (Storage::disk('public')->exists($imagePath)) {
-            Storage::disk('public')->delete($imagePath);
-        }
+        unset($this->images[$index]);
+        $this->images = array_values($this->images);
 
-        array_splice($this->images, $index, 1);
+        if (Storage::exists($imagePath)) {
+            Storage::delete($imagePath);
+        }
 
         $product = Product::findOrFail($this->productId);
         $product->images = json_encode($this->images);
         $product->save();
+
+        $this->mount($this->productId);
     }
 
+    public function makeCover($index)
+    {
+        $coverImage = $this->images[$index];
+        unset($this->images[$index]);
+        array_unshift($this->images, $coverImage);
+
+        $product = Product::findOrFail($this->productId);
+        $product->images = json_encode($this->images);
+        $product->save();
+        session()->flash('message', 'Cover Image Edited Successfully.');
+        $this->mount($this->productId);
+    }
 
     public function updateProduct()
     {
         $this->validate([
             'name' => 'required|string|max:255',
-            'category' => 'required|string',
-            'description' => 'required|string',
-            'price' => 'required|numeric',
+            'category_id' => 'required|max:255',
+            'description' => 'nullable|string|max:500',
+            'price' => 'required|numeric|min:0',
             'discount' => 'nullable|numeric|min:0|max:100',
-            'frame_sizes' => 'array',
-            'frame_colors' => 'array',
+            'frame_sizes' => 'nullable|array',
+            'frame_colors' => 'nullable|array',
             'newImages.*' => 'nullable|image',
         ]);
 
         $product = Product::findOrFail($this->productId);
 
-        $product->name = $this->name;
-        $product->category = $this->category;
-        $product->description = $this->description;
-        $product->price = $this->price;
-        $product->discount = $this->discount;
-        $product->frame_sizes = $this->frame_sizes;
-        $product->frame_colors = $this->frame_colors;
-
         if ($this->newImages) {
-            $imagePaths = $this->images;
-            foreach ($this->newImages as $image) {
-                $imagePaths[] = $image->store('images/posters', 'public');
+            foreach ($this->newImages as $newImage) {
+                $imagePath = $newImage->store('images/posters', 'public');
+                $this->images[] = $imagePath;
             }
-            $product->images = json_encode($imagePaths);
-        } else {
-            $product->images = json_encode($this->images);
+            $this->newImages = [];
         }
 
-        $product->save();
+        $product->update([
+            'name' => $this->name,
+            'category_id' => $this->category_id,
+            'description' => $this->description,
+            'price' => $this->price,
+            'discount' => $this->discount,
+            'frame_sizes' => $this->frame_sizes,
+            'frame_colors' => $this->frame_colors,
+            'images' => json_encode($this->images),
+        ]);
 
         session()->flash('message', 'Product updated successfully.');
-        return redirect()->route('product-details', [
-            'productId' => $product->id,
-        ]);
     }
+
 
     public function render()
     {
+        $this->categories = Category::get();
         return view('livewire.admin.edit-product')->layout('layouts.app');
     }
 }

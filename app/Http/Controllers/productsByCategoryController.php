@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
 
 class ProductsByCategoryController extends Controller
 {
     public function index($category, Request $request)
     {
-        $query = Product::query();
+        $categoryModel = Category::where('name', ucfirst(strtolower($category)))->firstOrFail();
+        $categoryId = $categoryModel->id;
 
-        $query->where('category', $category);
+        $query = Product::where('category_id', $categoryId);
+
         $categoryName = ucfirst(strtolower($category));
 
         $sort = $request->input('sort');

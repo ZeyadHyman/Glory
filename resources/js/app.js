@@ -141,31 +141,7 @@ $(document).ready(function () {
                     1024: { perPage: 3.5 },
                 },
             };
-
-            setupSplide($(".splide-players")[0], {
-                ...commonSplideOptions,
-                perPage: 2.5,
-            });
-            setupSplide($(".splide-clubs")[0], {
-                ...commonSplideOptions,
-                perPage: 2.5,
-            });
-            setupSplide($(".splide-movies")[0], {
-                ...commonSplideOptions,
-                perPage: 2.5,
-            });
-            setupSplide($(".splide-tshirts")[0], {
-                ...commonSplideOptions,
-                perPage: 2.5,
-            });
-            setupSplide($(".splide-anime")[0], {
-                ...commonSplideOptions,
-                perPage: 2.5,
-            });
-            setupSplide($(".splide-cars")[0], {
-                ...commonSplideOptions,
-                perPage: 2.5,
-            });
+            
             setupSplide($(".splide-category")[0], {
                 ...commonSplideOptions,
                 perPage: 2.5,
@@ -174,6 +150,14 @@ $(document).ready(function () {
             setupSplide($(".splide-related-designs")[0], {
                 ...commonSplideOptions,
                 perPage: 2.5,
+            });
+
+            categories.forEach((category) => {
+                const categoryClass = `.splide-${category.name.toLowerCase().replace(/[ &]/g, "-")}`;
+                setupSplide($(categoryClass)[0], {
+                    ...commonSplideOptions,
+                    perPage: 2.5,
+                });
             });
         }
     };

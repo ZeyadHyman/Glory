@@ -53,15 +53,14 @@
                 </div>
 
                 <div class="relative z-0 w-full mb-8 group">
-                    <select name="category" wire:model="category"
+                    <select name="category" wire:model="category_id"
                         class="block py-2.5 px-3 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-600 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+
                         <option class="text-slate-800" value="" selected>Select a category</option>
-                        <option class="text-slate-800" value="players">Player</option>
-                        <option class="text-slate-800" value="clubs">Clubs</option>
-                        <option class="text-slate-800" value="t-shirts">T-shirt</option>
-                        <option class="text-slate-800" value="movies">Movies & Series</option>
-                        <option class="text-slate-800" value="cars">Cars</option>
-                        <option class="text-slate-800" value="anime">Anime</option>
+                        @foreach ($categories as $category)
+                            <option class="text-slate-800" value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+
                     </select>
                     <label
                         class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
@@ -151,13 +150,25 @@
                 </div>
             </div>
 
+            <div class="flex flex-col md:flex-row md:space-x-10 ">
+                <!-- Cover Image Upload -->
+                <div class="flex-1 relative my-4 md:my-8">
+                    <label for="CoverImage" class="text-white flex items-center space-x-2">
+                        <i class="fas fa-image"></i>
+                        <span>Upload Cover Image</span>
+                    </label>
+                    <input id="CoverImage" type="file" wire:model="CoverImage"
+                        class="mt-2 w-full border border-gray-600 rounded-lg focus:ring-blue-500 bg-gray-800 text-zinc-50">
+                </div>
 
-            <div class="flex space-x-10">
-                <div class="flex flex-col space-y-4 mb-8 relative">
-                    <label for="images" class="text-white">Upload Images</label>
+                <!-- Second Images Upload -->
+                <div class="flex-1 relative my-4 md:my-8">
+                    <label for="images" class="text-white flex items-center space-x-2">
+                        <i class="fas fa-images"></i>
+                        <span>Upload Additional Images</span>
+                    </label>
                     <input id="images" type="file" wire:model="images" multiple
-                        class="w-full border-gray-300 rounded-lg focus:ring-blue-500 text-zinc-50">
-
+                        class="mt-2 w-full border border-gray-600 rounded-lg focus:ring-blue-500 bg-gray-800 text-zinc-50">
                     @error('images.*')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror

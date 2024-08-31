@@ -18,7 +18,7 @@
                                 class="rounded-xl h-full w-full object-cover ">
                             <div
                                 class="absolute top-2 right-2 rounded-xl bg-black/50 text-zinc-50 text-xs md:text-sm p-2 z-[1]">
-                                {{ $product->category }}
+                                {{ $product->category->name }}
                             </div>
                             <div
                                 class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 rounded-xl text-center text-zinc-50 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100">

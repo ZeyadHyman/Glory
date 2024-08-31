@@ -53,9 +53,10 @@
                             <tr>
                                 @foreach ($filteredAttributes as $key => $attribute)
                                     <th scope="col" class="px-4 sm:px-6 py-3">
-                                        {{ ucfirst($key) }}
+                                        {{ $key === 'category_id' ? 'Category' : $key }}
                                     </th>
                                 @endforeach
+
                                 <th scope="col" class="px-4 sm:px-6 py-3">
                                     Action
                                 </th>
@@ -67,7 +68,12 @@
                                     @php
                                         $filteredAttributes = array_filter(
                                             $product->getAttributes(),
-                                            fn($key) => !in_array($key, ['created_at', 'updated_at', 'images']),
+                                            fn($key) => !in_array($key, [
+                                                'created_at',
+                                                'updated_at',
+                                                'images',
+                                                'category_id',
+                                            ]),
                                             ARRAY_FILTER_USE_KEY,
                                         );
                                     @endphp
@@ -77,6 +83,12 @@
                                             {{ $value }}
                                         </td>
                                     @endforeach
+
+                                    {{-- Display Category Name --}}
+                                    <td class="px-4 sm:px-6 py-3 overflow-hidden text-ellipsis">
+                                        {{ $product->category->name ?? 'N/A' }}
+                                    </td>
+
                                     <td
                                         class="px-4 sm:px-6 py-3 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                                         <a href="{{ route('editProduct', ['productId' => $product->id]) }}"
@@ -90,6 +102,7 @@
                             @endforeach
                         </tbody>
                     </table>
+
                 </div>
 
                 {{ $data->links() }}
@@ -187,7 +200,48 @@
                 {{ $data->links() }}
             @else
                 <p class="text-zinc-50 text-xl sm:text-2xl lg:text-4xl text-center">No Users found.</p>
+
             @endif
+        @elseif($activeTab == 'categories')
+            <div class="pb-4 flex justify-end items-center">
+                <div class="flex flex-wrap space-x-2">
+                    <a href="{{ route('addCategory') }}"
+                        class="px-6 py-2 transition-transform transform hover:scale-105 border-x-4 border-[#1f815b] hover:border-[#1f814567] rounded-lg text-white flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#0b1d2c] focus:ring-opacity-50">
+                        <i class="fa-solid fa-plus"></i> Add Category
+                    </a>
+                </div>
+            </div>
+
+            @if ($data->isNotEmpty())
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    @foreach ($data as $category)
+                        <div class="bg-[#13212E] p-4 rounded-lg border border-gray-700 shadow-lg relative group">
+                            <img src="{{ asset('storage/' . $category['image']) }}" alt="{{ $category['name'] }}"
+                                class="w-full  object-fill rounded-md mb-4 transition-transform transform hover:scale-105 duration-700 ease-in-out">
+                            <h2 class="text-xl text-white font-semibold mb-2">{{ $category['name'] }}</h2>
+
+                            <!-- Edit and Delete Buttons -->
+                            <div
+                                class="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                                <!-- Edit Button -->
+                                <a href="{{ route('editCategory', ['categoryId' => $category['id']]) }}"
+                                    class="px-3 py-2 bg-[#1f815b] text-white rounded-full shadow-lg hover:bg-[#1f814567] transition-transform transform hover:scale-110 duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#0b1d2c] focus:ring-opacity-50">
+                                    <i class="fa-solid fa-edit"></i>
+                                </a>
+
+                                <!-- Delete Button -->
+                                <button @click="open = true; confirmDeleteId = '{{ $category['id'] }}'"
+                                    class="px-3 py-2 bg-red-600 text-white rounded-full shadow-lg hover:bg-red-500 transition-transform transform hover:scale-110 duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#0b1d2c] focus:ring-opacity-50">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <p class="text-zinc-50 text-xl sm:text-2xl lg:text-4xl text-center mt-6">No categories found.</p>
+            @endif
+
         @endif
 
         <!-- Confirmation Dialog -->

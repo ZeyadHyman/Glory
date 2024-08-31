@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\Category;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -12,19 +13,21 @@ class AddProduct extends Component
     use WithFileUploads;
 
     public $name;
-    public $category;
+    public $categories;
+    public $category_id;
     public $description;
     public $price;
     public $discount;
     public $frame_sizes = [];
     public $frame_colors = [];
     public $images = [];
+    public $CoverImage;
     public $selectAllSizes = false;
     public $selectAllColors = false;
 
     protected $rules = [
         'name' => 'required|string|max:255',
-        'category' => 'required|string',
+        'category_id' => 'required',
         'description' => 'required|string|max:1000',
         'price' => 'required|numeric',
         'discount' => 'nullable|numeric|min:0|max:100',
@@ -38,6 +41,7 @@ class AddProduct extends Component
         $data = $this->validate();
 
         $imagePaths = [];
+        $imagePaths[] = $this->CoverImage->store('images/Posters', 'public');
         foreach ($this->images as $image) {
             $imagePaths[] = $image->store('images/Posters', 'public');
         }
@@ -75,6 +79,7 @@ class AddProduct extends Component
 
     public function render()
     {
+        $this->categories = Category::get();
         return view('livewire.admin.add-product')->layout('layouts.app');
     }
 }

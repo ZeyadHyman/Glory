@@ -9,13 +9,23 @@ class Product extends Model
 {
 
     protected $fillable = [
-        'name', 'category', 'description', 'price', 'discount', 'frame_sizes', 'frame_colors', 'images',
+        'name',
+        'category_id',
+        'description',
+        'price',
+        'discount',
+        'frame_sizes',
+        'frame_colors',
+        'images',
     ];
 
     protected $casts = [
         'frame_sizes' => 'array',
         'frame_colors' => 'array',
-        'images' => 'array', 
+        'images' => 'array',
     ];
-
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

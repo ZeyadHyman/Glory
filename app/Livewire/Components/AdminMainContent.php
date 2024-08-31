@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Components;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -14,11 +16,17 @@ class AdminMainContent extends Component
     public $search = '';
     public $userRole;
     public $userData;
-    public $activeTab = 'products';
+    public $activeTab;
     public $sortBy = 'id';
     public $sortDirection = 'asc';
     public $openEditModal = false;
-    protected $listeners = ['tabChanged' => 'handleTabChanged'];
+
+    #[On('tabChanged')]
+    public function handleTabChanged($tab)
+    {
+        $this->activeTab = $tab;
+        $this->resetPage();
+    }
 
     public function updateUserRole($userId)
     {
@@ -43,12 +51,6 @@ class AdminMainContent extends Component
         $this->render();
     }
 
-    public function handleTabChanged($tab)
-    {
-        $this->activeTab = $tab;
-        $this->resetPage();
-    }
-
     public function handleSearching()
     {
         $this->resetPage();
@@ -60,9 +62,13 @@ class AdminMainContent extends Component
             Product::findorfail($id)->delete();
         }
 
-        if ($this->activeTab == 'users') {
-            User::findorfail($id)->delete();
+
+        if ($this->activeTab == 'categories') {
+            $category = Category::findOrFail($id);
+            $category->products()->delete();
+            $category->delete();
         }
+
 
         $this->render();
     }
@@ -78,7 +84,7 @@ class AdminMainContent extends Component
             if ($this->search) {
                 $query->where('name', 'like', '%' . $this->search . '%');
             }
-            $data = $query->orderBy($this->sortBy, $this->sortDirection)->paginate(8);
+            $data = $query->orderBy($this->sortBy, $this->sortDirection)->with('category')->paginate(8);
         }
 
         if ($this->activeTab == 'users') {
@@ -89,6 +95,16 @@ class AdminMainContent extends Component
             }
 
             $data = $query->orderBy('role')->paginate(8);
+        }
+
+        if ($this->activeTab == 'categories') {
+            $query = Category::query();
+
+            if ($this->search) {
+                $query->where('name', 'like', '%' . $this->search . '%');
+            }
+
+            $data = $query->paginate(8);
         }
 
         return view('livewire.components.admin-main-content', [

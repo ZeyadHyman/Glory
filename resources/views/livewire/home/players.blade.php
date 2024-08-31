@@ -18,25 +18,25 @@
                 }
             @endphp
 
-<div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative w-1/5 h-auto overflow-hidden">
-    <div class="relative h-full">
-        <img src="{{ asset('storage/' . $product->images[0]) }}" alt="{{ $product->name }}"
-            class="rounded-xl h-full w-full object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110">
-    </div>
-    <div
-        class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 rounded-xl text-center text-zinc-50 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100">
-        <h1
-            class="mt-16 mb-2 text-base md:text-md font-bold group-hover:text-md group-hover:md:text-xl transition-all">
-            {{ $product->name }}
-        </h1>
-        <a href="{{ route('product-details', ['productId' => $product->id]) }}"
-            class="bg-[#e30613] rounded p-2 text-sm transition-transform duration-500 ease-in-out group-hover:scale-110">
-            Order Now
-        </a>
-    </div>
+            <div class="rounded-xl flex flex-col text-zinc-50 shadow-xl group relative w-1/5 h-auto overflow-hidden">
+                <div class="relative h-full">
+                    <img src="{{ asset('storage/' . $product->images[0]) }}" alt="{{ $product->name }}"
+                        class="rounded-xl h-full w-full object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-110">
+                </div>
+                <div
+                    class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 rounded-xl text-center text-zinc-50 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100">
+                    <h1
+                        class="mt-16 mb-2 text-base md:text-md font-bold group-hover:text-md group-hover:md:text-xl transition-all">
+                        {{ $product->name }}
+                    </h1>
+                    <a href="{{ route('product-details', ['productId' => $product->id]) }}"
+                        class="bg-[#e30613] rounded p-2 text-sm transition-transform duration-500 ease-in-out group-hover:scale-110">
+                        Order Now
+                    </a>
+                </div>
 
-    @livewire('components.wishlist-button', ['product' => $product])
-</div>
+                @livewire('components.wishlist-button', ['product' => $product])
+            </div>
         @endforeach
     </div>
 

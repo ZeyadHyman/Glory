@@ -82,7 +82,7 @@ class ProductDetails extends Component
 
     public function render()
     {
-        $this->relatedProducts = Product::where('category', $this->product->category)
+        $this->relatedProducts = Product::where('category_id', $this->product->category_id)
             ->where('id', '!=', $this->product->id)
             ->inRandomOrder()
             ->take(4)

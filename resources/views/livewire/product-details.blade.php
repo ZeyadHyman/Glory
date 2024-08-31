@@ -275,7 +275,7 @@
 
                     <div
                         class="absolute top-4 left-4 bg-black/60 text-zinc-50 text-xs md:text-sm px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out">
-                        {{ $product->category }}
+                        {{ $product->category->name }}
                     </div>
 
                     @livewire('components.wishlist-button', ['product' => $product])

@@ -49,37 +49,44 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 justify-items-center">
-            @foreach ($products as $product)
-                @php
-                    $images = is_array($product->images) ? $product->images : json_decode($product->images);
-                @endphp
-
-                <div
-                    class="w-full h-auto bg-gray-900 rounded-xl shadow-lg group relative overflow-hidden transition-transform duration-300 hover:scale-105">
-                    <div class="relative h-64 md:h-72 lg:h-80">
-                        <img src="{{ asset('storage/' . $images[0]) }}" alt="{{ $product->name }}"
-                            class="rounded-xl h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110">
-                    </div>
+        <!-- Check if there are products in the category -->
+        @if ($products->isEmpty())
+            <div class="text-center py-10 h-[50vh]">
+                <p class="text-xl text-gray-500">No products available in this category.</p>
+            </div>
+        @else
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 justify-items-center">
+                @foreach ($products as $product)
+                    @php
+                        $images = is_array($product->images) ? $product->images : json_decode($product->images);
+                    @endphp
 
                     <div
-                        class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-70 rounded-xl text-center text-zinc-100 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100 p-4">
-                        <h1 class="text-xl md:text-2xl lg:text-3xl font-bold mb-2 text-white leading-tight">
-                            {{ $product->name }}
-                        </h1>
-                        <h2 class="text-lg md:text-xl lg:text-2xl font-semibold mb-4 text-green-400">
-                            {{ $product->price * (1 - $product->discount / 100) }} EGP
-                        </h2>
-                        <a href="{{ route('product-details', ['productId' => $product->id]) }}"
-                            class="bg-red-600 text-white rounded px-4 py-2 text-sm lg:text-base font-medium transition-transform duration-500 ease-in-out hover:scale-110">
-                            Order Now
-                        </a>
-                    </div>
+                        class="w-full h-auto bg-gray-900 rounded-xl shadow-lg group relative overflow-hidden transition-transform duration-300 hover:scale-105">
+                        <div class="relative h-64 md:h-72 lg:h-80">
+                            <img src="{{ asset('storage/' . $images[0]) }}" alt="{{ $product->name }}"
+                                class="rounded-xl h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110">
+                        </div>
 
-                    @livewire('components.wishlist-button', ['product' => $product])
-                </div>
-            @endforeach
-        </div>
+                        <div
+                            class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-70 rounded-xl text-center text-zinc-100 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100 p-4">
+                            <h1 class="text-xl md:text-2xl lg:text-3xl font-bold mb-2 text-white leading-tight">
+                                {{ $product->name }}
+                            </h1>
+                            <h2 class="text-lg md:text-xl lg:text-2xl font-semibold mb-4 text-green-400">
+                                {{ $product->price * (1 - $product->discount / 100) }} EGP
+                            </h2>
+                            <a href="{{ route('product-details', ['productId' => $product->id]) }}"
+                                class="bg-red-600 text-white rounded px-4 py-2 text-sm lg:text-base font-medium transition-transform duration-500 ease-in-out hover:scale-110">
+                                Order Now
+                            </a>
+                        </div>
+
+                        @livewire('components.wishlist-button', ['product' => $product])
+                    </div>
+                @endforeach
+            </div>
+        @endif
 
     </div>
 </x-app-layout>
