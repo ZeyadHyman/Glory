@@ -22,7 +22,7 @@ Route::view('/cart', 'cart')->name('cart'); // Shopping cart
 Route::get('/categories', [CategoriesController::class, 'index'])->name('categories'); // Categories page
 Route::get('/productDetails/{productId}', [ProductDetailsController::class, 'index'])->name('product-details'); // Product details page
 Route::get('/category/{category}', [ProductsByCategoryController::class, 'index'])->name('products-by-category'); // Products by category
-Route::post('/payment', [PayController::class, 'pay'])->name('payment'); // Payment processing
+Route::post('/payment', [PayController::class, 'pay'])->name('pay'); // Payment processing
 
 // Authenticated User Routes
 Route::middleware(['auth', 'verified'])->group(function () {

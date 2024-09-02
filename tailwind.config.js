@@ -15,20 +15,30 @@ export default {
             },
             keyframes: {
                 fadeIn: {
-                    '0%': { opacity: '0' },
-                    '100%': { opacity: '1' },
+                    "0%": { opacity: "0" },
+                    "100%": { opacity: "1" },
                 },
                 pulse: {
-                    '0%': { transform: 'scale(1)' },
-                    '50%': { transform: 'scale(1.1)' },
-                    '100%': { transform: 'scale(1)' },
+                    "0%": { transform: "scale(1)" },
+                    "50%": { transform: "scale(1.1)" },
+                    "100%": { transform: "scale(1)" },
                 },
             },
             animation: {
-                fadeIn: 'fadeIn 1s ease-in-out',
-                pulse: 'pulse 1s ease-in-out infinite',
+                fadeIn: "fadeIn 1s ease-in-out",
+                pulse: "pulse 1s ease-in-out infinite",
             },
         },
     },
+    safelist: [
+        {
+            pattern:
+                /bg-(red|green|blue|orange|yellow|purple|pink|indigo|teal|cyan|emerald|fuchsia|gray|slate|zinc|neutral|stone|amber|lime|sky|violet|rose)-(50|100|200|300|400|500|600|700|800|900)/,
+        },
+        {
+            pattern:
+                /border-(red|green|blue|orange|yellow|purple|pink|indigo|teal|cyan|emerald|fuchsia|gray|slate|zinc|neutral|stone|amber|lime|sky|violet|rose)-(50|100|200|300|400|500|600|700|800|900)/,
+        },
+    ],
     plugins: [forms, "prettier-plugin-tailwindcss"],
 };

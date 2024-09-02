@@ -72,7 +72,7 @@
                         <label class="absolute -top-3 flex text-xs justify-between w-full items-center text-gray-400 ">
                             <span>Category</span>
                             <a href="{{ route('addCategory') }}" class="text-blue-500 hover:underline">
-                                Add Category
+                                ADD NEW CATEGORY
                             </a>
                         </label>
                     </div>

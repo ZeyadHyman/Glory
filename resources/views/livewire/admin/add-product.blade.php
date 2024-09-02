@@ -57,7 +57,7 @@
                         class="block py-2.5 px-3 w-full text-sm bg-transparent border-0 border-b-2 border-gray-600 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer
                     {{ $categories ? 'text-white' : 'text-red-500' }}">
                         @if ($categories && $categories->count())
-                            <option class="text-slate-800" value="" selected disabled>Select a category</option>
+                            <option class="text-slate-800" value="" selected>Select a category</option>
                             @foreach ($categories as $category)
                                 <option class="text-slate-800" value="{{ $category->id }}">
                                     {{ $category->name }}
@@ -73,7 +73,7 @@
                     <label class="absolute -top-3 flex text-xs justify-between w-full items-center text-gray-400 ">
                         <span>Category</span>
                         <a href="{{ route('addCategory') }}" class="text-blue-500 hover:underline">
-                            Add Category
+                            ADD NEW CATEGORY
                         </a>
                     </label>
                 </div>

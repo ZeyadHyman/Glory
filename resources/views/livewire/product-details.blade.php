@@ -164,19 +164,27 @@
                 </h1>
                 <div class="flex mt-2 flex-wrap gap-2 text-zinc-50">
                     @foreach ($product->frame_colors as $color)
+                        @php
+                            $isBlack = $color === 'black';
+                            $isWhite = $color === 'white';
+                            $colorClass = $isBlack
+                                ? 'bg-black text-white'
+                                : ($isWhite
+                                    ? 'bg-white border-black text-slate-950'
+                                    : "bg-{$color}-700 border-{$ }-950");
+                            $borderClass = $isBlack ? '' : 'border';
+                            $activeClass = $isBlack
+                                ? ''
+                                : 'focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100';
+                        @endphp
                         <button
-                            :class="{
-                                'bg-black border-none': '{{ $color }}'
-                                === 'black' && selectedColor === '{{ $color }}',
-                                'bg-white border-none text-slate-950': '{{ $color }}'
-                                === 'white' &&
-                                selectedColor === '{{ $color }}',
-                                'bg-{{ $color }}-500 border-none ': '{{ $color }}'
-                                !== 'black' &&
-                                selectedColor === '{{ $color }}',
+                            x-bind:class="{
+                                '{{ $colorClass }}': selectedColor === '{{ $color }}',
+                                '{{ $borderClass }}': selectedColor !== '{{ $color }}',
+                                '{{ $activeClass }}': selectedColor === '{{ $color }}',
                             }"
                             @click="selectedColor = '{{ $color }}'"
-                            class=" px-4 py-2 rounded-xl border">
+                            class="px-4 py-2 rounded-xl border focus:outline-none transition duration-200 ease-in-out hover:scale-105">
                             {{ strtoupper($color) }}
                         </button>
                     @endforeach
@@ -196,10 +204,12 @@
                                 'bg-white border-white text-gray-600': selectedSize === '{{ $size }}',
                                 'bg-transparent border-gray-300 text-zinc-50': selectedSize !== '{{ $size }}'
                             }"
-                            @click="selectedSize = '{{ $size }}'" class="px-4 py-2 rounded-xl border">
+                            @click="selectedSize = '{{ $size }}'"
+                            class="px-4 py-2 rounded-xl border focus:outline-none transition duration-200 ease-in-out hover:scale-105">
                             {{ strtoupper($size) }}
                         </button>
                     @endforeach
+
                 </div>
             </div>
 
