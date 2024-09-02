@@ -45,7 +45,7 @@
 
                 <!-- Name Input -->
                 <div class="relative z-0 w-full mb-8 group">
-                    <input autocomplete="off" type="text" name="name" wire:model="name"
+                    <input required autocomplete="off" type="text" name="name" wire:model="name"
                         class="block py-2.5 px-3 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-600 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
                     <label
                         class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
@@ -69,7 +69,7 @@
                 <div class="relative z-0 w-full mb-8 group">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload New
                         Image</label>
-                    <input type="file" wire:model="newImage"
+                    <input required type="file" wire:model="newImage"
                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                         accept="image/*">
                     <div wire:loading wire:target="newImage" class="text-white text-sm mt-2">

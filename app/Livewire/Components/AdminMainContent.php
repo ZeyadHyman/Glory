@@ -16,7 +16,8 @@ class AdminMainContent extends Component
     public $search = '';
     public $userRole;
     public $userData;
-    public $activeTab;
+    public $activeTab = 'products';
+    public $selectedRole;
     public $sortBy = 'id';
     public $sortDirection = 'asc';
     public $openEditModal = false;
@@ -69,7 +70,7 @@ class AdminMainContent extends Component
             $category->delete();
         }
 
-
+        $this->resetPage();
         $this->render();
     }
 

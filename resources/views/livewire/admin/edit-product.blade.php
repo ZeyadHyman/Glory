@@ -50,7 +50,7 @@
                 <div class="flex space-x-5">
                     <!-- Name Input -->
                     <div class="relative z-0 w-full mb-8 group">
-                        <input autocomplete="off" type="text" name="name" wire:model="name"
+                        <input required autocomplete="off" type="text" name="name" wire:model="name"
                             class="block py-2.5 px-3 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-600 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
                         <label
                             class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
@@ -58,27 +58,30 @@
                         </label>
                     </div>
 
-                    <!-- Category Input -->
+                    <!-- Category Input  -->
                     <div class="relative z-0 w-full mb-8 group">
                         <select name="category" wire:model="category_id"
                             class="block py-2.5 px-3 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-600 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer">
-                            
-                            <option class="text-slate-800" value="" selected>Select a category</option>
+
+                            <option class="text-slate-800" value="" selected disabled>Select a category</option>
                             @foreach ($categories as $category)
                                 <option class="text-slate-800" value="{{ $category->id }}">{{ $category->name }}
                                 </option>
                             @endforeach
                         </select>
-                        <label
-                            class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                            Category
+                        <label class="absolute -top-3 flex text-xs justify-between w-full items-center text-gray-400 ">
+                            <span>Category</span>
+                            <a href="{{ route('addCategory') }}" class="text-blue-500 hover:underline">
+                                Add Category
+                            </a>
                         </label>
                     </div>
                 </div>
 
-                <!-- Description Input -->
+                <!-- Description Input required -->
                 <div class="relative z-0 w-full mb-8 group">
-                    <input autocomplete="off" type="text" name="description" wire:model="description" placeholder=" "
+                    <input required autocomplete="off" type="text" name="description" wire:model="description"
+                        placeholder=" "
                         class="block py-2.5 px-3 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-600 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
                     <label
                         class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
@@ -88,9 +91,10 @@
 
                 <!-- Price and Discount Inputs -->
                 <div class="flex space-x-5">
-                    <!-- Price Input -->
+                    <!-- Price Input  -->
                     <div class="relative z-0 w-full mb-8 group">
-                        <input autocomplete="off" type="text" name="price" wire:model="price" placeholder=" "
+                        <input required autocomplete="off" type="text" name="price" wire:model="price"
+                            placeholder=" "
                             class="block py-2.5 px-3 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-600 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
                         <label
                             class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
@@ -98,9 +102,10 @@
                         </label>
                     </div>
 
-                    <!-- Discount Input -->
+                    <!-- Discount Input  -->
                     <div class="relative z-0 w-full mb-8 group">
-                        <input autocomplete="off" type="text" name="discount" wire:model="discount" placeholder=" "
+                        <input required autocomplete="off" type="text" name="discount" wire:model="discount"
+                            placeholder=" "
                             class="block py-2.5 px-3 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-600 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
                         <label
                             class="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
@@ -113,19 +118,25 @@
                 <div class="flex space-x-10 mb-8">
                     <!-- Frame Sizes -->
                     <div class="flex-1">
-                        <h1 class="text-xl font-semibold text-zinc-50 mb-4 border-b-2 border-gray-300 pb-2">Frame Sizes
-                        </h1>
+                        <div class="flex justify-between items-end mb-4 border-b-2 border-gray-300 pb-2 uppercase">
+                            <h1 class="text-xl font-semibold text-zinc-50">
+                                Frame Sizes
+                            </h1>
+                            <a href="{{ route('EditFrameSizes') }}" class="text-blue-500 text-xs hover:underline">
+                                Add New Size
+                            </a>
+                        </div>
                         <div class="flex items-center mb-4">
                             <input id="select_all_sizes" type="checkbox" wire:model="selectAllSizes"
                                 wire:click="toggleSizes" class="mr-2" />
                             <label for="select_all_sizes" class="text-zinc-50 text-sm">Select All</label>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
-                            @foreach (['small', 'medium', 'large', 'xlarge'] as $size)
+                            @foreach ($sizes as $size)
                                 <div class="flex items-center space-x-2">
-                                    <input type="checkbox" wire:model="frame_sizes" value="{{ $size }}"
+                                    <input type="checkbox" wire:model="frame_sizes" value="{{ $size->name }}"
                                         class="form-checkbox text-blue-600" />
-                                    <label class="text-zinc-50 text-sm">{{ ucfirst($size) }}</label>
+                                    <label class="text-zinc-50 text-sm">{{ ucfirst($size->name) }}</label>
                                 </div>
                             @endforeach
                         </div>
@@ -133,19 +144,25 @@
 
                     <!-- Frame Colors -->
                     <div class="flex-1">
-                        <h1 class="text-xl font-semibold text-zinc-50 mb-4 border-b-2 border-gray-300 pb-2">Frame Colors
-                        </h1>
+                        <div class="flex justify-between items-end mb-4 border-b-2 border-gray-300 pb-2 uppercase"">
+                            <h1 class="text-xl font-semibold text-zinc-50 ">
+                                Frame Colors
+                            </h1>
+                            <a href="{{ route('EditFrameColors') }}" class="text-blue-500 text-xs hover:underline">
+                                Add New Color
+                            </a>
+                        </div>
                         <div class="flex items-center mb-4">
                             <input id="select_all_colors" type="checkbox" wire:model="selectAllColors"
                                 wire:click="toggleColors" class="mr-2" />
                             <label for="select_all_colors" class="text-zinc-50 text-sm">Select All</label>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
-                            @foreach (['red', 'blue', 'green', 'black', 'white'] as $color)
+                            @foreach ($colors as $color)
                                 <div class="flex items-center space-x-2">
-                                    <input type="checkbox" wire:model="frame_colors" value="{{ $color }}"
+                                    <input type="checkbox" wire:model="frame_colors" value="{{ $color->name }}"
                                         class="form-checkbox text-blue-600" />
-                                    <label class="text-zinc-50 text-sm">{{ ucfirst($color) }}</label>
+                                    <label class="text-zinc-50 text-sm">{{ ucfirst($color->name) }}</label>
                                 </div>
                             @endforeach
                         </div>

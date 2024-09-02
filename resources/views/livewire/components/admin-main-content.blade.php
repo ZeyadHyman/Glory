@@ -1,5 +1,11 @@
 <div class="container mx-auto p-4">
-    <div x-data="{ openEditModal: @entangle('openEditModal'), editItemId: null, open: false, confirmDeleteId: null }">
+    <div x-data="{
+        openEditModal: @entangle('openEditModal'),
+        editItemId: null,
+        open: false,
+        confirmDeleteId: null,
+        message: ''
+    }">
         @if ($activeTab == 'products')
             <div class="pb-4 flex justify-between">
                 <form wire:submit.prevent='handleSearching' class="flex flex-col sm:flex-row items-start sm:items-center">
@@ -94,7 +100,16 @@
                                         <a href="{{ route('editProduct', ['productId' => $product->id]) }}"
                                             class="text-cyan-500 hover:text-cyan-700">Edit</a>
                                         <button class="text-red-500 hover:text-red-700"
-                                            @click="open = true; confirmDeleteId = '{{ $product->id }}'">
+                                            @click="open = true; confirmDeleteId = '{{ $product->id }}'; 
+                                            message = `
+                                            <div class='text-left'>
+                                                <p class='mb-2'>Are you sure you want to delete the product <strong
+                                                        class='text-white'>{{ $product->name }}</strong>?</p>
+                                                <p class='text-sm text-gray-300'>
+                                                    <span class='text-red-500 font-bold'>Note:</span>
+                                                    This action cannot be undone.
+                                                </p>
+                                            </div>`;">
                                             Delete
                                         </button>
                                     </td>
@@ -228,12 +243,23 @@
                                     class="px-3 py-2 bg-[#1f815b] text-white rounded-full shadow-lg hover:bg-[#1f814567] transition-transform transform hover:scale-110 duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#0b1d2c] focus:ring-opacity-50">
                                     <i class="fa-solid fa-edit"></i>
                                 </a>
-
                                 <!-- Delete Button -->
-                                <button @click="open = true; confirmDeleteId = '{{ $category['id'] }}'"
+                                <button
+                                    @click="open = true; confirmDeleteId = '{{ $category['id'] }}'; 
+                                    message = `
+                                    <div class='text-left'>
+                                        <p class='mb-2'>Are you sure you want to delete the category <strong
+                                                class='text-white'>{{ $category['name'] }}</strong>?</p>
+                                        <p class='text-sm text-gray-300'>
+                                            <span class='text-red-500 font-bold'>Note:</span>
+                                            Deleting this category will also remove all products associated with it.
+                                        </p>
+                                    </div>`;"
                                     class="px-3 py-2 bg-red-600 text-white rounded-full shadow-lg hover:bg-red-500 transition-transform transform hover:scale-110 duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#0b1d2c] focus:ring-opacity-50">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
+
+
                             </div>
                         </div>
                     @endforeach
@@ -244,20 +270,30 @@
 
         @endif
 
-        <!-- Confirmation Dialog -->
-        <div x-show="open" x-cloak
+        <!-- Confirmation Modal -->
+        <div x-show="open" x-cloak x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-90"
             class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
-            <div class="bg-gray-900 p-6 rounded-lg w-11/12 sm:w-1/3">
+            <div class="bg-gray-800 p-6 rounded-lg w-11/12 sm:w-1/3">
                 <h3 class="text-lg font-semibold text-white">Confirm Delete</h3>
-                <p class="mt-2 text-gray-400">Are you sure you want to delete this item?</p>
-                <div class="mt-4 flex justify-end space-x-2">
+                <!-- Render HTML content with x-html -->
+                <p class="mt-2 text-gray-400" x-html="message"></p>
+                <div class="mt-4 flex justify-end">
                     <button @click="open = false"
-                        class="px-4 py-2 bg-gray-600 hover:bg-gray-500 text-white rounded-lg">Cancel</button>
-                    <button @click="$wire.deleteItem(confirmDeleteId); open = false"
-                        class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg">Delete</button>
+                        class="px-4 py-2 text-sm text-white bg-gray-600 rounded-lg hover:bg-gray-500 focus:outline-none">
+                        Close
+                    </button>
+                    <button @click="$wire.deleteItem(confirmDeleteId)" @click="open = false"
+                        class="ml-2 px-4 py-2 text-sm text-white bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none">
+                        Delete
+                    </button>
                 </div>
             </div>
         </div>
+
+
 
         <!-- Edit Role Modal -->
         <div x-show="openEditModal" x-cloak

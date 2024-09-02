@@ -4,6 +4,8 @@ namespace App\Livewire\Admin;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\FrameColor;
+use App\Models\FrameSize;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
@@ -15,6 +17,8 @@ class EditProduct extends Component
     public $productId;
     public $name;
     public $categories;
+    public $sizes;
+    public $colors;
     public $category_id;
     public $description;
     public $price;
@@ -45,7 +49,7 @@ class EditProduct extends Component
     public function toggleSizes()
     {
         if ($this->selectAllSizes) {
-            $this->frame_sizes = ['small', 'medium', 'large', 'xlarge'];
+            $this->frame_sizes = $this->sizes->pluck('name')->toArray(); 
         } else {
             $this->frame_sizes = [];
         }
@@ -54,11 +58,12 @@ class EditProduct extends Component
     public function toggleColors()
     {
         if ($this->selectAllColors) {
-            $this->frame_colors = ['red', 'blue', 'green', 'black', 'white'];
+            $this->frame_colors = $this->colors->pluck('name')->toArray(); 
         } else {
             $this->frame_colors = [];
         }
     }
+
 
     public function removeImage($index)
     {
@@ -132,6 +137,8 @@ class EditProduct extends Component
     public function render()
     {
         $this->categories = Category::get();
+        $this->sizes = FrameSize::get();
+        $this->colors = FrameColor::get();
         return view('livewire.admin.edit-product')->layout('layouts.app');
     }
 }

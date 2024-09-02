@@ -12,8 +12,9 @@ class Category extends Component
 
     public function render()
     {
-
-        $this->categories = ModelsCategory::get();
+        if (ModelsCategory::first()) {
+            $this->categories = ModelsCategory::get();
+        }
         return view('livewire.home.category');
     }
 }

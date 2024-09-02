@@ -50,8 +50,8 @@
                 @endforeach
                 <li
                     class="thumbnail overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105 hover:transition-transform">
-                    <img class="h-full w-full object-cover rounded-md" src="{{ asset('images/size_guide.jpg') }}"
-                        alt="Thumbnail Image">
+                    <img class="h-full w-full object-cover rounded-md"
+                        src="{{ asset('storage/images/assets/size_guide.jpg') }}" alt="Thumbnail Image">
                 </li>
             </ul>
 
@@ -70,9 +70,10 @@
                             </li>
                         @endforeach
                         <li class="splide__slide">
-                            <button class="open-modal h-full w-full " data-image="{{ asset('images/size_guide.jpg') }}">
-                                <img class="h-full w-full object-cover" src="{{ asset('images/size_guide.jpg') }}"
-                                    alt="Main Image">
+                            <button class="open-modal h-full w-full "
+                                data-image="{{ asset('storage/images/assets/size_guide.jpg') }}">
+                                <img class="h-full w-full object-cover"
+                                    src="{{ asset('storage/images/assets/size_guide.jpg') }}" alt="Main Image">
                             </button>
                         </li>
                     </ul>
@@ -109,8 +110,8 @@
                         </li>
                     @endforeach
                     <li class="splide__slide">
-                        <img class="h-auto w-full object-cover" src="{{ asset('images/size_guide.jpg') }}"
-                            alt="Size Guide">
+                        <img class="h-auto w-full object-cover"
+                            src="{{ asset('storage/images/assets/size_guide.jpg') }}" alt="Size Guide">
                     </li>
                 </ul>
             </div>
@@ -161,13 +162,13 @@
                 <h1 class="mt-8 text-gray-300 font-bold text-start">Frame Color:
                     <span class="text-zinc-50" x-text="selectedColor"></span>
                 </h1>
-                <div class="flex mt-2 flex-wrap gap-2">
+                <div class="flex mt-2 flex-wrap gap-2 text-zinc-50">
                     @foreach ($product->frame_colors as $color)
                         <button
                             :class="{
                                 'bg-black border-none': '{{ $color }}'
                                 === 'black' && selectedColor === '{{ $color }}',
-                                'bg-white border-none text-slate-600': '{{ $color }}'
+                                'bg-white border-none text-slate-950': '{{ $color }}'
                                 === 'white' &&
                                 selectedColor === '{{ $color }}',
                                 'bg-{{ $color }}-500 border-none ': '{{ $color }}'
@@ -175,8 +176,8 @@
                                 selectedColor === '{{ $color }}',
                             }"
                             @click="selectedColor = '{{ $color }}'"
-                            class="text-zinc-50 px-4 py-2 rounded-xl border">
-                            {{ $color }}
+                            class=" px-4 py-2 rounded-xl border">
+                            {{ strtoupper($color) }}
                         </button>
                     @endforeach
 
@@ -196,7 +197,7 @@
                                 'bg-transparent border-gray-300 text-zinc-50': selectedSize !== '{{ $size }}'
                             }"
                             @click="selectedSize = '{{ $size }}'" class="px-4 py-2 rounded-xl border">
-                            {{ $size }}
+                            {{ strtoupper($size) }}
                         </button>
                     @endforeach
                 </div>

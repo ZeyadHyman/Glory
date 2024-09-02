@@ -12,7 +12,9 @@ class RecentlyAdded extends Component
     public function render()
     {
 
-        $this->Products = Product::with('category')->first()->take(10)->get();
+        if (Product::first()) {
+            $this->Products = Product::first()->take(10)->get();
+        }
         return view('livewire.home.recently-added');
     }
 }

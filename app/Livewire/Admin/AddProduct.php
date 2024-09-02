@@ -3,6 +3,8 @@
 namespace App\Livewire\Admin;
 
 use App\Models\Category;
+use App\Models\FrameColor;
+use App\Models\FrameSize;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -14,6 +16,8 @@ class AddProduct extends Component
 
     public $name;
     public $categories;
+    public $sizes;
+    public $colors;
     public $category_id;
     public $description;
     public $price;
@@ -62,7 +66,7 @@ class AddProduct extends Component
     public function toggleSizes()
     {
         if ($this->selectAllSizes) {
-            $this->frame_sizes = ['small', 'medium', 'large', 'xlarge'];
+            $this->frame_sizes = $this->sizes->pluck('name')->toArray(); 
         } else {
             $this->frame_sizes = [];
         }
@@ -71,7 +75,7 @@ class AddProduct extends Component
     public function toggleColors()
     {
         if ($this->selectAllColors) {
-            $this->frame_colors = ['red', 'blue', 'green', 'black', 'white'];
+            $this->frame_colors = $this->colors->pluck('name')->toArray(); 
         } else {
             $this->frame_colors = [];
         }
@@ -79,7 +83,15 @@ class AddProduct extends Component
 
     public function render()
     {
-        $this->categories = Category::get();
+        if (Category::first()) {
+            $this->categories = Category::get();
+        }
+        if (FrameSize::first()) {
+            $this->sizes = FrameSize::get();
+        }
+        if (FrameColor::first()) {
+            $this->colors = FrameColor::get();
+        }        
         return view('livewire.admin.add-product')->layout('layouts.app');
     }
 }
