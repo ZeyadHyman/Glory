@@ -2,9 +2,11 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="utf-8">  
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="description" content="Explore Glory, your ultimate online destination for stylish posters. Discover a diverse collection including sports stars, anime, cars, and movies. Enjoy easy browsing, clear images, and a seamless shopping experience on any device. Sign in with Google for added convenience and manage your wishlist with ease.">
+
 
     {{-- App Title --}}
     <title>{{ config('app.name') }} - @yield('pageTitle')</title>
@@ -44,7 +46,7 @@
         <livewire:layout.mobile-navigation />
     </main>
     <livewire:layout.footer />
-    
+
     @livewireScripts
     @yield('script')
 

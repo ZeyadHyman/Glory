@@ -7,15 +7,17 @@
         </h1>
 
         <!-- Add New Size Section -->
-        <div class="flex space-x-2 items-center mb-6">
-            <input type="text" wire:model="newSize" placeholder="New Frame Size"
-                class="flex-1 px-3 py-2 border border-gray-600 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-600 transition duration-150 ease-in-out" />
-            <button wire:click="addSize"
-                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center space-x-2">
-                <i class="fa-solid fa-plus"></i>
-                <span>Add Size</span>
-            </button>
-        </div>
+        <form wire:submit.prevent="addSize">
+            <div class="flex space-x-2 items-center mb-6">
+                <input type="text" wire:model="newSize" placeholder="New Frame Size"
+                    class="flex-1 px-3 py-2 border border-gray-600 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-600 transition duration-150 ease-in-out" />
+                <button type="submit"
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center space-x-2">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Add Size</span>
+                </button>
+            </div>
+        </form>
 
         <!-- Delete All Button -->
         @if ($sizes->count())

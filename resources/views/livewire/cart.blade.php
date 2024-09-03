@@ -3,8 +3,8 @@
 
     <style>
         .checkmark {
-            width: 100px;
-            height: 100px;
+            inline-size: 100px;
+            block-size: 100px;
             border-radius: 50%;
             display: block;
             stroke-width: 2;
@@ -13,8 +13,8 @@
             box-shadow: inset 0px 0px 0px #4bb71b;
             animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
             position: relative;
-            top: 5px;
-            right: 5px;
+            inset-block-start: 5px;
+            inset-inline-end: 5px;
             margin: 0 auto;
         }
 
@@ -307,10 +307,10 @@
                     <p class="text-base md:text-lg text-zinc-50">Your order has been successfully placed!</p>
                     @auth
                         <p></p>
-                        @else
+                    @else
                         <p class="text-sm mt-1 md:text-base text-zinc-50">To track your orders you should
-                    @endauth
-                        <a href="{{ route('login') }}" class="underline text-gray-300 hover:text-gray-50">login</a>
+                            <a href="{{ route('login') }}" class="underline text-gray-300 hover:text-gray-50">login</a>
+                        @endauth
                     </p>
                 </div>
 

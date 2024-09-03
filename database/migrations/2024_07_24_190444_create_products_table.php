@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->json('images');
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->integer('price');
             $table->integer('discount')->nullable();
             $table->json('frame_sizes');
             $table->json('frame_colors');
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+            $table->json('images');
             $table->timestamps();
         });
     }

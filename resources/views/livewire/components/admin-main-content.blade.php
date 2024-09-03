@@ -230,17 +230,19 @@
             @if ($data->isNotEmpty())
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     @foreach ($data as $category)
-                        <div class="bg-[#13212E] p-4 rounded-lg border border-gray-700 shadow-lg relative group">
+                        <div class="bg-[#13212E] rounded-lg border border-gray-700 shadow-lg relative group">
                             <img src="{{ asset('storage/' . $category['image']) }}" alt="{{ $category['name'] }}"
-                                class="w-full  object-fill rounded-md mb-4 transition-transform transform hover:scale-105 duration-700 ease-in-out">
-                            <h2 class="text-xl text-white font-semibold mb-2">{{ $category['name'] }}</h2>
+                                class="w-full h-full object-cover rounded-md mb-4">
+                            <h2
+                                class="text-sm text-white bg-black/80 px-6 py-3 font-semibold mb-2 top-0 absolute rounded-br-lg rounded-tl-lg">
+                                {{ $category['name'] }}</h2>
 
                             <!-- Edit and Delete Buttons -->
                             <div
                                 class="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                                 <!-- Edit Button -->
                                 <a href="{{ route('editCategory', ['categoryId' => $category['id']]) }}"
-                                    class="px-3 py-2 bg-[#1f815b] text-white rounded-full shadow-lg hover:bg-[#1f814567] transition-transform transform hover:scale-110 duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#0b1d2c] focus:ring-opacity-50">
+                                    class="px-3 py-2 bg-[#1f815b] text-white rounded-lg shadow-lg hover:bg-[#1f814567] transition-transform transform hover:scale-110 duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#0b1d2c] focus:ring-opacity-50">
                                     <i class="fa-solid fa-edit"></i>
                                 </a>
                                 <!-- Delete Button -->
@@ -285,7 +287,7 @@
                         class="px-4 py-2 text-sm text-white bg-gray-600 rounded-lg hover:bg-gray-500 focus:outline-none">
                         Close
                     </button>
-                    <button @click="$wire.deleteItem(confirmDeleteId)" @click="open = false"
+                    <button @click="handleDelete"
                         class="ml-2 px-4 py-2 text-sm text-white bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none">
                         Delete
                     </button>
@@ -319,4 +321,10 @@
             </div>
         </div>
     </div>
+    <script>
+        function handleDelete() {
+            this.open = false;
+            this.$wire.deleteItem(this.confirmDeleteId);
+        }
+    </script>
 </div>
