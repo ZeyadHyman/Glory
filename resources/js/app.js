@@ -112,7 +112,6 @@ $(document).ready(function () {
             };
 
             setupSplide($("#splide-added")[0], {
-                type: "loop",
                 drag: "free",
                 focus: "center",
                 arrows: false,

@@ -1,7 +1,7 @@
 /* Font */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 
-/* Font Aweasome */
+/* Font Awesome */
 @import "@fortawesome/fontawesome-free/css/fontawesome.css";
 @import "@fortawesome/fontawesome-free/css/regular.css";
 @import "@fortawesome/fontawesome-free/css/solid.css";
@@ -23,9 +23,13 @@
         font-weight: 500;
         font-style: normal;
     }
+    
+    html {
+        scroll-behavior: smooth;
+    }
 }
 
-/* SCrollbar */
+/* Scrollbar */
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -97,7 +101,6 @@
 .splide__pagination__page:hover {
     background-color: #888; /* Hover color */
 }
-
 
 /* Page Spinner */
 .spinner-overlay {

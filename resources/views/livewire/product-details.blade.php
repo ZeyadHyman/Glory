@@ -171,7 +171,7 @@
                                 ? 'bg-black text-white'
                                 : ($isWhite
                                     ? 'bg-white border-black text-slate-950'
-                                    : "bg-{$color}-700 border-{$ }-950");
+                                    : "bg-{$color}-700 border-{$color}-950");
                             $borderClass = $isBlack ? '' : 'border';
                             $activeClass = $isBlack
                                 ? ''

@@ -1,5 +1,5 @@
 @section('pageTitle', 'Frame Colors')
-<div class="container min-h-[80vh] mx-auto px-4 max-w-xl flex flex-col justify-center items-center">
+<div class="container min-h-[80vh] mx-auto px-4 max-w-xl flex flex-col justify-center items-center mt-10">
     <section class="w-full bg-slate-800 rounded-lg shadow-lg p-8">
         <h1 class="text-3xl font-extrabold text-gray-100 mb-6 flex items-center justify-center space-x-4">
             <i class="fas fa-palette text-blue-500 text-3xl"></i>
@@ -26,7 +26,7 @@
                         <button wire:click="deleteColor({{ $color->id }})"
                             class="bg-red-600 text-white px-3 py-1 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 flex items-center space-x-2">
                             <i class="fas fa-trash-alt"></i>
-                            <span>Delete</span>
+                            <span class="text-sm">Delete</span>
                         </button>
                     </li>
                 @endforeach
