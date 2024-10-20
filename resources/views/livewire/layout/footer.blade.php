@@ -35,7 +35,7 @@
 
         <!-- Desktop Logo -->
         <div class="justify-center items-center hidden lg:flex mb-6 lg:mb-0">
-            <img src="{{ asset('images/glory_logo_white.png') }}" alt="Glory Logo" class="w-56 h-auto">
+            <img src="{{ asset('images/glory_logo_white.webp') }}" alt="Glory Logo" class="w-56 h-auto">
         </div>
 
         <!-- Contact Information -->
@@ -58,7 +58,7 @@
             <div class="w-1/2 h-full bg-white/80" style="clip-path: polygon(0 0, 80% 0, 100% 100%, 0 100%);"></div>
         </div>
         <div class="w-full h-10 flex justify-center">
-            <img src="{{ asset('images/slogan_arabic.png') }}" alt="Slogan" class="w-52 h-auto">
+            <img src="{{ asset('images/slogan_arabic.webp') }}" alt="Slogan" class="w-52 h-auto">
         </div>
         <div class="w-full h-10 flex justify-end">
             <div class="w-1/2 h-full bg-white/80" style="clip-path: polygon(20% 0, 100% 0%, 100% 100%, 0 100%);"></div>
