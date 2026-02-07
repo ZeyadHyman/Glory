@@ -15,7 +15,7 @@ class CreateOrdersTable extends Migration
             $table->string('email');
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->string('payment')->default('cash'); 
+            $table->string('payment')->default('cash');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');

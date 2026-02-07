@@ -1,7 +1,7 @@
 <div class="bg-[#13212E]  md:rounded-xl mt-5 p-5">
     @if ($Products)
         <h1 class="text-zinc-50 font-bold text-2xl md:text-3xl mb-5 ">
-            Recently Added
+            {{ __('Recently Added') }}
         </h1>
 
         <section class="splide mt-2" id="splide-added" aria-labelledby="carousel-heading">
@@ -29,7 +29,7 @@
                                     </h1>
                                     <a href="{{ route('product-details', ['productId' => $product->id]) }}"
                                         class="bg-[#e30613] rounded p-2 text-sm transition-transform duration-500 ease-in-out group-hover:scale-110">
-                                        Order Now
+                                        {{ __('Order Now') }}
                                     </a>
                                 </div>
 

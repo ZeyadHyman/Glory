@@ -13,20 +13,11 @@ new #[Layout('layouts.guest')] class extends Component {
      */
     public function login(): void
     {
-        Session::flush();
-        try {
-            $this->form->authenticate();
+        $this->form->authenticate();
 
-            Session::regenerate();
+        Session::regenerate();
 
-            Session::flash('success', 'Logged in successfully.');
-
-            $this->redirectIntended(default: route('home', absolute: false));
-        } catch (\Exception $e) {
-            Session::flash('error', 'Invalid email or password.');
-
-            $this->redirect(route('login', absolute: false), navigate: true);
-        }
+        $this->redirectIntended(default: route('home', absolute: false));
     }
 }; ?>
 
@@ -46,14 +37,14 @@ new #[Layout('layouts.guest')] class extends Component {
         <div class="p-6 sm:p-8">
             <h1 class="text-xl mb-2 text-center font-bold leading-tight tracking-tight text-white xl:text-2xl">
                 <i class="fa fa-user mr-2" aria-hidden="true"></i>
-                Login to your Account
+                {{ __('Login to your Account') }}
             </h1>
             <form wire:submit="login">
                 {{-- Email --}}
                 <div>
                     <label for="email" class="block mb-2 mt-5 text-sm font-medium text-white">
                         <i class="fa fa-envelope mr-1" aria-hidden="true"></i>
-                        Your email
+                        {{ __('Your email') }}
                     </label>
                     <input type="email" name="email" id="email" wire:model='form.email'
                         class="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -65,7 +56,7 @@ new #[Layout('layouts.guest')] class extends Component {
                 <div>
                     <label for="password" class="block mb-2 mt-5 text-sm font-medium text-white">
                         <i class="fa fa-lock mr-1" aria-hidden="true"></i>
-                        Password
+                        {{ __('Password') }}
                     </label>
                     <input type="password" name="password" id="password" placeholder="••••••••"
                         wire:model='form.password'
@@ -91,7 +82,7 @@ new #[Layout('layouts.guest')] class extends Component {
                 {{-- Login --}}
                 <button type="submit" id="login"
                     class="w-full text-white bg-[#0b2031] hover:bg-[#223849] transition-all focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-base px-5 py-2.5 text-center">
-                    <span wire:loading.remove wire:target="login">Log in</span>
+                    <span wire:loading.remove wire:target="login">{{ __('Log in') }}</span>
                     <span wire:loading wire:target="login">
                         <svg aria-hidden="true"
                             class="inline w-6 h-6 text-gray-200 animate-spin dark:text-gray-600 fill-blue-300"
@@ -117,21 +108,21 @@ new #[Layout('layouts.guest')] class extends Component {
                 </div>
 
                 <p class="text-sm font-light text-gray-400 my-3">
-                    Don’t have an account yet?
+                    {{ __('Don’t have an account yet?') }}
                     <a href={{ route('register') }}
-                        class="font-medium text-gray-300 hover:text-gray-400 hover:underline">Register</a>
+                        class="font-medium text-gray-300 hover:text-gray-400 hover:underline">{{ __('Register') }}</a>
                 </p>
             </form>
 
             {{-- Log in with Gooogle or Facebook --}}
             <div class="flex items-center text-gray-400">
                 <div class="w-full h-[1px] bg-gray-400"></div>
-                <h1 class="text-md mx-5">or</h1>
+                <h1 class="text-md mx-5">{{ __('or') }}</h1>
                 <div class="w-full h-[1px] bg-gray-400"></div>
             </div>
 
             {{-- Google icon --}}
-            <h1 class="text-sm font-light text-gray-400 my-2">Log in with </h1>
+            <h1 class="text-sm font-light text-gray-400 my-2">{{ __('Log in with ') }}</h1>
             <div class="flex">
                 <a href="/socialite/google"
                     class="py-2 px-4 md:mr-5 flex justify-center items-center bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 focus:ring-gray-500 focus:ring-offset-gray-200 w-full transition ease-in duration-200 text-center text-sm md:text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">

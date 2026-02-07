@@ -9,12 +9,14 @@ use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-
 class CartWishlistCount extends Component
 {
     public $wishlist_count = 0;
+
     public $cart_count = 0;
+
     public $cart_count_session;
+
     public $wishlist_count_session;
 
     #[On('wishlistUpdated')]

@@ -13,7 +13,8 @@ class Tshirts extends Component
 {
     use WithPagination;
 
-    public $perPage = 4 ;
+    public $perPage = 4;
+
     public $page = 1;
 
     public function loadMore()
@@ -33,6 +34,7 @@ class Tshirts extends Component
         $products->getCollection()->transform(function ($product) use ($wishlistProductIds, $sessionWishlist) {
             $product->in_wishlist = in_array($product->id, $wishlistProductIds);
             $product->in_session_wishlist = in_array($product->id, $sessionWishlist);
+
             return $product;
         });
 

@@ -14,12 +14,19 @@ class AdminMainContent extends Component
     use WithPagination;
 
     public $search = '';
+
     public $userRole;
+
     public $userData;
+
     public $activeTab = 'products';
+
     public $selectedRole;
+
     public $sortBy = 'id';
+
     public $sortDirection = 'asc';
+
     public $openEditModal = false;
 
     #[On('tabChanged')]
@@ -63,7 +70,6 @@ class AdminMainContent extends Component
             Product::findorfail($id)->delete();
         }
 
-
         if ($this->activeTab == 'categories') {
             $category = Category::findOrFail($id);
             $category->products()->delete();
@@ -74,7 +80,6 @@ class AdminMainContent extends Component
         $this->render();
     }
 
-
     public function render()
     {
         $data = collect();
@@ -83,7 +88,7 @@ class AdminMainContent extends Component
             $query = Product::query();
 
             if ($this->search) {
-                $query->where('name', 'like', '%' . $this->search . '%');
+                $query->where('name', 'like', '%'.$this->search.'%');
             }
             $data = $query->orderBy($this->sortBy, $this->sortDirection)->with('category')->paginate(8);
         }
@@ -92,7 +97,7 @@ class AdminMainContent extends Component
             $query = User::query();
 
             if ($this->search) {
-                $query->where('name', 'like', '%' . $this->search . '%');
+                $query->where('name', 'like', '%'.$this->search.'%');
             }
 
             $data = $query->orderBy('role')->paginate(8);
@@ -102,7 +107,7 @@ class AdminMainContent extends Component
             $query = Category::query();
 
             if ($this->search) {
-                $query->where('name', 'like', '%' . $this->search . '%');
+                $query->where('name', 'like', '%'.$this->search.'%');
             }
 
             $data = $query->paginate(8);

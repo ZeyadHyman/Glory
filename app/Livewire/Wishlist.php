@@ -36,7 +36,7 @@ class Wishlist extends Component
         }
 
         return view('livewire.wishlist', [
-            'products' => $this->products
+            'products' => $this->products,
         ]);
     }
 
@@ -53,6 +53,7 @@ class Wishlist extends Component
         $this->render();
         $this->dispatch('wishlistSessionUpdated');
     }
+
     public function removeAll()
     {
         if (Auth::check()) {

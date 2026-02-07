@@ -1,18 +1,17 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PayController;
 use App\Http\Controllers\ProductDetailsController;
 use App\Http\Controllers\ProductsByCategoryController;
-use App\Livewire\Admin\SizeGuideUpload;
 use App\Livewire\Admin\AddCategory;
 use App\Livewire\Admin\AddProduct;
 use App\Livewire\Admin\EditCategory;
 use App\Livewire\Admin\EditProduct;
 use App\Livewire\Admin\FrameColor;
 use App\Livewire\Admin\FrameSize;
+use App\Livewire\Admin\SizeGuideUpload;
 use Illuminate\Support\Facades\Route;
 
 // Public Routes
@@ -46,5 +45,15 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/frame-colors', FrameColor::class)->name('EditFrameColors');
 });
 
+Route::get('lang/{locale}', function ($locale) {
+    if (! in_array($locale, ['en', 'ar'])) {
+        abort(400);
+    }
+
+    session()->put('locale', $locale);
+
+    return redirect()->back();
+})->name('lang.switch');
+
 // Include authentication routes
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

@@ -33,7 +33,7 @@
             <!-- Thumbnail Carousel -->
             <ul id="thumbnails"
                 class="flex flex-row md:flex-col space-x-2 md:space-x-0 md:space-y-2 md:mr-4 w-full md:w-1/6 lg:w-1/5 xl:w-1/6">
-                <h1 class="text-zinc-50 text-xs mb-2 hidden md:block">Click on Image to Expand it
+                <h1 class="text-zinc-50 text-xs mb-2 hidden md:block">{{ __('Click on Image to Expand it') }}
                     <i class="fa fa-arrow-right animate-back-and-forth" aria-hidden="true"></i>
                 </h1>
                 @php
@@ -90,7 +90,7 @@
                     @if (Auth::user()->role == 'admin')
                         <a href="{{ route('editProduct', ['productId' => $product->id]) }}"
                             class="text-zinc-100 hover:text-gray-500 text-xl px-6 py-4 bg-red-500 hover:bg-red-400 transition-all hover:transition-all rounded-3xl">
-                            Edit
+                            {{ __('Edit') }}
                         </a>
                     @endif
                 @endauth
@@ -128,7 +128,7 @@
                         @if (Auth::user()->role == 'admin')
                             <a href="{{ route('editProduct', ['productId' => $product->id]) }}"
                                 class="text-zinc-100 hover:text-gray-500 text-xl px-6 py-4 bg-red-500 hover:bg-red-400 transition-all hover:transition-all rounded-3xl">
-                                Edit This Product
+                                {{ __('Edit This Product') }}
                             </a>
                         @endif
                     @endauth
@@ -159,7 +159,7 @@
 
             {{-- Frame Color --}}
             <div x-data="{ selectedColor: @entangle('frame_color') }">
-                <h1 class="mt-8 text-gray-300 font-bold text-start">Frame Color:
+                <h1 class="mt-8 text-gray-300 font-bold text-start">{{ __('Frame Color:') }}
                     <span class="text-zinc-50" x-text="selectedColor"></span>
                 </h1>
                 <div class="flex mt-2 flex-wrap gap-2 text-zinc-50">
@@ -194,7 +194,7 @@
 
             {{-- Frame Size --}}
             <div x-data="{ selectedSize: @entangle('frame_size') }">
-                <h1 class="mt-8 text-gray-300 font-bold text-start">Frame Size:
+                <h1 class="mt-8 text-gray-300 font-bold text-start">{{ __('Frame Size:') }}
                     <span class="text-zinc-50" x-text="selectedSize"></span>
                 </h1>
                 <div class="flex mt-2 flex-wrap gap-2">
@@ -215,7 +215,7 @@
 
             {{-- Quantity --}}
             <div x-data="{ quantity: @entangle('quantity') }">
-                <label for="counter-input" class="mt-8 text-gray-300 font-bold block text-start">Quantity:
+                <label for="counter-input" class="mt-8 text-gray-300 font-bold block text-start">{{ __('Quantity:') }}
                     <span class="text-zinc-50" x-text="quantity"></span>
                 </label>
                 <div class="relative flex items-center mt-2">
@@ -239,7 +239,7 @@
                     <button type="submit"
                         class="px-8 py-4 transition-all duration-300 bg-[#251f81] hover:bg-[#352e9b] border border-transparent hover:border-white/50 rounded-xl text-zinc-50 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#0b1d2c] focus:ring-opacity-50">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                        <span>Add To Cart</span>
+                        <span>{{ __('Add To Cart') }}</span>
                     </button>
                 </form>
                 @livewire('components.product-details-wishlist', ['product_id' => $product->id])
@@ -259,7 +259,7 @@
 
     {{-- Related Products --}}
     <div class="px-4 py-10 md:px-10 lg:px-20 xl:px-40 mt-10">
-        <h1 class="text-zinc-50 text-2xl md:text-3xl lg:text-4xl font-bold mb-8 ">Related products</h1>
+        <h1 class="text-zinc-50 text-2xl md:text-3xl lg:text-4xl font-bold mb-8 ">{{ __('Related products') }}</h1>
         <div class="flex flex-wrap gap-6">
             @foreach ($relatedProducts as $product)
                 @php
@@ -280,7 +280,7 @@
                         </h1>
                         <a href="{{ route('product-details', ['productId' => $product->id]) }}"
                             class="bg-[#e30613] text-white rounded px-4 py-2 text-sm font-semibold transition-transform duration-500 ease-in-out group-hover:scale-110">
-                            Order Now
+                            {{ __('Order Now') }}
                         </a>
                     </div>
 

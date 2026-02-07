@@ -15,6 +15,7 @@ class RecentlyAdded extends Component
         if (Product::first()) {
             $this->Products = Product::first()->take(10)->get();
         }
+
         return view('livewire.home.recently-added');
     }
 }

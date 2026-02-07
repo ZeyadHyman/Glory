@@ -51,8 +51,13 @@
 
         <!-- Check if there are products in the category -->
         @if ($products->isEmpty())
-            <div class="text-center py-10 h-[50vh]">
-                <p class="text-xl text-gray-500">No products available in this category.</p>
+            <div class="flex flex-col items-center justify-center text-center py-20 h-[50vh] text-gray-400">
+                <i class="fas fa-box-open text-6xl mb-4 opacity-50"></i>
+                <p class="text-2xl font-semibold">No products found</p>
+                <p class="mt-2 text-gray-500">We couldn't find any products in this category right now.</p>
+                <a href="{{ route('categories') }}" class="mt-6 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-300">
+                    Browse other categories
+                </a>
             </div>
         @else
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 justify-items-center">

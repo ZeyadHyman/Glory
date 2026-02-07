@@ -22,8 +22,9 @@ class Order extends Model
         'quantity',
         'price',
         'discount',
-        'order_id'
+        'order_id',
     ];
+
     public function items()
     {
         return $this->hasMany(OrderItem::class);

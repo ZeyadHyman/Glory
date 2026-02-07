@@ -2,14 +2,15 @@
 
 namespace App\Livewire\Components;
 
-use Livewire\Component;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Livewire\Component;
 
 class WishlistButton extends Component
 {
     public $product;
+
     public function toggleWishlist($productId)
     {
         $userId = Auth::id();
@@ -24,7 +25,7 @@ class WishlistButton extends Component
             Wishlist::create([
                 'user_id' => $userId,
                 'product_id' => $productId,
-                'created_at' => now()
+                'created_at' => now(),
             ]);
         }
 
@@ -36,7 +37,7 @@ class WishlistButton extends Component
     {
         $wishlist = Session::get('wishlist', []);
 
-        if (!in_array($productId, $wishlist)) {
+        if (! in_array($productId, $wishlist)) {
             Session::push('wishlist', $productId);
         } else {
             $wishlist = array_diff($wishlist, [$productId]);
@@ -52,7 +53,7 @@ class WishlistButton extends Component
     public function mount()
     {
         return view('livewire.components.wishlist-button', [
-            'product' => $this->product
+            'product' => $this->product,
         ]);
     }
 }

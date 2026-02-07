@@ -10,7 +10,7 @@
             </h1>
             <a href="{{ route('products-by-category', ['category' => $category->name]) }}"
                 class="block lg:hidden mb-5 border-white border text-white px-4 py-2 rounded hover:border-[#275f38] hover:text-white/50 transition duration-300">
-                View All
+                {{ __('View All') }}
             </a>
         </div>
 
@@ -36,7 +36,7 @@
                         </h1>
                         <a href="{{ route('product-details', ['productId' => $product->id]) }}"
                             class="bg-[#e30613] rounded p-2 text-sm transition-transform duration-500 ease-in-out group-hover:scale-110">
-                            Order Now
+                            {{ __('Order Now') }}
                         </a>
                     </div>
 
@@ -51,12 +51,12 @@
                 <button
                     class="border-white border text-white px-4 py-2 rounded hover:border-[#27445f] hover:text-white/50 transition duration-300"
                     wire:click="loadMore" wire:loading.class="opacity-50" wire:loading.attr="disabled">
-                    Load More
+                    {{ __('Load More') }}
                 </button>
             @else
                 <a href="{{ route('products-by-category', ['category' => $category->name]) }}"
                     class="hidden lg:block border-white border text-white px-4 py-2 rounded hover:border-[#275f38] hover:text-white/50 transition duration-300">
-                    View All
+                    {{ __('View All') }}
                 </a>
             @endif
         </div>
@@ -82,7 +82,7 @@
                                     </h1>
                                     <a href="{{ route('product-details', ['productId' => $product->id]) }}"
                                         class="bg-[#e30613] rounded p-2 text-sm transition-transform duration-500 ease-in-out group-hover:scale-110">
-                                        Order Now
+                                        {{ __('Order Now') }}
                                     </a>
                                 </div>
                                 @livewire('components.wishlist-button', ['product' => $product])

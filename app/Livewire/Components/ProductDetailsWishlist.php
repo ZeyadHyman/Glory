@@ -10,7 +10,9 @@ use Livewire\Component;
 class ProductDetailsWishlist extends Component
 {
     public $isInWishlist = false;
+
     public $product_id;
+
     public function mount()
     {
         $userId = Auth::id();
@@ -40,7 +42,7 @@ class ProductDetailsWishlist extends Component
             Wishlist::create([
                 'user_id' => $userId,
                 'product_id' => $productId,
-                'created_at' => now()
+                'created_at' => now(),
             ]);
             $this->isInWishlist = true;
         }
@@ -52,7 +54,7 @@ class ProductDetailsWishlist extends Component
     {
         $wishlist = Session::get('wishlist', []);
 
-        if (!in_array($productId, $wishlist)) {
+        if (! in_array($productId, $wishlist)) {
             Session::push('wishlist', $productId);
             $this->isInWishlist = true;
         } else {
@@ -68,7 +70,7 @@ class ProductDetailsWishlist extends Component
     public function render()
     {
         return view('livewire.components.product-details-wishlist', [
-            'isInWishlist' => $this->isInWishlist
+            'isInWishlist' => $this->isInWishlist,
         ]);
     }
 }

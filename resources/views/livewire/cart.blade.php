@@ -65,10 +65,10 @@
         <div class="grid gap-6">
             <!-- Cart Header -->
             <div class="flex justify-between items-center mb-10">
-                <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-zinc-50">Your Cart</h1>
+                <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-zinc-50">{{ __('Your Cart') }}</h1>
                 <button wire:click='removeAll'
                     class="px-4 py-2 sm:px-6 sm:py-3 bg-red-600 hover:bg-red-500 text-white rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-300">
-                    Remove All
+                    {{ __('Remove All') }}
                 </button>
             </div>
 
@@ -101,7 +101,7 @@
                                 <img class="w-full h-full object-cover absolute inset-0"
                                     src="{{ asset('storage/' . $item['image'][0]) }}" alt="{{ $item['name'] }}">
                             @else
-                                <p class="text-gray-400">No image available</p>
+                                <p class="text-gray-400">{{ __('No image available') }}</p>
                             @endif
                         </div>
                         <div class="py-4 pr-2 flex flex-col justify-between">
@@ -113,22 +113,22 @@
                                 </a>
 
                                 <p class="text-md sm:text-lg text-gray-300 mb-1 mt-4">
-                                    Price: {{ $itemPrice }} EGP
+                                    {{ __('Price:') }} {{ $itemPrice }} EGP
                                 </p>
                                 <p class="text-md sm:text-lg text-gray-300 mb-1">
-                                    Discount: {{ $itemDiscount }}%
+                                    {{ __('Discount:') }} {{ $itemDiscount }}%
                                 </p>
                                 <p class="text-md sm:text-lg text-gray-300 mb-1">
-                                    Quantity: {{ $item['quantity'] ?? 1 }}
+                                    {{ __('Quantity:') }} {{ $item['quantity'] ?? 1 }}
                                 </p>
                                 <p class="text-md sm:text-lg text-gray-300 mb-1">
-                                    Frame Size: {{ $item['frame_size'] ?? 'Not specified' }}
+                                    {{ __('Frame Size:') }} {{ $item['frame_size'] ?? 'Not specified' }}
                                 </p>
                                 <p class="text-md sm:text-lg text-gray-300">
-                                    Color: {{ $item['frame_color'] ?? 'Not specified' }}
+                                    {{ __('Color:') }} {{ $item['frame_color'] ?? 'Not specified' }}
                                 </p>
                                 <p class="text-md sm:text-lg text-gray-300 mt-2 font-semibold">
-                                    Total: {{ $itemTotal }} EGP
+                                    {{ __('Total:') }} {{ $itemTotal }} EGP
                                 </p>
                             </div>
                         </div>
@@ -140,7 +140,7 @@
             <div class="flex flex-col lg:flex-row w-full space-y-8 lg:space-y-0 lg:space-x-5">
                 <!-- Price Section -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 p-4 bg-gray-700 rounded-lg shadow-md flex-1">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-zinc-50">Total Price</h2>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-zinc-50">{{ __('Total Price') }}</h2>
                     <p class="text-xl sm:text-2xl font-semibold text-zinc-50 text-right">
                         {{ $totalPrice }} EGP
                     </p>
@@ -150,7 +150,7 @@
                 <div class="flex lg:justify-end">
                     <button @click="open = true"
                         class="px-6 py-3 bg-green-600 hover:bg-green-500 text-white rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-300">
-                        Checkout
+                        {{ __('Checkout') }}
                     </button>
                 </div>
             </div>
@@ -167,7 +167,7 @@
                 class="bg-gradient-to-tr from-slate-900 to-slate-800 p-8 rounded-lg shadow-lg w-full max-w-md md:max-w-lg lg:max-w-xl overflow-y-auto">
                 <!-- Header -->
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl text-zinc-50 font-bold">Checkout</h2>
+                    <h2 class="text-2xl text-zinc-50 font-bold">{{ __('Checkout') }}</h2>
                     <button @click="open = false" class="text-zinc-500 transition-all hover:text-zinc-50">
                         <i class="fa-solid fa-times fa-lg"></i>
                     </button>
@@ -194,32 +194,31 @@
                     <!-- User Information -->
                     <div class="mb-6">
                         <h3 class="text-xl font-semibold mb-3 text-zinc-50 flex items-center">
-                            <i class="fa-solid fa-user mr-3"></i> Contact Information
+                            <i class="fa-solid fa-user mr-3"></i> {{ __('Contact Information') }}
                         </h3>
 
                         <div class="mb-4">
-                            <label for="name" class="block text-sm font-medium text-zinc-50">Name</label>
+                            <label for="name" class="block text-sm font-medium text-zinc-50">{{ __('Name') }}</label>
                             <input required type="text" id="name" name="name"
                                 value="{{ auth()->user()->name ?? '' }}"
                                 class="mt-1 block w-full px-4 border border-gray-300 bg-white/90 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300 ease-in-out">
                         </div>
 
                         <div class="mb-4">
-                            <label for="email" class="block text-sm font-medium text-zinc-50">Email</label>
+                            <label for="email" class="block text-sm font-medium text-zinc-50">{{ __('Email') }}</label>
                             <input required type="email" id="email" name="email"
                                 value="{{ auth()->user()->email ?? '' }}"
                                 class="mt-1 block w-full px-4 border border-gray-300 bg-white/90 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300 ease-in-out">
                         </div>
 
                         <div class="mb-4">
-                            <label for="phone" class="block text-sm font-medium text-zinc-50">Phone Number (including
-                                WhatsApp)</label>
+                            <label for="phone" class="block text-sm font-medium text-zinc-50">{{ __('Phone Number (including WhatsApp)') }}</label>
                             <input required type="tel" id="phone" name="phone"
                                 class="mt-1 block w-full px-4 border border-gray-300 bg-white/90 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300 ease-in-out">
                         </div>
 
                         <div class="mb-4">
-                            <label for="address" class="block text-sm font-medium text-zinc-50">Address</label>
+                            <label for="address" class="block text-sm font-medium text-zinc-50">{{ __('Address') }}</label>
                             <input required type="text" id="address" name="address"
                                 class="mt-1 block w-full px-4 border border-gray-300 bg-white/90 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300 ease-in-out">
                         </div>
@@ -228,7 +227,7 @@
                     <!-- Payment Information -->
                     <div class="mb-6">
                         <h3 class="text-xl font-semibold mb-3 text-zinc-50 flex items-center">
-                            <i class="fa-solid fa-credit-card mr-3"></i> Payment Information
+                            <i class="fa-solid fa-credit-card mr-3"></i> {{ __('Payment Information') }}
                         </h3>
 
                         <!-- Payment Options -->
@@ -237,7 +236,7 @@
                                 <input required type="radio" id="cash" name="payment" value="cash"
                                     class="mr-3" x-model="paymentMethod">
                                 <label for="cash" class="text-zinc-50 flex items-center">
-                                    <i class="fa-solid fa-money-bill-wave mr-3"></i> Cash on Delivery
+                                    <i class="fa-solid fa-money-bill-wave mr-3"></i> {{ __('Cash on Delivery') }}
                                 </label>
                             </div>
                         </div>
@@ -246,7 +245,7 @@
                     <!-- Order Summary -->
                     <div class="flex justify-between items-center mb-6 pt-6 border-t border-gray-300">
                         <h4 class="text-xl font-semibold text-zinc-50 flex items-center">
-                            <i class="fa-solid fa-receipt mr-3"></i> Order Summary
+                            <i class="fa-solid fa-receipt mr-3"></i> {{ __('Order Summary') }}
                         </h4>
                         <p class="text-xl text-zinc-50 font-bold">{{ $totalPrice }} EGP</p>
                     </div>
@@ -255,7 +254,7 @@
                     <div class="flex justify-end">
                         <button type="submit"
                             class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg shadow-md flex items-center transition-colors duration-300">
-                            Confirm Order
+                            {{ __('Confirm Order') }}
                         </button>
                     </div>
                 </form>
@@ -266,11 +265,11 @@
         {{-- @dd(session()->all()); --}}
 
         <div class="flex flex-col items-center justify-center text-center">
-            <h1 class="text-zinc-50 text-4xl font-bold mb-4">Your Cart's Empty</h1>
+            <h1 class="text-zinc-50 text-4xl font-bold mb-4">{{ __("Your Cart's Empty") }}</h1>
             <img src="{{ asset('images/empty_cart.png') }}" alt="Empty Cart" class="w-full md:w-2/5 mb-6">
             <a href="{{ route('home') }}"
                 class="text-center px-6 py-3 bg-red-600 hover:bg-red-500 text-white rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-300">
-                Fill It Out Now
+                {{ __('Fill It Out Now') }}
             </a>
         </div>
         <!-- Thank You Modal Background -->
@@ -295,7 +294,7 @@
 
                 <!-- Header -->
                 <div class="flex md:flex-row justify-between  mb-6">
-                    <h2 class="text-xl md:text-2xl text-zinc-50 font-bold mb-4 md:mb-0">Thank You!</h2>
+                    <h2 class="text-xl md:text-2xl text-zinc-50 font-bold mb-4 md:mb-0">{{ __('Thank You!') }}</h2>
                     <button @click="thankYou = false"
                         class="text-zinc-500 hover:text-zinc-50 transition-colors duration-300">
                         <i class="fa-solid fa-times fa-lg"></i>
@@ -304,12 +303,12 @@
 
                 <!-- Thank You Message -->
                 <div class="mb-6">
-                    <p class="text-base md:text-lg text-zinc-50">Your order has been successfully placed!</p>
+                    <p class="text-base md:text-lg text-zinc-50">{{ __('Your order has been successfully placed!') }}</p>
                     @auth
                         <p></p>
                     @else
-                        <p class="text-sm mt-1 md:text-base text-zinc-50">To track your orders you should
-                            <a href="{{ route('login') }}" class="underline text-gray-300 hover:text-gray-50">login</a>
+                        <p class="text-sm mt-1 md:text-base text-zinc-50">{{ __('To track your orders you should') }}
+                            <a href="{{ route('login') }}" class="underline text-gray-300 hover:text-gray-50">{{ __('login') }}</a>
                         @endauth
                     </p>
                 </div>
@@ -318,7 +317,7 @@
                 <div class="flex justify-center">
                     <button @click="thankYou = false"
                         class="px-4 py-2 md:px-6 md:py-3 bg-green-600 hover:bg-green-500 text-white rounded-lg shadow-md transition-colors duration-300">
-                        Ok
+                        {{ __('Ok') }}
                     </button>
                 </div>
             </div>

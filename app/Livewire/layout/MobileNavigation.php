@@ -2,22 +2,25 @@
 
 namespace App\Livewire\Layout;
 
-use Livewire\Component;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\On;
+use App\Livewire\Actions\Logout;
 use App\Models\Cart;
 use App\Models\SocialLogin;
 use App\Models\Wishlist;
-use App\Livewire\Actions\Logout;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class MobileNavigation extends Component
 {
     public string $user_image = '';
+
     public $wishlist_count = 0;
+
     public $cart_count = 0;
+
     public $cart_count_session = 0;
+
     public $wishlist_count_session = 0;
 
     #[On('profile-image-updated')]
@@ -55,18 +58,20 @@ class MobileNavigation extends Component
             $exists = SocialLogin::where('user_id', $userId)->exists();
             $imageChanged = Auth::user()->profile_image_changed;
 
-            if ($imageChanged || !$exists) {
-                $this->user_image = asset('storage/profile_images/' . (Auth::user()->profile_image ?: ''));
+            if ($imageChanged || ! $exists) {
+                $this->user_image = asset('storage/profile_images/'.(Auth::user()->profile_image ?: ''));
             } else {
                 $this->user_image = Auth::user()->profile_image ?: '';
             }
         }
     }
+
     public function logout(Logout $logout): void
     {
         $logout();
         $this->redirect('/');
     }
+
     public function render()
     {
         return view('livewire.layout.mobile-navigation');

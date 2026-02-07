@@ -69,7 +69,7 @@ new #[Layout('layouts.guest')] class extends Component {
             return;
         }
 
-        $this->redirect(route('dashboard', absolute: false));
+        $this->redirect(route('home', absolute: false));
     }
 };
 ?>
@@ -82,14 +82,14 @@ new #[Layout('layouts.guest')] class extends Component {
             <div class="p-6 sm:p-8">
                 <h1 class="text-xl mb-2 text-center font-bold leading-tight tracking-tight text-white md:text-2xl">
                     <i class="fa fa-user-plus mr-2" aria-hidden="true"></i>
-                    Create Account
+                    {{ __('Create Account') }}
                 </h1>
                 <form wire:submit.prevent="register">
                     {{-- Name --}}
                     <div>
                         <label for="name" class="block mb-2 mt-5  text-sm font-medium text-white">
                             <i class="fa fa-user mr-1" aria-hidden="true"></i>
-                            Name
+                            {{ __('Name') }}
                         </label>
                         <input type="text" name="name" id="name" wire:model.live='name'
                             class="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -102,7 +102,7 @@ new #[Layout('layouts.guest')] class extends Component {
                     <div class="relative">
                         <label for="email" class="block mb-2 mt-5  text-sm font-medium text-white">
                             <i class="fa fa-envelope mr-1" aria-hidden="true"></i>
-                            Email
+                            {{ __('Email') }}
                         </label>
                         <input type="email" name="email" id="email" wire:model.live='email'
                             wire:blur='emailValidation'
@@ -123,7 +123,7 @@ new #[Layout('layouts.guest')] class extends Component {
                     <div x-data="{ showPassword: false }" class="relative">
                         <label for="password" class="block mb-2 mt-5 text-sm font-medium text-white">
                             <i class="fa fa-lock mr-1" aria-hidden="true"></i>
-                            Password
+                            {{ __('Password') }}
                         </label>
                         <div class="relative">
                             <input :type="showPassword ? 'text' : 'password'" name="password" id="password"
@@ -151,7 +151,7 @@ new #[Layout('layouts.guest')] class extends Component {
                     <div x-data="{ showPasswordConfirmation: false }" class="relative">
                         <label for="password_confirmation" class="block mb-2 mt-5 text-sm font-medium text-white">
                             <i class="fa fa-lock mr-1" aria-hidden="true"></i>
-                            Confirm Password
+                            {{ __('Confirm Password') }}
                         </label>
                         <div class="relative">
                             <input :type="showPasswordConfirmation ? 'text' : 'password'" name="password_confirmation"
@@ -180,7 +180,7 @@ new #[Layout('layouts.guest')] class extends Component {
                     {{-- Register Button --}}
                     <button type="submit" id="register"
                         class="mt-5 w-full text-white bg-[#0b2031] hover:bg-[#223849] transition-all focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                        <span wire:loading.remove wire:target="register">Register</span>
+                        <span wire:loading.remove wire:target="register">{{ __('Register') }}</span>
                         <span wire:loading wire:target="register">
                             <svg aria-hidden="true"
                                 class="inline w-6 h-6 text-gray-200 animate-spin dark:text-gray-600 fill-blue-300"
@@ -208,12 +208,12 @@ new #[Layout('layouts.guest')] class extends Component {
                 {{-- Sign Up with Gooogle --}}
                 <div class="flex items-center text-gray-400">
                     <div class="w-full h-[1px] bg-gray-400"></div>
-                    <h1 class="text-md mx-5">or</h1>
+                    <h1 class="text-md mx-5">{{ __('or') }}</h1>
                     <div class="w-full h-[1px] bg-gray-400"></div>
                 </div>
 
                 {{-- Google icon --}}
-                <h1 class="text-sm font-light text-gray-400 my-2">Sign Up with </h1>
+                <h1 class="text-sm font-light text-gray-400 my-2">{{ __('Sign Up with ') }}</h1>
                 <div class="flex">
                     <a href="/socialite/google"
                         class="py-2 px-4 md:mr-5 flex justify-center items-center bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 focus:ring-gray-500 focus:ring-offset-gray-200 w-full transition ease-in duration-200 text-center text-sm md:text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">

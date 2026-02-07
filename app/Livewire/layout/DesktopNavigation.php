@@ -2,18 +2,20 @@
 
 namespace App\Livewire\Layout;
 
-use Livewire\Component;
-use Livewire\Attributes\On;
-use Illuminate\Support\Facades\Auth;
 use App\Livewire\Actions\Logout;
-use App\Models\SocialLogin;
 use App\Models\Product;
+use App\Models\SocialLogin;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class DesktopNavigation extends Component
 {
     public string $user_image = '';
+
     public $search = '';
+
     public Collection $searchedProducts;
 
     #[On('profile-image-updated')]
@@ -21,24 +23,24 @@ class DesktopNavigation extends Component
     #[On('sessionUpdated')]
     public function mount()
     {
-        $this->searchedProducts = new Collection();
-        
+        $this->searchedProducts = new Collection;
+
         if (Auth::user()) {
             $userId = Auth::id();
             $exists = SocialLogin::where('user_id', $userId)->exists();
             $imageChanged = Auth::user()->profile_image_changed;
-            if (!$imageChanged && $exists) {     
+            if (! $imageChanged && $exists) {
                 $this->user_image = Auth::user()->profile_image ?: '';
             } else {
-                $this->user_image = asset('storage/profile_images/' . (Auth::user()->profile_image ?: ''));
+                $this->user_image = asset('storage/profile_images/'.(Auth::user()->profile_image ?: ''));
             }
         }
     }
-    
+
     public function render()
     {
         if ($this->search) {
-            $this->searchedProducts = Product::where('name', 'like', '%' . $this->search . '%')->get();
+            $this->searchedProducts = Product::where('name', 'like', '%'.$this->search.'%')->get();
         }
 
         return view('livewire.layout.desktop-navigation', [

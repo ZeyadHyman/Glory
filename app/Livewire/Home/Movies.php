@@ -6,7 +6,6 @@ use App\Models\Product;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,6 +14,7 @@ class Movies extends Component
     use WithPagination;
 
     public $perPage = 4;
+
     public $page = 1;
 
     public function loadMore()
@@ -27,15 +27,15 @@ class Movies extends Component
         $userId = Auth::id();
         $wishlistProductIds = Wishlist::where('user_id', $userId)->pluck('product_id')->toArray();
         $sessionWishlist = Session::get('wishlist', []);
-        
-        $products = Product::where('category', 'movies')
-        ->orWhere('category', 'series')
-        ->paginate($this->perPage);
 
+        $products = Product::where('category', 'movies')
+            ->orWhere('category', 'series')
+            ->paginate($this->perPage);
 
         $products->getCollection()->transform(function ($product) use ($wishlistProductIds, $sessionWishlist) {
             $product->in_wishlist = in_array($product->id, $wishlistProductIds);
             $product->in_session_wishlist = in_array($product->id, $sessionWishlist);
+
             return $product;
         });
 

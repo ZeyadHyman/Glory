@@ -8,6 +8,7 @@ use Livewire\Component;
 class FrameSize extends Component
 {
     public $sizes;
+
     public $newSize;
 
     public function mount()
@@ -33,7 +34,7 @@ class FrameSize extends Component
     public function deleteAll()
     {
         ModelsFrameSize::query()->delete();
-        $this->sizes = ModelsFrameSize::all(); 
+        $this->sizes = ModelsFrameSize::all();
     }
 
     public function render()

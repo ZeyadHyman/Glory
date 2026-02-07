@@ -1,11 +1,11 @@
 <div class="mx-4 sm:mx-10 lg:mx-32 my-5 lg:my-10  mt-10 {{ count($products) == 1 ? 'h-[75vh]' : '' }}">
     @if ($products)
         <div class="flex justify-between items-center mb-10">
-            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-zinc-50 ">Your Wishlist</h1>
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-zinc-50 ">{{ __('Your Wishlist') }}</h1>
             <div class="">
                 <button wire:click='removeAll'
                     class=" px-4 py-2 sm:px-8 sm:py-4 transition-all duration-300 bg-[#9e1f1f] hover:bg-[39e1f1fb7] border border-transparent hover:border-white/50 rounded-xl text-zinc-50 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#0b1d2c] focus:ring-opacity-50">
-                    Remove All
+                    {{ __('Remove All') }}
                 </button>
             </div>
         </div>
@@ -32,7 +32,7 @@
                         <div class="flex flex-col sm:flex-row gap-2 w-full h-full ">
                             <a href={{ route('product-details', ['productId' => $product->id]) }}
                                 class="px-4 py-2 sm:px-8 sm:py-4 transition-all duration-300 bg-[#0e3b38] hover:bg-[#0e3b38b7] border border-transparent hover:border-white/50 rounded-xl text-zinc-50 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#0b1d2c] focus:ring-opacity-50">
-                                Order Now
+                                {{ __('Order Now') }}
                             </a>
                             <button wire:click="remove({{ $product->id }})"
                                 class="px-4 py-2 sm:px-6 sm:py-4 transition-all duration-300 bg-white hover:bg-white/50 border border-white rounded-xl text-zinc-50 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#0b1d2c] focus:ring-opacity-50">
@@ -46,14 +46,14 @@
         </div>
     @else
         <div class="flex flex-col items-center justify-center ">
-            <h1 class="text-zinc-50 text-4xl text-center">Your Wishlist's Empty</h1>
+            <h1 class="text-zinc-50 text-4xl text-center">{{ __("Your Wishlist's Empty") }}</h1>
             <img src="{{ asset('images/empty_wishlist.png') }}" alt="" class="w-full md:w-2/5">
 
         </div>
         <div class="flex justify-center items-center">
             <a href="{{ route('home') }}"
                 class="text-center px-4 py-2 sm:px-8 sm:py-4 transition-all duration-300 bg-[#9e1f1f] hover:bg-[39e1f1fb7] border border-transparent hover:border-white/50 rounded-xl text-zinc-50 flex items-center justify-center  gap-2 focus:outline-none focus:ring-2 focus:ring-[#0b1d2c] focus:ring-opacity-50">
-                Fill It out now
+                {{ __('Fill It out now') }}
             </a>
         </div>
     @endif

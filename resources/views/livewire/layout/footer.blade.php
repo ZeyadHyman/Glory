@@ -9,26 +9,26 @@
 
         <!-- Social Links -->
         <div class="flex flex-col items-center lg:items-start lg:w-1/3 space-y-3 mb-6 lg:mb-0">
-            <h1 class="font-bold text-2xl block lg:hidden">Contact Us</h1>
+            <h1 class="font-bold text-2xl block lg:hidden">{{ __('Contact Us') }}</h1>
             <h1 class="flex items-center">
                 <i class="fa-brands fa-whatsapp mr-2 text-white font-bold text-2xl" aria-hidden="true"></i>
                 <a target="_blank" rel="noopener noreferrer"
                 href="#"
                     {{-- href="https://api.whatsapp.com/send/?phone=201159289796&text&type=phone_number&app_absent=0" --}}
                     class="underline hover:text-zinc-50/80">
-                    Whatsapp
+                    {{ __('Whatsapp') }}
                 </a>
             </h1>
             <h1 class="flex items-center">
                 <i class="fa-brands fa-facebook-f mr-4 text-white font-bold text-2xl" aria-hidden="true"></i>
                 <a target="_blank" rel="noopener noreferrer" href="#" class="underline hover:text-zinc-50/80">
-                    Facebook
+                    {{ __('Facebook') }}
                 </a>
             </h1>
             <h1 class="flex items-center">
                 <i class="fa-brands fa-instagram mr-2 text-white font-bold text-2xl" aria-hidden="true"></i>
                 <a target="_blank" rel="noopener noreferrer" href="#" class="underline hover:text-zinc-50/80">
-                    Instagram
+                    {{ __('Instagram') }}
                 </a>
             </h1>
         </div>
@@ -40,7 +40,7 @@
 
         <!-- Contact Information -->
         <div class="flex flex-col items-center lg:items-end lg:w-1/3 space-y-3 mb-6 lg:mb-0">
-            <h1 class="font-bold text-2xl hidden lg:block">Contact Us</h1>
+            <h1 class="font-bold text-2xl hidden lg:block">{{ __('Contact Us') }}</h1>
             <h1 class="flex items-center justify-start lg:justify-end">
                 <i class="fa fa-phone mr-2 text-xl" aria-hidden="true"></i>
                 (+20) 111 111 1111

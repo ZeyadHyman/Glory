@@ -8,6 +8,7 @@ use Livewire\Component;
 class FrameColor extends Component
 {
     public $colors;
+
     public $newColor;
 
     public function mount()

@@ -14,7 +14,7 @@ new class extends Component {
     {
         if (Auth::user()) {
             $userId = Auth::id();
-            $exists = SocialLogin::where('user_id', $userId)->exists();
+            $this->exists = SocialLogin::where('user_id', $userId)->exists();
         }
     }
 
@@ -28,7 +28,7 @@ new class extends Component {
                 'password' => ['required', 'string', 'current_password'],
             ]);
         } else {
-            $userId = Auth::id();        
+            $userId = Auth::id();
             SocialLogin::where('user_id', $userId)->delete();
         }
 
@@ -42,13 +42,7 @@ new class extends Component {
 ?>
 
 @php
-    $exists = true;
-
-    if (Auth::user()) {
-        $userId = Auth::id();
-        $exists = SocialLogin::where('user_id', $userId)->exists();
-    }
-
+    // Logic moved to component mount method
 @endphp
 <section class="space-y-6 ">
     <header>
@@ -75,7 +69,7 @@ new class extends Component {
                 {{ __('Once your account is deleted, all of its resources and data will be permanently deleted.') }}
             </p>
 
-            @if (!$exists)
+            @if (!$this->exists)
                 <div class="mt-6">
                     <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
 

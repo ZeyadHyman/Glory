@@ -8,25 +8,37 @@ use App\Models\FrameSize;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\Storage;
 
 class AddProduct extends Component
 {
     use WithFileUploads;
 
     public $name;
+
     public $categories;
+
     public $sizes;
+
     public $colors;
+
     public $category_id;
+
     public $description;
+
     public $price;
+
     public $discount;
+
     public $frame_sizes = [];
+
     public $frame_colors = [];
+
     public $images = [];
+
     public $CoverImage;
+
     public $selectAllSizes = false;
+
     public $selectAllColors = false;
 
     protected $rules = [
@@ -37,7 +49,7 @@ class AddProduct extends Component
         'discount' => 'nullable|numeric|min:0|max:100',
         'frame_sizes' => 'array',
         'frame_colors' => 'array',
-        'images.*' => 'image'
+        'images.*' => 'image',
     ];
 
     public function addProduct()
@@ -61,12 +73,10 @@ class AddProduct extends Component
         ]);
     }
 
-
-
     public function toggleSizes()
     {
         if ($this->selectAllSizes) {
-            $this->frame_sizes = $this->sizes->pluck('name')->toArray(); 
+            $this->frame_sizes = $this->sizes->pluck('name')->toArray();
         } else {
             $this->frame_sizes = [];
         }
@@ -75,7 +85,7 @@ class AddProduct extends Component
     public function toggleColors()
     {
         if ($this->selectAllColors) {
-            $this->frame_colors = $this->colors->pluck('name')->toArray(); 
+            $this->frame_colors = $this->colors->pluck('name')->toArray();
         } else {
             $this->frame_colors = [];
         }
@@ -91,7 +101,8 @@ class AddProduct extends Component
         }
         if (FrameColor::first()) {
             $this->colors = FrameColor::get();
-        }        
+        }
+
         return view('livewire.admin.add-product')->layout('layouts.app');
     }
 }

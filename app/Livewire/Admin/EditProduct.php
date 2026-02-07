@@ -3,32 +3,47 @@
 namespace App\Livewire\Admin;
 
 use App\Models\Category;
-use App\Models\Product;
 use App\Models\FrameColor;
 use App\Models\FrameSize;
+use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\Storage;
 
 class EditProduct extends Component
 {
     use WithFileUploads;
 
     public $productId;
+
     public $name;
+
     public $categories;
+
     public $sizes;
+
     public $colors;
+
     public $category_id;
+
     public $description;
+
     public $price;
+
     public $discount;
+
     public $frame_sizes = [];
+
     public $frame_colors = [];
+
     public $image;
+
     public $images = [];
+
     public $newImages = [];
+
     public $selectAllSizes = false;
+
     public $selectAllColors = false;
 
     public function mount($productId)
@@ -49,7 +64,7 @@ class EditProduct extends Component
     public function toggleSizes()
     {
         if ($this->selectAllSizes) {
-            $this->frame_sizes = $this->sizes->pluck('name')->toArray(); 
+            $this->frame_sizes = $this->sizes->pluck('name')->toArray();
         } else {
             $this->frame_sizes = [];
         }
@@ -58,12 +73,11 @@ class EditProduct extends Component
     public function toggleColors()
     {
         if ($this->selectAllColors) {
-            $this->frame_colors = $this->colors->pluck('name')->toArray(); 
+            $this->frame_colors = $this->colors->pluck('name')->toArray();
         } else {
             $this->frame_colors = [];
         }
     }
-
 
     public function removeImage($index)
     {
@@ -133,12 +147,12 @@ class EditProduct extends Component
         session()->flash('message', 'Product updated successfully.');
     }
 
-
     public function render()
     {
         $this->categories = Category::get();
         $this->sizes = FrameSize::get();
         $this->colors = FrameColor::get();
+
         return view('livewire.admin.edit-product')->layout('layouts.app');
     }
 }

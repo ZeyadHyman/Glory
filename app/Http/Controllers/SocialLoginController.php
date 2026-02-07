@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\SocialLogin;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Session;
-
-
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 
 class SocialLoginController extends Controller
 {
@@ -16,11 +16,16 @@ class SocialLoginController extends Controller
     {
         return Socialite::driver($driver)->redirect();
     }
+
     public function handleCallback($driver)
     {
-        $user = Socialite::driver($driver)->user();
-        $user_account = SocialLogin::where("provider",  $driver)->where('provider_id', $user->getId())->first();
-        $db_user =  User::where('email', $user->getEmail())->first();
+        try {
+            $user = Socialite::driver($driver)->user();
+        } catch (\Laravel\Socialite\Two\InvalidStateException $e) {
+            $user = Socialite::driver($driver)->stateless()->user();
+        }
+        $user_account = SocialLogin::where('provider', $driver)->where('provider_id', $user->getId())->first();
+        $db_user = User::where('email', $user->getEmail())->first();
 
         if ($user_account) {
             Auth::login($user_account->user);
@@ -36,6 +41,9 @@ class SocialLoginController extends Controller
                 'user_id' => $db_user->id,
             ]);
         } else {
+            $imageContents = file_get_contents($user->getAvatar());
+            $imageName = Str::random(40).'.jpg';
+            Storage::disk('public')->put('profile_images/'.$imageName, $imageContents);
 
             $new_user = User::create([
                 'name' => $user->getName(),
@@ -53,7 +61,6 @@ class SocialLoginController extends Controller
 
             $db_user = $new_user;
         }
-
 
         Auth::login($db_user, true);
         Session::regenerate();

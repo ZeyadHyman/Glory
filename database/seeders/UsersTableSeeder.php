@@ -19,14 +19,14 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Admin User',
                 'email' => 'admin@admin.com',
-                'password' => Hash::make('admin'), // Make sure to hash the password
+                'password' => Hash::make('admin'),
                 'role' => 'admin',
                 'profile_image' => 'default-profile.jpg',
                 'profile_image_changed' => false,
                 'email_verified_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]
+            ],
         ]);
     }
 }

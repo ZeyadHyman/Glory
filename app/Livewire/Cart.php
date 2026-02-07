@@ -2,9 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Models\Cart as CartItem;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use App\Models\Cart as CartItem;
 
 class Cart extends Component
 {
@@ -32,7 +32,6 @@ class Cart extends Component
         $this->dispatch('sessionUpdated');
     }
 
-
     public function removeItem($productId)
     {
         $components = explode('-', $productId);
@@ -52,7 +51,7 @@ class Cart extends Component
                 ->delete();
         } else {
             $cart = session()->get('cart', []);
-            $cartKey = $productIdValue . '-' . ($frameSize !== null ? $frameSize . '-' : '') . ($frameColor !== null ? $frameColor : '');
+            $cartKey = $productIdValue.'-'.($frameSize !== null ? $frameSize.'-' : '').($frameColor !== null ? $frameColor : '');
             if (isset($cart[$cartKey])) {
                 unset($cart[$cartKey]);
                 session()->put('cart', $cart);
@@ -62,7 +61,6 @@ class Cart extends Component
         $this->loadCartItems();
         $this->dispatch('sessionUpdated');
     }
-
 
     private function loadCartItems()
     {

@@ -39,6 +39,13 @@
                     </a>
                 </div>
 
+                <!-- Language Switcher Mobile -->
+                <div class="lg:hidden block mr-4">
+                    <a href="{{ route('lang.switch', app()->getLocale() === 'en' ? 'ar' : 'en') }}" class="text-cyan-900 font-bold">
+                        {{ app()->getLocale() === 'en' ? 'AR' : 'EN' }}
+                    </a>
+                </div>
+
                 <!-- Search Icon for Mobile -->
                 <div class=" lg:hidden block rounded-full">
 
@@ -49,7 +56,7 @@
                     <x-modal name="searchModal" :show="false" maxWidth="full" focusable>
                         <div class="py-14 w-full flex items-center justify-center">
                             <div class="p-1">
-                                <h1 class="text-zinc-50 text-lg mb-2">Tell me what's in your mind</h1>
+                                <h1 class="text-zinc-50 text-lg mb-2">{{ __("Tell me what's in your mind") }}</h1>
                                 <div class="relative">
                                     <div
                                         class="absolute start-0 flex justify-center top-3 items-center ps-3 pointer-events-none">
@@ -59,7 +66,7 @@
                                     <input type="search" id="modal -search" x-ref="modalSearchInput"
                                         wire:model.live="search"
                                         class="block w-full p-2 ps-10 text-sm rounded-lg bg-stone-100 border focus:outline-stone-100 outline-none placeholder-gray-400 text-cyan-900"
-                                        placeholder="Search..." />
+                                        placeholder="{{ __('Search...') }}" />
 
                                     <div class="">
                                         @if ($searchedProducts->isNotEmpty())
@@ -76,7 +83,7 @@
                                         @else
                                             @if ($search)
                                                 @if ($search)
-                                                    <p class="mt-4 text-zinc-50">No results found.</p>
+                                                    <p class="mt-4 text-zinc-50">{{ __('No results found.') }}</p>
                                                 @endif
                                             @endif
                                         @endif
@@ -109,7 +116,7 @@
             @else
                 {{-- Center item: Search  --}}
                 <div class="place-self-center items-center hidden lg:inline-block w-full">
-                    <label for="default-search" class="mb-2 text-sm font-medium sr-only text-white">Search</label>
+                    <label for="default-search" class="mb-2 text-sm font-medium sr-only text-white">{{ __('Search') }}</label>
                     <div class="relative w-full">
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <i class="fa fa-search" aria-hidden="true"></i>
@@ -118,14 +125,14 @@
                             style="width: 100%">
                             <input type="search" id="default-search"
                                 class="block w-full p-2 ps-10 text-sm rounded-lg bg-stone-100 border focus:outline-stone-100 outline-none placeholder-gray-400 text-cyan-900"
-                                placeholder="Search..." readonly />
+                                placeholder="{{ __('Search...') }}" readonly />
                         </button>
 
 
                         <x-modal name="searchModal" :show="false" maxWidth="full" focusable>
                             <div class="py-10 w-full flex items-center justify-center">
                                 <div class="w-1/3">
-                                    <h1 class="text-zinc-50 text-xl mb-5">Tell me what's in your mind</h1>
+                                    <h1 class="text-zinc-50 text-xl mb-5">{{ __("Tell me what's in your mind") }}</h1>
                                     <div class="relative">
                                         <div
                                             class="absolute start-0 flex justify-center top-3 items-center ps-3 pointer-events-none">
@@ -134,7 +141,7 @@
                                         <input type="search" id="modal-search" x-ref="modalSearchInput"
                                             wire:model.live.debounce.1ms="search"
                                             class="block w-full p-2 ps-10 text-sm rounded-lg bg-stone-100 border focus:outline-stone-100 outline-none placeholder-gray-400 text-cyan-900"
-                                            placeholder="Search..." />
+                                            placeholder="{{ __('Search...') }}" />
                                         <div class="">
                                             @if ($searchedProducts->isNotEmpty())
                                                 <ul class="mt-4">
@@ -149,7 +156,7 @@
                                                 </ul>
                                             @else
                                                 @if ($search)
-                                                    <p class="mt-4 text-zinc-50">No results found.</p>
+                                                    <p class="mt-4 text-zinc-50">{{ __('No results found.') }}</p>
                                                 @endif
                                             @endif
                                         </div>
@@ -163,6 +170,9 @@
 
             {{-- Right item: Icons and Profile Dropdown  --}}
             <div class="items-center place-content-end mr-5 md:mr-0 hidden lg:flex">
+                <a href="{{ route('lang.switch', app()->getLocale() === 'en' ? 'ar' : 'en') }}" class="text-cyan-900 font-bold hover:text-cyan-700 transition-all hover:transition-all px-4">
+                    {{ app()->getLocale() === 'en' ? 'العربية' : 'English' }}
+                </a>
                 @auth
                     @if (Auth::user()->role == 'admin')
                         <a href={{ route('adminDashboard') }}
@@ -225,9 +235,9 @@
                             aria-hidden="true"></i>
                         <div
                             class="text-cyan-900 font-bold text-sm sm:text-sm sm:transition-all sm:duration-500 sm:opacity-0 sm:-translate-x-10 sm:group-hover:opacity-100 sm:group-hover:translate-x-0 sm:hidden sm:group-hover:block ">
-                            <a href="{{ route('login') }}" class="">Login</a>
+                            <a href="{{ route('login') }}" class="">{{ __('Login') }}</a>
                             <span class="hidden sm:inline"> / </span>
-                            <a href="{{ route('register') }}" class="hidden sm:inline">Register</a>
+                            <a href="{{ route('register') }}" class="hidden sm:inline">{{ __('Register') }}</a>
                         </div>
                     </div>
                 @endauth

@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class Category extends Component
 {
-
     public $categories;
 
     public function render()
@@ -15,6 +14,7 @@ class Category extends Component
         if (ModelsCategory::first()) {
             $this->categories = ModelsCategory::get();
         }
+
         return view('livewire.home.category');
     }
 }

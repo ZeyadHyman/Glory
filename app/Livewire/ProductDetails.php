@@ -2,17 +2,21 @@
 
 namespace App\Livewire;
 
-use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class ProductDetails extends Component
 {
     public $product;
+
     public $relatedProducts;
+
     public $quantity = 1;
+
     public $frame_size;
+
     public $frame_color;
 
     public function mount(Product $product)
@@ -50,11 +54,10 @@ class ProductDetails extends Component
                 ]);
             }
 
-
             session()->flash('message', 'Product updated in your cart successfully!');
         } else {
             $cart = session()->get('cart', []);
-            $cartKey = $this->product->id . '-' . $this->frame_size . '-' . $this->frame_color;
+            $cartKey = $this->product->id.'-'.$this->frame_size.'-'.$this->frame_color;
 
             if (isset($cart[$cartKey])) {
                 $cart[$cartKey]['quantity'] += $this->quantity;
@@ -77,6 +80,7 @@ class ProductDetails extends Component
         }
 
         $this->dispatch('sessionUpdated');
+
         return redirect()->route('cart');
     }
 

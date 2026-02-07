@@ -14,13 +14,13 @@ class Players extends Component
     use WithPagination;
 
     public $perPage = 4;
+
     public $page = 1;
 
     public function loadMore()
     {
         $this->perPage += 3;
     }
-
 
     public function render()
     {
@@ -34,6 +34,7 @@ class Players extends Component
         $products->getCollection()->transform(function ($product) use ($wishlistProductIds, $sessionWishlist) {
             $product->in_wishlist = in_array($product->id, $wishlistProductIds);
             $product->in_session_wishlist = in_array($product->id, $sessionWishlist);
+
             return $product;
         });
 

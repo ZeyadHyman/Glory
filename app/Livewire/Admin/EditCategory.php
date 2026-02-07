@@ -3,17 +3,20 @@
 namespace App\Livewire\Admin;
 
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
-use Illuminate\Support\Facades\Storage;
 
 class EditCategory extends Component
 {
     use WithFileUploads;
 
     public $name;
+
     public $image;
+
     public $newImage;
+
     public $categoryId;
 
     public function mount($categoryId)
@@ -46,6 +49,7 @@ class EditCategory extends Component
         $category->save();
 
         session()->flash('message', 'Category updated successfully.');
+
         return redirect()->route('adminDashboard')->with('activeTab', 'categories');
     }
 

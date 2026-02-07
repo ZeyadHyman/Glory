@@ -1,38 +1,38 @@
-<div x-data="{ loading: false }" class="container mx-auto py-8 px-4 max-w-xl flex flex-col justify-center items-center">
+<div x-data="{ loading: false }" class="container flex flex-col items-center justify-center max-w-xl px-4 py-8 mx-auto">
 
-    <section class="w-full bg-slate-800 rounded-lg shadow-lg p-8">
+    <section class="w-full p-8 rounded-lg shadow-lg bg-slate-800">
         @section('pageTitle', 'Edit Size Guide Image')
 
-        <h1 class="text-3xl font-extrabold text-gray-100 mb-6 flex items-center justify-center space-x-4">
-            <i class="fas fa-upload text-blue-500 text-3xl"></i>
+        <h1 class="flex items-center justify-center mb-6 space-x-4 text-3xl font-extrabold text-gray-100">
+            <i class="text-3xl text-blue-500 fas fa-upload"></i>
             <span>Edit Size Guide Image</span>
         </h1>
 
         @if (session()->has('message'))
             <div
-                class="bg-green-100 border border-green-300 text-green-800 p-4 mb-6 rounded-lg flex items-center space-x-3">
-                <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                class="flex items-center p-4 mb-6 space-x-3 text-green-800 bg-green-100 border border-green-300 rounded-lg">
+                <i class="text-xl text-green-600 fas fa-check-circle"></i>
                 <span>{{ session('message') }}</span>
             </div>
         @endif
 
         @error('sizeGuideImage')
-            <div class="bg-red-100 border border-red-300 text-red-800 p-4 mb-6 rounded-lg flex items-center space-x-3">
-                <i class="fas fa-exclamation-circle text-red-600 text-xl"></i>
+            <div class="flex items-center p-4 mb-6 space-x-3 text-red-800 bg-red-100 border border-red-300 rounded-lg">
+                <i class="text-xl text-red-600 fas fa-exclamation-circle"></i>
                 <span>{{ $message }}</span>
             </div>
         @enderror
 
         <div class="relative mb-6">
-            @if ($sizeGuideImage)
-                <img class="w-full h-full object-fill rounded-lg" src="{{ $sizeGuideImage->temporaryUrl() }}"
+            @if ($sizeGuideImage && !is_string($sizeGuideImage))
+                <img class="object-fill w-full h-full rounded-lg" src="{{ $sizeGuideImage->temporaryUrl() }}"
                     alt="Size Guide Image">
             @else
-                <img class="w-full h-full object-fill rounded-lg"
-                    src="{{ asset('storage/images/assets/size_guide.jpg') }}" alt="Size Guide Image">
+                <img class="object-fill w-full h-full rounded-lg"
+                    src="{{ asset('storage/images/assets/size_guide.jpg') }}?v={{ time() }}" alt="Size Guide Image">
             @endif
             <div
-                class="absolute top-0 bg-black/50 rounded-br-lg rounded-tl-lg px-4 py-2 text-zinc-50 text-xs font-semibold">
+                class="absolute top-0 px-4 py-2 text-xs font-semibold rounded-tl-lg rounded-br-lg bg-black/50 text-zinc-50">
                 Current
             </div>
         </div>
@@ -42,18 +42,18 @@
         <form wire:submit.prevent="test">
             <div>
                 <label for="sizeGuideImage"
-                    class="block text-lg font-semibold text-gray-300 mb-3 flex items-center space-x-3">
-                    <i class="fas fa-image text-gray-300 text-xl"></i>
+                    class="flex items-center block mb-3 space-x-3 text-lg font-semibold text-gray-300">
+                    <i class="text-xl text-gray-300 fas fa-image"></i>
                     <span>Size Guide Image</span>
                 </label>
                 <input required type="file" id="sizeGuideImage" wire:model="sizeGuideImage" @change="loading = true"
-                    class="block w-full text-sm text-gray-800 border border-gray-600 rounded-lg cursor-pointer py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-600 transition duration-150 ease-in-out" />
+                    class="block w-full px-3 py-2 text-sm text-gray-800 transition duration-150 ease-in-out border border-gray-600 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-600" />
             </div>
 
 
             <div class="flex items-center justify-end w-full">
                 <button type="submit"
-                    class="bg-blue-600  text-white px-6 py-2 mt-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-end space-x-2">
+                    class="flex items-center justify-end px-6 py-2 mt-6 space-x-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
                     Upload
                 </button>
             </div>

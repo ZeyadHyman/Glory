@@ -12,7 +12,9 @@ class HomeProducts extends Component
     use WithPagination;
 
     public $perPage = 4;
+
     public $categories;
+
     public $products = [];
 
     public function loadMore()
@@ -34,6 +36,7 @@ class HomeProducts extends Component
     {
         $this->categories = Category::all();
         $this->loadProducts();
+
         return view('livewire.home.home-products');
     }
 }

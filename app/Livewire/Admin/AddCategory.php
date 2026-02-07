@@ -11,6 +11,7 @@ class AddCategory extends Component
     use WithFileUploads;
 
     public $name;
+
     public $image;
 
     protected $rules = [
